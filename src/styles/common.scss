@@ -1,5 +1,5 @@
-@import "reset";
+@import "reset", "variables";
 
 * {
-  font-family: "Pretendard" sans-serif;
+  font-family: $defaultFont;
 }
