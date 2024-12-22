@@ -1,5 +1,7 @@
+import { useEffect } from "react";
+
 function App() {
-  return <div>HI</div>;
+  return <div>ㅁㄴㅇㄹㅁ</div>;
 }
 
 export default App;
