@@ -1,9 +1,7 @@
-import { QueryClientProvider } from "@tanstack/react-query";
-
 import "styles/common.scss";
 
 function App() {
-  return <div>ㅁㄴㅇㄹㅁ</div>;
+  return <div>ㅁㄴㅇasdfasdfasdfasfdasdfasdfasdfasfdasdfㄹㅁ</div>;
 }
 
 export default App;
