@@ -1,0 +1,87 @@
+@mixin font($s: 14px, $w: normal, $c: null, $f: null) {
+  color: $c;
+  font-family: $f;
+  font-size: $s;
+  font-weight: $w;
+}
+
+@mixin size($w: 100%, $h: 100%) {
+  width: $w;
+  height: $h;
+}
+
+@mixin flex($d: null, $j: space-between, $a: center, $g: 0, $fg: 0) {
+  display: flex;
+  flex-direction: $d;
+  justify-content: $j;
+  align-items: $a;
+  gap: $g;
+  flex-grow: $fg;
+}
+
+@mixin headingB {
+  font-weight: 700;
+  font-size: 54px;
+}
+
+@mixin heading1 {
+  font-weight: 500;
+  font-size: 28px;
+}
+
+@mixin heading2 {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+@mixin subTitle1 {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+@mixin subTitle2 {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+@mixin subTitle3 {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+@mixin subTitle4 {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+@mixin bodyB {
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+@mixin body1 {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+@mixin body2 {
+  font-weight: 400;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+@mixin body3 {
+  font-weight: 400;
+  font-size: 13px;
+}
+
+@mixin caption1 {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+@mixin caption2 {
+  font-weight: 300;
+  font-size: 12px;
+}
