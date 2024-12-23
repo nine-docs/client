@@ -1,6 +1,21 @@
 @import "styles/variables";
 
+.button_wrap {
+  border-radius: 4px;
+  padding: 4px 8px;
+  transition: 0.2s;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
 .button_primary {
   background-color: $brand01;
   color: $white;
+}
+
+.button_gray {
+  background-color: $grey03;
+  color: $black;
 }

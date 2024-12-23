@@ -7,10 +7,12 @@ export default {
   argTypes: {
     type: {
       control: "inline-radio",
-      options: ["button", "submit"],
     },
     children: {
       control: false,
+    },
+    theme: {
+      control: "inline-radio",
     },
   },
 };
