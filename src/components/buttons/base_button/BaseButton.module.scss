@@ -8,11 +8,18 @@
   &:hover {
     opacity: 0.5;
   }
+
+  &:active {
+    opacity: 1;
+  }
 }
 
 .button_primary {
   background-color: $brand01;
-  color: $white;
+
+  > * {
+    color: $white;
+  }
 }
 
 .button_gray {

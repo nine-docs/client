@@ -1,6 +1,7 @@
 @import "mixin";
 
 :root {
+  --color_brand01_light: #ffc3a3;
   --color_brand01: #fe7e37;
   --color_brand02: #f05a4e;
 
@@ -28,6 +29,7 @@
 
 $defaultFont: "Pretendard", sans-serif;
 
+$brand01Light: var(--color_brand01_light);
 $brand01: var(--color_brand01);
 $brand02: var(--color_brand02);
 

@@ -9,7 +9,7 @@ type LogoIconProps = {
 const Logo: React.FC<LogoIconProps> = ({
   width = 24,
   height = 24,
-  color = "black",
+  color = "var(--color_brand01)",
 }) => {
   return (
     <svg

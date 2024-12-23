@@ -1,0 +1,9 @@
+@import "styles/variables";
+
+.Logo_Button_wrap {
+  @include flex(row, center, center, 4px);
+
+  > * {
+    @include font($fn, 600, $brand01, $defaultFont);
+  }
+}

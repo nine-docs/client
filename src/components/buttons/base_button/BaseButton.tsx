@@ -4,18 +4,20 @@ import classes from "./BaseButton.module.scss";
 
 type BaseButtonProps = {
   type: "button" | "submit";
-  theme: "primary" | "primary-light" | "gray";
+  theme: "primary" | "primary-light" | "gray" | "none";
+  onClick: () => void;
   children: React.ReactNode;
 };
 
 const BaseButton: React.FC<BaseButtonProps> = ({
   type,
   theme = "primary",
+  onClick = () => {},
   children,
 }) => {
   return (
     <button
-      className={`${classes.button_wrap} ${classes.button_primary}`}
+      className={`${classes.button_wrap} ${theme === "primary" ? classes.button_primary : undefined}`}
       type={type}
     >
       {children}
