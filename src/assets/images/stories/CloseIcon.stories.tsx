@@ -1,4 +1,4 @@
-import CloseIcon from "../CloseIcon";
+import CloseIcon from "assets/images/icons/CloseIcon";
 
 export default {
   title: "assets/images/icons/CloseIcon",
@@ -21,6 +21,6 @@ export const Default = {
   args: {
     width: 24,
     height: 24,
-    color: "black",
+    color: "#646f7c",
   },
 };

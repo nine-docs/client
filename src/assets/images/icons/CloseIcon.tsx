@@ -1,6 +1,16 @@
 import React from "react";
 
-const CloseIcon = ({ width = 24, height = 24, color = "black" }) => {
+type CloseIconProps = {
+  width?: number;
+  height?: number;
+  color?: string;
+};
+
+const CloseIcon: React.FC<CloseIconProps> = ({
+  width = 24,
+  height = 24,
+  color = "var(--color_grey05)",
+}) => {
   return (
     <svg
       width={width}

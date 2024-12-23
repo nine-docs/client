@@ -1,5 +1,5 @@
 @import "reset", "variables";
 
 * {
-  font-family: $defaultFont;
+  @include font(16px, normal, $black, $defaultFont);
 }
