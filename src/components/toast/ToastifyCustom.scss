@@ -1,0 +1,27 @@
+@import "styles/variables";
+
+.Toastify__toast {
+  box-sizing: border-box;
+  width: fit-content;
+  font-family: $defaultFont;
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-height: auto; // 기본 높이 제한 해제
+}
+
+.Toastify__toast-icon {
+  display: none;
+}
+
+.Toastify__close-button {
+  display: none;
+}
+
+.Toastify__toast--success {
+  background-color: $green01;
+}
+
+.Toastify__toast--error {
+  background-color: $red02;
+  color: $white;
+}
