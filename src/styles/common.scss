@@ -3,3 +3,8 @@
 * {
   @include font(16px, normal, $black, $defaultFont);
 }
+
+.layout {
+  width: 100vw;
+  height: 100vh;
+}

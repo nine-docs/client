@@ -3,14 +3,14 @@ import React from "react";
 import classes from "./BaseButton.module.scss";
 
 type BaseButtonProps = {
-  type: "button" | "submit";
-  theme: "primary" | "primary-light" | "gray" | "none";
-  onClick: () => void;
-  children: React.ReactNode;
+  type?: "button" | "submit";
+  theme?: "primary" | "primary-light" | "gray" | "none";
+  onClick?: () => void;
+  children?: React.ReactNode;
 };
 
 const BaseButton: React.FC<BaseButtonProps> = ({
-  type,
+  type = "button",
   theme = "primary",
   onClick = () => {},
   children,
