@@ -1,0 +1,15 @@
+@import "styles/variables";
+
+.first_section {
+  @include flex(column, center, center, 20px);
+  background: linear-gradient(180deg, transparent 50%, $brand01Light);
+  height: calc(100vh - 60px);
+}
+
+.font_center {
+  text-align: center;
+}
+
+.font_label {
+  color: $grey05;
+}

@@ -21,6 +21,10 @@
   --color_red02: #ff0000;
   --color_blue01: #1e3bf8;
 
+  --fs_h1: 30px;
+  --fs_h2: 26px;
+  --fs_h3: 24px;
+
   --fs_xl: 20px;
   --fs_l: 16px;
   --fs_n: 14px;
@@ -49,6 +53,9 @@ $red01: var(--color_red01);
 $red02: var(--color_red02);
 $blue01: var(--color_blue01);
 
+$fh1: var(--fs_h1);
+$fh2: var(--fs_h2);
+$fh3: var(--fs_h3);
 $fxl: var(--fs_xl);
 $fl: var(--fs_l);
 $fn: var(--fs_n);

@@ -2,6 +2,22 @@
 
 * {
   @include font(16px, normal, $black, $defaultFont);
+  color: $grey08;
+
+  h1 {
+    font-size: $fh1;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-size: $fh2;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: $fh3;
+    font-weight: 500;
+  }
 }
 
 .layout {

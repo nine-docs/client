@@ -10,10 +10,10 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className={classes.Layout}>
+    <>
       <Toast />
-      {children}
-    </div>
+      <div className={classes.Layout}>{children}</div>
+    </>
   );
 };
 
