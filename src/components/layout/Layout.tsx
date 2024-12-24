@@ -1,5 +1,6 @@
 import React from "react";
 
+import MainHeader from "components/headers/main_header/MainHeader";
 import Toast from "components/toast/Toast";
 
 import classes from "./Layout.module.scss";
@@ -12,7 +13,10 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Toast />
-      <div className={classes.Layout}>{children}</div>
+      <div className={classes.Layout}>
+        <MainHeader />
+        {children}
+      </div>
     </>
   );
 };

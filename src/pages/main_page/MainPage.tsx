@@ -1,14 +1,18 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import TextButton from "components/buttons/text_button/TextButton";
-import MainHeader from "components/headers/main_header/MainHeader";
 
 import classes from "./MainPage.module.scss";
 
 const MainPage = () => {
+  const navigate = useNavigate();
+
+  const handleGoodocClick = () => {
+    navigate("/signup");
+  };
+
   return (
     <>
-      <MainHeader />
       {/* 첫번째 소개 Section */}
       <section className={classes.first_section}>
         <h1 className={classes.font_center}>
@@ -21,7 +25,14 @@ const MainPage = () => {
           <br />
           걱정이 사라질 거예요.
         </h3>
-        <TextButton text="무료 구독하기" size="h1" p="xl" br="20" />
+        <TextButton
+          text="무료 구독하기"
+          size="h1"
+          p="xl"
+          br="20"
+          width={"250px"}
+          onClick={handleGoodocClick}
+        />
       </section>
     </>
   );

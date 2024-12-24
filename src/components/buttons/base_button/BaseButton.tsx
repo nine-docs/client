@@ -6,6 +6,7 @@ type BaseButtonProps = {
   type?: "button" | "submit";
   theme?: "primary" | "primary-light" | "gray" | "none";
   onClick?: () => void;
+  width?: 0 | "fit-content" | string;
   br?: "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s";
   children?: React.ReactNode;
@@ -14,6 +15,7 @@ type BaseButtonProps = {
 const BaseButton: React.FC<BaseButtonProps> = ({
   type = "button",
   theme = "primary",
+  width,
   onClick = () => {},
   br = "4",
   p = "n",
@@ -46,6 +48,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
         `}
       type={type}
       onClick={onClick}
+      style={{ width: width }}
     >
       {children}
     </button>
