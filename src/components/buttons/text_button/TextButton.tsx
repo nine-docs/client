@@ -8,7 +8,9 @@ type TextButtonProps = {
   type?: "button" | "submit";
   theme?: "primary" | "primary-light" | "gray" | "none";
   text: string;
-  size?: "small" | "normal" | "large" | "xlarge";
+  size?: "small" | "normal" | "large" | "xlarge" | "h3" | "h2" | "h1";
+  br?: "4" | "8" | "20";
+  p?: "xl" | "l" | "n" | "s";
   onClick?: () => void;
 };
 const TextButton: React.FC<TextButtonProps> = ({
@@ -16,12 +18,21 @@ const TextButton: React.FC<TextButtonProps> = ({
   theme,
   text,
   size = "normal",
+  br,
+  p,
   onClick,
 }) => {
   return (
-    <BaseButton type={type} theme={theme} onClick={onClick}>
+    <BaseButton type={type} theme={theme} onClick={onClick} br={br} p={p}>
       <span
-        className={`${size === "small" && classes.small} ${size === "normal" && classes.normal} ${size === "large" && classes.large} ${size === "xlarge" && classes.xlarge}`}
+        className={`
+          ${size === "h1" && classes.h1} 
+          ${size === "h2" && classes.h2} 
+          ${size === "h3" && classes.h3} 
+          ${size === "small" && classes.small} 
+          ${size === "normal" && classes.normal} 
+          ${size === "large" && classes.large} 
+          ${size === "xlarge" && classes.xlarge}`}
       >
         {text}
       </span>

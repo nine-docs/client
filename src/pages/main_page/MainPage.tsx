@@ -1,5 +1,6 @@
 import React from "react";
 
+import TextButton from "components/buttons/text_button/TextButton";
 import MainHeader from "components/headers/main_header/MainHeader";
 
 import classes from "./MainPage.module.scss";
@@ -20,6 +21,7 @@ const MainPage = () => {
           <br />
           걱정이 사라질 거예요.
         </h3>
+        <TextButton text="무료 구독하기" size="h1" p="xl" br="20" />
       </section>
     </>
   );

@@ -1,7 +1,6 @@
 @import "styles/variables";
 
 .button_wrap {
-  border-radius: 4px;
   padding: 4px 8px;
   transition: 0.2s;
 
@@ -12,6 +11,34 @@
   &:active {
     opacity: 1;
   }
+}
+
+.radius_4 {
+  border-radius: 4px;
+}
+
+.radius_8 {
+  border-radius: 8px;
+}
+
+.radius_20 {
+  border-radius: 20px;
+}
+
+.p_xl {
+  padding: 20px 40px;
+}
+
+.p_l {
+  padding: 12px 16px;
+}
+
+.p_n {
+  padding: 8px 12px;
+}
+
+.p_s {
+  padding: 4px 8px;
 }
 
 .button_primary {
