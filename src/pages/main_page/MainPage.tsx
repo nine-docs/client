@@ -8,7 +8,7 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const handleGoodocClick = () => {
-    navigate("/signup");
+    navigate("/signin");
   };
 
   return (
