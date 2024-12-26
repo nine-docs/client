@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import classes from "./BaseInput.module.scss";
 
 type BaseInputProps = {
-  type: "text" | "number" | "";
+  type: "text" | "number" | "password" | "";
   placeholder: string;
   disabled?: boolean;
   width?: "fit-content" | 0 | string;
@@ -18,8 +18,6 @@ const BaseInput: React.FC<BaseInputProps> = ({
   type = "text",
   placeholder = "",
   disabled = false,
-  width = "fit-content",
-  align = "start",
   registerName,
   registerOption,
   maxLength = 100,
@@ -32,6 +30,8 @@ const BaseInput: React.FC<BaseInputProps> = ({
       placeholder={placeholder}
       width="100%"
       className={classes.input}
+      disabled={disabled}
+      maxLength={maxLength}
       {...methods.register(registerName, { ...registerOption })}
     />
   );

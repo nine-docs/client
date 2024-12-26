@@ -7,8 +7,12 @@ import classes from "./MainPage.module.scss";
 const MainPage = () => {
   const navigate = useNavigate();
 
-  const handleGoodocClick = () => {
+  const handleSignInClick = () => {
     navigate("/signin");
+  };
+
+  const handleSignUpClick = () => {
+    navigate("/signup");
   };
 
   return (
@@ -26,12 +30,21 @@ const MainPage = () => {
           걱정이 사라질 거예요.
         </h3>
         <TextButton
-          text="무료 구독하기"
-          size="h1"
-          p="xl"
-          br="20"
+          text="로그인"
+          size="h2"
+          p="l"
+          br="8"
           width={"250px"}
-          onClick={handleGoodocClick}
+          onClick={handleSignUpClick}
+        />
+        <TextButton
+          text="회원가입"
+          theme="gray"
+          size="h2"
+          p="l"
+          br="8"
+          width={"250px"}
+          onClick={handleSignInClick}
         />
       </section>
     </>

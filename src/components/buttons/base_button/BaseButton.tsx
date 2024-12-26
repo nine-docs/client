@@ -4,7 +4,7 @@ import classes from "./BaseButton.module.scss";
 
 type BaseButtonProps = {
   type?: "button" | "submit";
-  theme?: "primary" | "primary-light" | "gray" | "none";
+  theme?: "primary" | "primary-line" | "gray" | "none";
   onClick?: () => void;
   width?: 0 | "fit-content" | string;
   br?: "4" | "8" | "20";
@@ -24,7 +24,15 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   return (
     <button
       className={`${classes.button_wrap} 
-        ${theme === "primary" ? classes.button_primary : undefined} 
+        ${
+          theme === "primary"
+            ? classes.button_primary
+            : theme === "gray"
+              ? classes.button_gray
+              : theme === "primary-line"
+                ? classes.button_primary_line
+                : undefined
+        } 
         ${
           br === "4"
             ? classes.radius_4

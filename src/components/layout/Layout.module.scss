@@ -2,7 +2,6 @@
 
 .layout {
   @include flex(column, start, start);
-
   width: 100vw;
   height: 100vh;
 }

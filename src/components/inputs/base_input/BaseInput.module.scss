@@ -3,4 +3,10 @@
 .input {
   border: 1px solid $grey04;
   border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+
+  &::placeholder {
+    color: $grey04;
+  }
 }
