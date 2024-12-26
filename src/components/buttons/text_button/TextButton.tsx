@@ -6,7 +6,7 @@ import classes from "./TextButton.module.scss";
 
 type TextButtonProps = {
   type?: "button" | "submit";
-  theme?: "primary" | "primary-light" | "gray" | "none";
+  theme?: "primary" | "primary-line" | "gray" | "none";
   text: string;
   size?: "small" | "normal" | "large" | "xlarge" | "h3" | "h2" | "h1";
   width?: 0 | "fit-content" | string;

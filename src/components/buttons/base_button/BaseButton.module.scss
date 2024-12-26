@@ -49,7 +49,18 @@
   }
 }
 
+.button_primary_line {
+  border: 1px solid $brand01;
+
+  > * {
+    color: $brand01;
+  }
+}
+
 .button_gray {
-  background-color: $grey03;
-  color: $black;
+  background-color: $grey02;
+  border: 1px solid $grey03;
+  > * {
+    color: $grey05;
+  }
 }
