@@ -47,6 +47,10 @@
   > * {
     color: $white;
   }
+
+  &:focus {
+    outline: 1px solid $brand01;
+  }
 }
 
 .button_primary_line {
@@ -55,6 +59,10 @@
   > * {
     color: $brand01;
   }
+
+  &:focus {
+    outline: 1px solid $brand01;
+  }
 }
 
 .button_gray {
@@ -62,5 +70,9 @@
   border: 1px solid $grey03;
   > * {
     color: $grey05;
+  }
+
+  &:focus {
+    outline: 1px solid $brand01;
   }
 }
