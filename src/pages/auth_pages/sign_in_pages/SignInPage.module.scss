@@ -33,8 +33,10 @@
 }
 
 .signin_input_button_wrap {
-  @include flex(row, start, center, 10px);
+  @include flex(row, start, start, 10px);
   width: 100%;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
 }
 
 .login_notice_wrap {

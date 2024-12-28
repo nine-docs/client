@@ -47,13 +47,14 @@
 
 .button_primary {
   background-color: $brand01;
+  border: 1px solid $brand01;
 
   > * {
     color: $white;
   }
 
   &:focus {
-    outline: 1px solid $brand01;
+    border: 1px solid $brand01Light;
   }
 }
 
@@ -65,7 +66,7 @@
   }
 
   &:focus {
-    outline: 1px solid $brand01;
+    border: 1px solid $brand01Light;
   }
 }
 
@@ -77,6 +78,6 @@
   }
 
   &:focus {
-    outline: 1px solid $brand01;
+    border: 1px solid $brand01;
   }
 }

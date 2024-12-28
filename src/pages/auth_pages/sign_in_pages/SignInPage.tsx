@@ -14,6 +14,7 @@ import classes from "./SignInPage.module.scss";
 type FormValues = {
   nickname: string;
   email: string;
+  authCode: string;
   password: string;
   passwordCheck: string;
 };
@@ -66,7 +67,8 @@ const SignInPage = () => {
                   required: "닉네임을 입력해 주세요.",
                 }}
               />
-              <div className={classes.signin_input_button_wrap}>
+              {/* 이메일 */}
+              <div className={`${classes.signin_input_button_wrap}`}>
                 <BaseInput
                   type="text"
                   width="100%"
@@ -84,8 +86,31 @@ const SignInPage = () => {
                 <TextButton
                   type="button"
                   width={"120px"}
-                  height="35"
+                  height={"35"}
                   text="인증번호 받기"
+                  theme="primary-line"
+                  p="s"
+                  size="small"
+                />
+              </div>
+
+              {/* 인증번호 입력 */}
+              <div className={classes.signin_input_button_wrap}>
+                <BaseInput
+                  type="text"
+                  width="100%"
+                  placeholder="인증번호"
+                  align="start"
+                  registerName="authCode"
+                  registerOption={{
+                    required: "인증번호를 입력해 주세요.",
+                  }}
+                />
+                <TextButton
+                  type="button"
+                  width={"120px"}
+                  height={"35"}
+                  text="인증번호 확인"
                   theme="primary-line"
                   p="s"
                   size="small"
@@ -111,7 +136,9 @@ const SignInPage = () => {
                 placeholder="비밀번호 확인"
                 align="start"
                 registerName="passwordCheck"
-                registerOption={{}}
+                registerOption={{
+                  required: "비밀번호를 다시 입력해 주세요.",
+                }}
               />
             </div>
             <TextButton
