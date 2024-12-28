@@ -9,7 +9,7 @@ import BaseInput from "components/inputs/base_input/BaseInput";
 
 import { EMAIL_PATTERN, PASSWORD_PATTERN } from "constants/validations";
 
-import classes from "./SignInPage.module.scss";
+import classes from "./SignUpPage.module.scss";
 
 type FormValues = {
   nickname: string;
@@ -19,7 +19,7 @@ type FormValues = {
   passwordCheck: string;
 };
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const initialFormValue = {
     nickname: "",
     email: "",
@@ -45,16 +45,16 @@ const SignInPage = () => {
   return (
     <main className={classes.page_wrap}>
       <FormProvider {...methods}>
-        <section className={classes.signin_section}>
-          <div className={classes.signin_title_wrap}>
+        <section className={classes.signup_section}>
+          <div className={classes.signup_title_wrap}>
             <LogoIcon width={40} height={40} />
-            <h2 className={classes.signin_title}>회원가입</h2>
+            <h2 className={classes.signup_title}>회원가입</h2>
           </div>
           <form
             className={classes.sign_form}
             onSubmit={methods.handleSubmit(onSubmit, onError)}
           >
-            <div className={classes.signin_input_wrap}>
+            <div className={classes.signup_input_wrap}>
               <BaseInput
                 type="text"
                 width="100%"
@@ -66,7 +66,7 @@ const SignInPage = () => {
                 }}
               />
               {/* 이메일 */}
-              <div className={`${classes.signin_input_button_wrap}`}>
+              <div className={`${classes.signup_input_button_wrap}`}>
                 <BaseInput
                   type="text"
                   width="100%"
@@ -93,7 +93,7 @@ const SignInPage = () => {
               </div>
 
               {/* 인증번호 입력 */}
-              <div className={classes.signin_input_button_wrap}>
+              <div className={classes.signup_input_button_wrap}>
                 <BaseInput
                   type="text"
                   width="100%"
@@ -163,4 +163,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

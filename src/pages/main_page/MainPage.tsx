@@ -7,8 +7,8 @@ import classes from "./MainPage.module.scss";
 const MainPage = () => {
   const navigate = useNavigate();
 
-  const handleSignInClick = () => {
-    navigate("/signin");
+  const handleSignUpClick = () => {
+    navigate("/signup");
   };
 
   const handleLoginClick = () => {
@@ -38,7 +38,7 @@ const MainPage = () => {
           p="l"
           br="8"
           width={"250px"}
-          onClick={handleSignInClick}
+          onClick={handleSignUpClick}
         />
       </section>
     </>

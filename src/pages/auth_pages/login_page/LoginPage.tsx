@@ -29,8 +29,8 @@ const LoginPage = () => {
     defaultValues: initialFormValues,
   });
 
-  const handleSigninClick = () => {
-    navigate("/signin");
+  const handleSignupClick = () => {
+    navigate("/signup");
   };
 
   const onSubmit = () => {};
@@ -92,7 +92,7 @@ const LoginPage = () => {
                 text="회원가입"
                 p="s"
                 theme="primary-line"
-                onClick={handleSigninClick}
+                onClick={handleSignupClick}
               />
             </div>
           </form>
