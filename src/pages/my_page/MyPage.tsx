@@ -1,5 +1,7 @@
+import classes from "./MyPage.module.scss";
+
 const MyPage = () => {
-  return <div>MyPage</div>;
+  return <div className={classes.page_wrap}>MyPage</div>;
 };
 
 export default MyPage;

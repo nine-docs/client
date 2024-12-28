@@ -1,0 +1,7 @@
+@import "styles/variables";
+
+.page_wrap {
+  @include flex(column, start, start);
+  width: 100vw;
+  height: calc(100vh - 60px);
+}
