@@ -1,0 +1,22 @@
+@import "styles/variables";
+
+.item_wrap {
+  @include flex(column, start, start);
+  padding: 8px 16px;
+  transition: 0.2s;
+  width: 100%;
+
+  > * {
+    transition: 0.2s;
+  }
+
+  &:hover {
+    background-color: $grey03;
+  }
+}
+
+.cur_item {
+  > * {
+    color: $brand01;
+  }
+}

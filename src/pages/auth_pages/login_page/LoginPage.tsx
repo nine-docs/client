@@ -33,7 +33,9 @@ const LoginPage = () => {
     navigate("/signup");
   };
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    navigate("/mypage/bookmark");
+  };
 
   const onError = () => {};
 
