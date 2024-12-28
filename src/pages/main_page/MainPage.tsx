@@ -8,7 +8,7 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const handleSignInClick = () => {
-    navigate("/signin/info");
+    navigate("/signin");
   };
 
   const handleSignUpClick = () => {
