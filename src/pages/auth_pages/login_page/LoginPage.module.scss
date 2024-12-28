@@ -6,16 +6,16 @@
   height: calc(100vh - 60px);
 }
 
-.signup_section {
+.login_section {
   @include flex(column, start, center, 20px);
   width: 300px;
 }
 
-.signup_title_wrap {
+.login_title_wrap {
   @include flex(row, center, center, 10px);
 }
 
-.signup_title {
+.login_title {
   color: $brand01;
 }
 
@@ -27,17 +27,17 @@
   box-shadow: 0 2px 10px 2px $grey03;
 }
 
-.signup_input_wrap {
+.login_input_wrap {
   @include flex(column, start, start, 10px);
   width: 100%;
 }
 
-.signup_input_button_wrap {
+.login_input_button_wrap {
   @include flex(row, start, center, 10px);
   width: 100%;
 }
 
-.signin_notice_wrap {
+.login_notice_wrap {
   @include flex(row, center, center, 8px);
 
   > span {

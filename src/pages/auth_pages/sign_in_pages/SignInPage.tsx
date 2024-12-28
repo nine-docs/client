@@ -35,12 +35,10 @@ const SignInPage = () => {
   });
 
   const handleLoginClick = () => {
-    navigate("/signup");
+    navigate("/login");
   };
 
-  const onSubmit = () => {
-    navigate("/signin");
-  };
+  const onSubmit = () => {};
 
   const onError = () => {};
 

@@ -11,8 +11,8 @@ const MainPage = () => {
     navigate("/signin");
   };
 
-  const handleSignUpClick = () => {
-    navigate("/signup");
+  const handleLoginClick = () => {
+    navigate("/login");
   };
 
   return (
@@ -29,7 +29,7 @@ const MainPage = () => {
           p="l"
           br="8"
           width={"250px"}
-          onClick={handleSignUpClick}
+          onClick={handleLoginClick}
         />
         <TextButton
           text="회원가입"

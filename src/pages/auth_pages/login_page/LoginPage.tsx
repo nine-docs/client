@@ -9,14 +9,14 @@ import BaseInput from "components/inputs/base_input/BaseInput";
 
 import { EMAIL_PATTERN, PASSWORD_PATTERN } from "constants/validations";
 
-import classes from "./SignUpPage.module.scss";
+import classes from "./LoginPage.module.scss";
 
 type FormValues = {
   email: string;
   password: string;
 };
 
-const SignUpPage = () => {
+const LoginPage = () => {
   const initialFormValues = {
     email: "",
     password: "",
@@ -40,16 +40,16 @@ const SignUpPage = () => {
   return (
     <FormProvider {...methods}>
       <main className={classes.page_wrap}>
-        <section className={classes.signup_section}>
-          <div className={classes.signup_title_wrap}>
+        <section className={classes.login_section}>
+          <div className={classes.login_title_wrap}>
             <LogoIcon width={40} height={40} />
-            <h2 className={classes.signup_title}>로그인</h2>
+            <h2 className={classes.login_title}>로그인</h2>
           </div>
           <form
             className={classes.sign_form}
             onSubmit={methods.handleSubmit(onSubmit, onError)}
           >
-            <div className={classes.signup_input_wrap}>
+            <div className={classes.login_input_wrap}>
               <BaseInput
                 type="text"
                 width="100%"
@@ -85,7 +85,7 @@ const SignUpPage = () => {
               width="100%"
               size="xlarge"
             />
-            <div className={classes.signin_notice_wrap}>
+            <div className={classes.login_notice_wrap}>
               <span>계정이 없으신가요?</span>
               <TextButton
                 type="button"
@@ -102,4 +102,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default LoginPage;
