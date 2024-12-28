@@ -81,6 +81,15 @@ const SignInPage = () => {
                     },
                   }}
                 />
+                <TextButton
+                  type="button"
+                  width={"120px"}
+                  height="35"
+                  text="인증번호 받기"
+                  theme="primary-line"
+                  p="s"
+                  size="small"
+                />
               </div>
               <BaseInput
                 type="password"

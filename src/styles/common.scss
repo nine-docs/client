@@ -1,7 +1,7 @@
 @import "reset", "variables", "mixin";
 
 * {
-  @include font(16px, normal, $black, $defaultFont);
+  @include font($fn, normal, $black, $defaultFont);
   color: $grey08;
 
   h1 {

@@ -7,6 +7,7 @@ type BaseButtonProps = {
   theme?: "primary" | "primary-line" | "gray" | "none";
   onClick?: () => void;
   width?: 0 | "fit-content" | string;
+  height?: "35";
   br?: "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s";
   children?: React.ReactNode;
@@ -16,6 +17,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   type = "button",
   theme = "primary",
   width,
+  height,
   onClick = () => {},
   br = "4",
   p = "n",
@@ -53,6 +55,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
                   ? classes.p_s
                   : undefined
         }
+        ${height === "35" ? classes.h35 : undefined}
         `}
       type={type}
       onClick={onClick}
