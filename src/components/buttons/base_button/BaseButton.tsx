@@ -8,7 +8,7 @@ type BaseButtonProps = {
   onClick?: () => void;
   width?: 0 | "fit-content" | string;
   height?: "35";
-  br?: "4" | "8" | "20";
+  br?: "0" | "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s";
   children?: React.ReactNode;
 };

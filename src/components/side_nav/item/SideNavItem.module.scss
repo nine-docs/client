@@ -1,0 +1,19 @@
+@import "styles/variables";
+
+.item_wrap {
+  @include flex(column, start, start);
+  padding: 4px 8px;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  > span {
+    @include font($fn, normal, $grey06, $defaultFont);
+  }
+}
+
+.cur_item {
+  background-color: $grey05;
+}
