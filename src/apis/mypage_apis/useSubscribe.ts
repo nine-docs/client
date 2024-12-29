@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
@@ -13,7 +14,7 @@ const subscribeListMockData = {
         name: "Kubernetes",
       },
       {
-        id: 1,
+        id: 2,
         name: "Helm",
       },
     ],
@@ -25,8 +26,6 @@ const subscribeListMockData = {
 
 export const useGetSubscribeList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
-
-  const params = {};
 
   const fallback = {
     success: true,
@@ -40,7 +39,7 @@ export const useGetSubscribeList = () => {
   };
 
   const { data = fallback } = useQuery({
-    queryKey: queryKeyFactory.subscribe(params).queryKey,
+    queryKey: queryKeyFactory.subscribe().queryKey,
     queryFn: () => {
       if (isApiMock) {
         return new Promise((resolve) => {

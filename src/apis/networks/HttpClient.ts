@@ -11,6 +11,12 @@ const http = new Axios({
 
 http.interceptors.request.use(
   (config) => {
+    const token = useAuthStore((state) => state.token);
+
+    if (token !== "") {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
     return config;
   },
   (error) => {
