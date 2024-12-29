@@ -1,4 +1,7 @@
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Router from "Router";
+import queryClient from "apis/query_config/queryClient";
 import { BrowserRouter } from "react-router-dom";
 
 import "styles/common.scss";
@@ -7,11 +10,14 @@ import Layout from "components/layout/Layout";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Router />
-      </Layout>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
+      <BrowserRouter>
+        <Layout>
+          <Router />
+        </Layout>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

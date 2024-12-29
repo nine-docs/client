@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import httpClient from "apis/networks/HttpClient";
 
 type LoginPayload = {
   email: string;
@@ -15,6 +16,8 @@ const mockData = {
 };
 
 const useLogin = () => {
+  const isApiMock = process.env.REACT_APP_API_MOCK === "true";
+
   const { mutateAsync } = useMutation({
     mutationFn: ({ email, password }: LoginPayload) => {
       const params = {
@@ -22,9 +25,13 @@ const useLogin = () => {
         password: password,
       };
 
-      return new Promise((resolve) => {
-        setTimeout(() => resolve(mockData), 100);
-      });
+      if (isApiMock) {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(mockData), 100);
+        });
+      } else {
+        return httpClient.post(`/api/v1/login`, params);
+      }
     },
   });
 
