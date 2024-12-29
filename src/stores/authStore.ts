@@ -1,12 +1,19 @@
 // store/authStore.ts
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { StateCreator, create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 type AuthState = {
   token: string | null;
   setToken: (token: string) => void;
 };
 
-const store = () => {};
+const store: StateCreator<AuthState> = (set, get) => ({
+  token: "",
+  setToken: (token: string) => set({ token: token }),
+});
 
-export const useAuthStore = create(store);
+const persistStore = persist(store, { name: "authStore" });
+
+export const useAuthStore = create(
+  devtools(persistStore, { name: "authStore" }),
+);
