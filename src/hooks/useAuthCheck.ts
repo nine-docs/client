@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthStore } from "stores/authStore";
 
-/* 로그인 되어있지 않거나, 토큰이 만료된 경우 강제로 메인화면으로 navigate시키는 hook */
+/* 로그인 되어있지 않거나, 토큰이 만료된 경우 강제로 메인화면으로 로그아웃하는 hook */
 const useAuthCheck = () => {
   const pathname = useLocation().pathname;
   const navigate = useNavigate();

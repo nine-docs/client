@@ -15,7 +15,11 @@ const MainHeader = () => {
   const { token, deleteAuthInfo } = useAuthStore();
 
   const handleLogoClick = () => {
-    navigate("/main");
+    if (token === "") {
+      navigate("/main");
+    } else {
+      navigate("/mypage/subscribe");
+    }
   };
 
   const handleLogoutClick = () => {
