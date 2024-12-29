@@ -4,7 +4,7 @@
     "<THIRD_PARTY_MODULES>",
     "^styles/(.*)$",
     "^assets/(.*)$",
-    "^api/(.*)$",
+    "^apis/(.*)$",
     "^queries/(.*)$",
     "^components/(.*)$",
     "^pages/(.*)$",

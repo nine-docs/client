@@ -2,13 +2,18 @@ import { StateCreator, create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 type AuthState = {
-  token: string | null;
-  setToken: (token: string) => void;
+  token: string;
+  accessTokenExpiredAt: string;
+  setAuthInfo: (token: string, accessTokenExpiredAt: string) => void;
+  deleteAuthInfo: () => void;
 };
 
 const store: StateCreator<AuthState> = (set, get) => ({
   token: "",
-  setToken: (token: string) => set({ token: token }),
+  accessTokenExpiredAt: "",
+  setAuthInfo: (token: string, accessTokenExpiredAt: string) =>
+    set({ token: token, accessTokenExpiredAt: accessTokenExpiredAt }),
+  deleteAuthInfo: () => set({ token: "", accessTokenExpiredAt: "" }),
 });
 
 const persistStore = persist(store, { name: "authStore" });

@@ -1,11 +1,12 @@
-import useLogin from "apis/auth_apis/useLogin";
 import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FieldErrors, FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthStore } from "stores/authStore";
 
 import LogoIcon from "assets/images/logos/LogoIcon";
+
+import useLogin from "apis/auth_apis/useLogin";
 
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
@@ -22,7 +23,7 @@ type FormValues = {
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const setToken = useAuthStore((state) => state.setToken);
+  const setAuthInfo = useAuthStore((state) => state.setAuthInfo);
 
   const { mutateAsync } = useLogin();
 
@@ -30,6 +31,7 @@ const LoginPage = () => {
     email: "",
     password: "",
   };
+
   const methods = useForm<FormValues>({
     mode: "all",
     defaultValues: initialFormValues,
@@ -47,15 +49,20 @@ const LoginPage = () => {
       });
 
       if (loginRes.success) {
-        setToken(loginRes.data.accessToken);
+        setAuthInfo(
+          loginRes.data.accessToken,
+          loginRes.data.accessTokenExpiredAt,
+        );
         navigate("/mypage/subscribe");
       }
     } catch (e) {
-      console.log(e);
+      toast.error((e as Error).message);
     }
   };
 
-  const onError = () => {};
+  const onError = (e: FieldErrors) => {
+    toast.error(e.root?.message);
+  };
 
   return (
     <FormProvider {...methods}>
