@@ -10,7 +10,8 @@ type TextButtonProps = {
   text: string;
   size?: "small" | "normal" | "large" | "xlarge" | "h3" | "h2" | "h1";
   width?: 0 | "fit-content" | string;
-  br?: "4" | "8" | "20";
+  height?: "35";
+  br?: "0" | "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s";
   onClick?: () => void;
 };
@@ -20,6 +21,7 @@ const TextButton: React.FC<TextButtonProps> = ({
   text,
   size = "normal",
   width = "fit-content",
+  height,
   br,
   p,
   onClick,
@@ -28,6 +30,7 @@ const TextButton: React.FC<TextButtonProps> = ({
     <BaseButton
       type={type}
       width={width}
+      height={height}
       theme={theme}
       onClick={onClick}
       br={br}

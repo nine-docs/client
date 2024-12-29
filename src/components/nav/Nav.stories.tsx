@@ -1,11 +1,11 @@
 import { StoryFn } from "@storybook/react";
 import { BrowserRouter } from "react-router-dom";
 
-import MainHeader from "./MainHeader";
+import Nav from "./Nav";
 
 export default {
-  title: "components/headers/MainHeader",
-  component: MainHeader,
+  title: "components/Nav",
+  component: Nav,
   decorators: [
     (Story: StoryFn) => {
       return (

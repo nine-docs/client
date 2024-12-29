@@ -13,6 +13,10 @@
   }
 }
 
+.h35 {
+  height: 35px;
+}
+
 .radius_4 {
   border-radius: 4px;
 }
@@ -43,9 +47,14 @@
 
 .button_primary {
   background-color: $brand01;
+  border: 1px solid $brand01;
 
   > * {
     color: $white;
+  }
+
+  &:focus {
+    border: 1px solid $brand01Light;
   }
 }
 
@@ -55,6 +64,10 @@
   > * {
     color: $brand01;
   }
+
+  &:focus {
+    border: 1px solid $brand01Light;
+  }
 }
 
 .button_gray {
@@ -62,5 +75,9 @@
   border: 1px solid $grey03;
   > * {
     color: $grey05;
+  }
+
+  &:focus {
+    border: 1px solid $brand01;
   }
 }

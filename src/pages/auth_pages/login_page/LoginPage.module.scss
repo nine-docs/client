@@ -1,21 +1,21 @@
 @import "styles/variables";
 
 .page_wrap {
-  @include flex(column, center, center);
+  @include flex(column, center, center, 40px);
   width: 100%;
   height: calc(100vh - 60px);
 }
 
-.signin_section {
+.login_section {
   @include flex(column, start, center, 20px);
   width: 300px;
 }
 
-.signin_title_wrap {
+.login_title_wrap {
   @include flex(row, center, center, 10px);
 }
 
-.signin_title {
+.login_title {
   color: $brand01;
 }
 
@@ -27,12 +27,12 @@
   box-shadow: 0 2px 10px 2px $grey03;
 }
 
-.signin_input_wrap {
+.login_input_wrap {
   @include flex(column, start, start, 10px);
   width: 100%;
 }
 
-.signin_input_button_wrap {
+.login_input_button_wrap {
   @include flex(row, start, center, 10px);
   width: 100%;
 }

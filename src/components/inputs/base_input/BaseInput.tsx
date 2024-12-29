@@ -24,16 +24,25 @@ const BaseInput: React.FC<BaseInputProps> = ({
 }) => {
   const methods = useFormContext();
 
+  const isSubmitted = methods.formState.isSubmitted;
+
+  const error = methods.formState.errors[registerName];
+
   return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      width="100%"
-      className={classes.input}
-      disabled={disabled}
-      maxLength={maxLength}
-      {...methods.register(registerName, { ...registerOption })}
-    />
+    <div className={classes.input_wrap}>
+      <input
+        type={type}
+        placeholder={placeholder}
+        width="100%"
+        className={classes.input}
+        disabled={disabled}
+        maxLength={maxLength}
+        {...methods.register(registerName, { ...registerOption })}
+      />
+      {!!isSubmitted && !!error && (
+        <span className={classes.error_text}>{error.message as string}</span>
+      )}
+    </div>
   );
 };
 

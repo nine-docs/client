@@ -1,0 +1,48 @@
+@import "styles/variables";
+
+.page_wrap {
+  @include flex(column, center, center);
+  width: 100%;
+  height: calc(100vh - 60px);
+}
+
+.signup_section {
+  @include flex(column, start, center, 20px);
+  width: 300px;
+}
+
+.signup_title_wrap {
+  @include flex(row, center, center, 10px);
+}
+
+.signup_title {
+  color: $brand01;
+}
+
+.sign_form {
+  @include flex(column, start, center, 20px);
+  width: 100%;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px 2px $grey03;
+}
+
+.signup_input_wrap {
+  @include flex(column, start, start, 10px);
+  width: 100%;
+}
+
+.signup_input_button_wrap {
+  @include flex(row, start, start, 10px);
+  width: 100%;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+}
+
+.login_notice_wrap {
+  @include flex(row, center, center, 8px);
+
+  > span {
+    font-size: $fs;
+  }
+}

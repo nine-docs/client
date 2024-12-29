@@ -1,0 +1,6 @@
+@import "styles/variables";
+
+.nav_wrap {
+  @include flex(row, center, center);
+  width: 100%;
+}

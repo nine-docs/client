@@ -1,7 +1,7 @@
 @import "reset", "variables", "mixin";
 
 * {
-  @include font(16px, normal, $black, $defaultFont);
+  @include font($fn, normal, $black, $defaultFont);
   color: $grey08;
 
   h1 {
@@ -17,5 +17,9 @@
   h3 {
     font-size: $fh3;
     font-weight: 500;
+  }
+
+  strong {
+    color: $brand01;
   }
 }
