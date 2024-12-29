@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Toast />
-      <div className={classes.Layout}>
+      <div className={classes.layout}>
         <MainHeader />
         {children}
       </div>

@@ -34,7 +34,7 @@ const LoginPage = () => {
   };
 
   const onSubmit = () => {
-    navigate("/mypage/bookmark");
+    navigate("/mypage/subscribe");
   };
 
   const onError = () => {};

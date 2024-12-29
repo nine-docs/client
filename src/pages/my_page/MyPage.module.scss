@@ -3,5 +3,13 @@
 .page_wrap {
   @include flex(column, start, start);
   width: 100vw;
+  max-width: 1000px;
   height: calc(100vh - 60px);
+}
+
+.content_wrap {
+  @include flex(row, start, start);
+
+  width: 100%;
+  padding: 12px 20px;
 }
