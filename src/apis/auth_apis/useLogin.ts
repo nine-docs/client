@@ -36,9 +36,9 @@ const useLogin = () => {
       };
 
       if (isApiMock) {
-        return new Promise((resolve) => {
-          setTimeout(() => resolve(mockData), 100);
-        });
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(mockData), 1000),
+        );
       } else {
         return httpClient.post(
           `/api/v1/login`,

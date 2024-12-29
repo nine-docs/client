@@ -1,6 +1,7 @@
 import React from "react";
 
 import MainHeader from "components/headers/main_header/MainHeader";
+import LoadingIndicator from "components/loading/LoadingIndicator";
 import Toast from "components/toast/Toast";
 
 import classes from "./Layout.module.scss";
@@ -12,6 +13,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
+      <LoadingIndicator />
       <Toast />
       <div className={classes.layout}>
         <MainHeader />

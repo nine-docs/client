@@ -15,11 +15,11 @@
   --color_grey07: #28323c;
   --color_grey08: #161d24;
   --color_black: #000;
-
   --color_green01: #60b86f;
   --color_red01: #f74271;
   --color_red02: #ff0000;
   --color_blue01: #1e3bf8;
+  --color_backdrop: rgba(0, 0, 0, 0.15);
 
   --fs_h1: 28px;
   --fs_h2: 24px;
@@ -47,6 +47,7 @@ $grey06: var(--color_grey06);
 $grey07: var(--color_grey07);
 $grey08: var(--color_grey08);
 $black: var(--color_black);
+$backdrop: var(--color_backdrop);
 
 $green01: var(--color_green01);
 $red01: var(--color_red01);

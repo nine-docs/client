@@ -1,0 +1,12 @@
+@import "styles/variables";
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: $ziLoading;
+  background-color: $backdrop;
+  @include flex(column, center, center);
+}
