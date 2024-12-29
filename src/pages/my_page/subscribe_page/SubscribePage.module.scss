@@ -1,1 +1,12 @@
 @import "styles/variables";
+
+.content_wrap {
+  @include flex(column, start, center, 20px);
+  padding: 12px 20px;
+}
+
+.section_wrap {
+  @include flex(column, start, start);
+
+  width: 100%;
+}
