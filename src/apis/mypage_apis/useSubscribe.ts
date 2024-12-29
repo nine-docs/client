@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
