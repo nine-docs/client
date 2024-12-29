@@ -1,10 +1,7 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Router from "Router";
-import dayjs from "dayjs";
-import { useEffect } from "react";
-import { BrowserRouter, useNavigate } from "react-router-dom";
-import { useAuthStore } from "stores/authStore";
+import { BrowserRouter } from "react-router-dom";
 
 import "styles/common.scss";
 

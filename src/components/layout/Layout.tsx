@@ -1,10 +1,9 @@
-import dayjs from "dayjs";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "stores/authStore";
+import React from "react";
 
 import MainHeader from "components/headers/main_header/MainHeader";
 import Toast from "components/toast/Toast";
+
+import useAuthCheck from "hooks/useAuthCheck";
 
 import classes from "./Layout.module.scss";
 
@@ -13,24 +12,7 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  const navigate = useNavigate();
-
-  const { token, accessTokenExpiredAt, deleteAuthInfo } = useAuthStore();
-
-  const isBeforeNow = (dateString: string): boolean => {
-    const inputDate = dayjs(dateString);
-    const now = dayjs();
-
-    return now.isBefore(inputDate);
-  };
-
-  useEffect(() => {
-    if (token !== "" && isBeforeNow(accessTokenExpiredAt)) {
-      navigate("/mypage/subscribe");
-    } else if (token !== "" && !isBeforeNow(accessTokenExpiredAt)) {
-      deleteAuthInfo();
-    }
-  }, [token, accessTokenExpiredAt]);
+  useAuthCheck();
 
   return (
     <>
