@@ -1,6 +1,9 @@
+import useLogin from "apis/auth_apis/useLogin";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuthStore } from "stores/authStore";
 
 import LogoIcon from "assets/images/logos/LogoIcon";
 
@@ -17,13 +20,16 @@ type FormValues = {
 };
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const setToken = useAuthStore((state) => state.setToken);
+
+  const { mutateAsync } = useLogin();
+
   const initialFormValues = {
     email: "",
     password: "",
   };
-
-  const navigate = useNavigate();
-
   const methods = useForm<FormValues>({
     mode: "all",
     defaultValues: initialFormValues,
@@ -33,8 +39,20 @@ const LoginPage = () => {
     navigate("/signup");
   };
 
-  const onSubmit = () => {
-    navigate("/mypage/subscribe");
+  const onSubmit = async (data: FormValues) => {
+    try {
+      const loginRes = await mutateAsync({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (loginRes.success) {
+        setToken(loginRes.data.accessToken);
+        navigate("/mypage/subscribe");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onError = () => {};

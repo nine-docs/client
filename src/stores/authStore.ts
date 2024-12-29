@@ -1,4 +1,3 @@
-// store/authStore.ts
 import { StateCreator, create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 

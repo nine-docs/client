@@ -6,6 +6,15 @@ type LoginPayload = {
   password: string;
 };
 
+type LoginResponse = {
+  success: boolean;
+  errorCode: number | null;
+  data: {
+    accessToken: string;
+    accessTokenExpiredAt: string;
+  };
+};
+
 const mockData = {
   success: true,
   errorCode: null,
@@ -19,7 +28,7 @@ const useLogin = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const { mutateAsync } = useMutation({
-    mutationFn: ({ email, password }: LoginPayload) => {
+    mutationFn: ({ email, password }: LoginPayload): Promise<LoginResponse> => {
       const params = {
         email: email,
         password: password,
@@ -30,7 +39,10 @@ const useLogin = () => {
           setTimeout(() => resolve(mockData), 100);
         });
       } else {
-        return httpClient.post(`/api/v1/login`, params);
+        return httpClient.post(
+          `/api/v1/login`,
+          params,
+        ) as Promise<LoginResponse>;
       }
     },
   });
