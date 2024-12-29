@@ -1,4 +1,5 @@
 import axios, { Axios } from "axios";
+import { useAuthStore } from "stores/authStore";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -22,6 +23,14 @@ http.interceptors.response.use(
     return response;
   },
   (error) => {
+    const deleteAuthInfo = useAuthStore((state) => state.deleteAuthInfo);
+
+    if (error.response?.status === 401) {
+      // 강제 로그아웃
+      deleteAuthInfo();
+      window.location.href = "/login";
+    }
+
     return Promise.reject(error);
   },
 );

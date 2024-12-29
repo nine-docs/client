@@ -3,8 +3,6 @@ import React from "react";
 import MainHeader from "components/headers/main_header/MainHeader";
 import Toast from "components/toast/Toast";
 
-import useAuthCheck from "hooks/useAuthCheck";
-
 import classes from "./Layout.module.scss";
 
 type LayoutProps = {
@@ -12,8 +10,6 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  useAuthCheck();
-
   return (
     <>
       <Toast />
