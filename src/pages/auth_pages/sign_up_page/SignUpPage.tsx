@@ -56,6 +56,7 @@ const SignUpPage = () => {
       const emailSendRes = await sendEmailMutateAsync({
         email: methods.getValues("email"),
       });
+      toast.success(`인증번호가 발송되었습니다.\n이메일을 확인해 주세요.`);
     } catch (e) {
       toast.error("인증번호 발송에 실패했습니다.");
     }
@@ -69,6 +70,7 @@ const SignUpPage = () => {
         emailVerificationCode: methods.getValues("authCode"),
       });
 
+      toast.success("이메일이 인증되었습니다.");
       setIsAuthCodeChecked(true);
     } catch (e) {
       methods.setError("authCode", {
