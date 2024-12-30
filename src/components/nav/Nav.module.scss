@@ -1,6 +1,7 @@
-@import "styles/variables";
+@use "styles/variables";
+@use "styles/mixin";
 
 .nav_wrap {
-  @include flex(row, center, center);
+  @include mixin.flex(row, center, center);
   width: 100%;
 }

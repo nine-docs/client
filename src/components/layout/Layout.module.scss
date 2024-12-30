@@ -1,7 +1,8 @@
-@import "styles/variables";
+@use "styles/variables";
+@use "styles/mixin";
 
 .layout {
-  @include flex(column, start, center);
+  @include mixin.flex(column, start, center);
   width: 100vw;
   height: 100vh;
 }

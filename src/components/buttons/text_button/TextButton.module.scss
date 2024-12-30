@@ -1,32 +1,32 @@
-@import "styles/variables";
+@use "styles/variables";
 
 .h1 {
-  font-size: $fh1;
+  font-size: variables.$fh1;
   font-weight: 600;
 }
 
 .h2 {
-  font-size: $fh2;
+  font-size: variables.$fh2;
   font-weight: 600;
 }
 
 .h3 {
-  font-size: $fh3;
+  font-size: variables.$fh3;
   font-weight: 600;
 }
 
 .xlarge {
-  font-size: $fxl;
+  font-size: variables.$fxl;
 }
 
 .large {
-  font-size: $fl;
+  font-size: variables.$fl;
 }
 
 .normal {
-  font-size: $fn;
+  font-size: variables.$fn;
 }
 
 .small {
-  font-size: $fs;
+  font-size: variables.$fs;
 }

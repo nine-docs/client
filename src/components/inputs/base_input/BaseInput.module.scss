@@ -1,27 +1,33 @@
-@import "styles/variables";
+@use "styles/variables";
+@use "styles/mixin";
 
 .input_wrap {
-  @include flex(column, start, start);
+  @include mixin.flex(column, start, start);
   width: 100%;
 }
 
 .input {
-  border: 1px solid $grey04;
+  border: 1px solid variables.$grey04;
   border-radius: 4px;
   padding: 8px;
   width: 100%;
   height: 35px;
 
   &::placeholder {
-    color: $grey04;
+    color: variables.$grey04;
   }
 
   &:focus {
-    border: 1px solid $brand01;
+    border: 1px solid variables.$brand01;
   }
 }
 
 .error_text {
-  @include font($fs, normal, $red01, $defaultFont);
+  @include mixin.font(
+    variables.$fs,
+    normal,
+    variables.$red01,
+    variables.$defaultFont
+  );
   text-align: start;
 }

@@ -1,25 +1,32 @@
-@import "reset", "variables", "mixin";
+@use "reset";
+@use "variables";
+@use "mixin";
 
 * {
-  @include font($fn, normal, $black, $defaultFont);
-  color: $grey08;
+  @include mixin.font(
+    variables.$fn,
+    normal,
+    variables.$black,
+    variables.$defaultFont
+  );
+  color: variables.$grey08;
 
   h1 {
-    font-size: $fh1;
+    font-size: variables.$fh1;
     font-weight: 600;
   }
 
   h2 {
-    font-size: $fh2;
+    font-size: variables.$fh2;
     font-weight: 600;
   }
 
   h3 {
-    font-size: $fh3;
+    font-size: variables.$fh3;
     font-weight: 500;
   }
 
   strong {
-    color: $brand01;
+    color: variables.$brand01;
   }
 }

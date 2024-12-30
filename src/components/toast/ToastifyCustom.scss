@@ -1,9 +1,9 @@
-@import "styles/variables";
+@use "styles/variables";
 
 .Toastify__toast {
   box-sizing: border-box;
   width: fit-content;
-  font-family: $defaultFont;
+  font-family: variables.$defaultFont;
   border-radius: 4px;
   padding: 8px 12px;
   min-height: auto; // 기본 높이 제한 해제
@@ -18,11 +18,11 @@
 }
 
 .Toastify__toast--success {
-  background-color: $blue01;
-  color: $white;
+  background-color: variables.$blue01;
+  color: variables.$white;
 }
 
 .Toastify__toast--error {
-  background-color: $red02;
-  color: $white;
+  background-color: variables.$red02;
+  color: variables.$white;
 }

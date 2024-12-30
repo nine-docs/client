@@ -1,7 +1,8 @@
-@import "styles/variables";
+@use "styles/variables";
+@use "styles/mixin";
 
 .item_wrap {
-  @include flex(row, center, center);
+  @include mixin.flex(row, center, center);
   padding: 8px 16px;
   transition: 0.2s;
   max-width: 150px;
@@ -13,15 +14,15 @@
   }
 
   &:hover {
-    background-color: $grey03;
+    background-color: variables.$grey03;
   }
 }
 
 .cur_item {
-  border-bottom: 1px solid $brand01;
+  border-bottom: 1px solid variables.$brand01;
 
   > * {
-    color: $brand01;
+    color: variables.$brand01;
     font-weight: 600;
   }
 }

@@ -1,5 +1,6 @@
-@import "styles/variables";
+@use "styles/variables";
+@use "styles/mixin";
 
 .modal_content_wrap {
-  @include flex(column, start, start);
+  @include mixin.flex(column, start, start);
 }

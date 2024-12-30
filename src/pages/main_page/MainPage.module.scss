@@ -1,8 +1,9 @@
-@import "styles/variables";
+@use "styles/variables";
+@use "styles/mixin";
 
 .first_section {
-  @include flex(column, center, center, 20px);
-  background: linear-gradient(180deg, transparent 50%, $brand01Light);
+  @include mixin.flex(column, center, center, 20px);
+  background: linear-gradient(180deg, transparent 50%, variables.$brand01Light);
   width: 100%;
   height: calc(100vh - 60px);
 }
@@ -12,5 +13,5 @@
 }
 
 .font_label {
-  color: $grey05;
+  color: variables.$grey05;
 }

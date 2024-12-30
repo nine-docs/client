@@ -1,4 +1,5 @@
-@import "styles/variables";
+@use "styles/variables";
+@use "styles/mixin";
 
 .backdrop {
   position: fixed;
@@ -6,7 +7,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: $ziLoading;
-  background-color: $backdrop;
-  @include flex(column, center, center);
+  z-index: variables.$ziLoading;
+  background-color: variables.$backdrop;
+  @include mixin.flex(column, center, center);
 }

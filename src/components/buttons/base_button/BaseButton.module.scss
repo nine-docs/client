@@ -1,4 +1,4 @@
-@import "styles/variables";
+@use "styles/variables";
 
 .button_wrap {
   padding: 4px 8px;
@@ -46,38 +46,38 @@
 }
 
 .button_primary {
-  background-color: $brand01;
-  border: 1px solid $brand01;
+  background-color: variables.$brand01;
+  border: 1px solid variables.$brand01;
 
   > * {
-    color: $white;
+    color: variables.$white;
   }
 
   &:focus {
-    border: 1px solid $brand01Light;
+    border: 1px solid variables.$brand01Light;
   }
 }
 
 .button_primary_line {
-  border: 1px solid $brand01;
+  border: 1px solid variables.$brand01;
 
   > * {
-    color: $brand01;
+    color: variables.$brand01;
   }
 
   &:focus {
-    border: 1px solid $brand01Light;
+    border: 1px solid variables.$brand01Light;
   }
 }
 
 .button_gray {
-  background-color: $grey02;
-  border: 1px solid $grey03;
+  background-color: variables.$grey02;
+  border: 1px solid variables.$grey03;
   > * {
-    color: $grey05;
+    color: variables.$grey05;
   }
 
   &:focus {
-    border: 1px solid $brand01;
+    border: 1px solid variables.$brand01;
   }
 }
