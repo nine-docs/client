@@ -1,9 +1,13 @@
+import { getValue } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import LogoIcon from "assets/images/logos/LogoIcon";
+
+import useCodeCheck from "apis/auth_apis/useCodeCheck";
+import useEmailSend from "apis/auth_apis/useEmailSend";
 
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
@@ -21,6 +25,13 @@ type FormValues = {
 };
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+
+  const [isAuthCodeChecked, setIsAuthCodeChecked] = useState(false);
+
+  const { mutateAsync: sendEmailMutateAsync } = useEmailSend();
+  const { mutateAsync: codeCheckMutateAsync } = useCodeCheck();
+
   const initialFormValue = {
     nickname: "",
     email: "",
@@ -29,35 +40,55 @@ const SignUpPage = () => {
     passwordCheck: "",
   };
 
-  const navigate = useNavigate();
-
   const methods = useForm<FormValues>({
     mode: "all",
     defaultValues: initialFormValue,
   });
 
-  const [isAuthChecked, setIsAuthChecked] = useState(false);
-
+  /* 로그인 버튼 누르면 실행되는 함수 */
   const handleLoginClick = () => {
     navigate("/login");
   };
 
-  const checkAuthCode = async () => {
-    const isValid = await methods.trigger("authCode");
-
-    if (isValid) {
-      /* 인증코드 API 호출 */
-      try {
-        setIsAuthChecked(true);
-      } catch (e) {
-        setIsAuthChecked(false);
-      }
-    } else {
-      toast.error(methods.formState?.errors["authCode"]?.message);
+  /* 인증번호 받기 버튼 누르면 실행되는 함수 */
+  const getAuthCode = async () => {
+    try {
+      const emailSendRes = await sendEmailMutateAsync({
+        email: methods.getValues("email"),
+      });
+    } catch (e) {
+      toast.error("인증번호 발송에 실패했습니다.");
     }
   };
 
-  const onSubmit = (data: FormValues) => {};
+  /* 인증번호 확인 버튼 누르면 실행되는 함수 */
+  const checkAuthCode: () => void = async () => {
+    try {
+      const res = await codeCheckMutateAsync({
+        email: methods.getValues("email"),
+        emailVerificationCode: methods.getValues("authCode"),
+      });
+
+      setIsAuthCodeChecked(true);
+    } catch (e) {
+      methods.setError("authCode", {
+        type: "authCheck",
+        message: "인증번호 확인이 필요합니다.",
+      });
+      setIsAuthCodeChecked(false);
+    }
+  };
+
+  const onSubmit = async (data: FormValues) => {
+    if (!isAuthCodeChecked) {
+      toast.error("이메일 인증을 완료해 주세요.");
+      methods.setError("authCode", {
+        type: "authCheck",
+        message: "인증번호 확인이 필요합니다.",
+      });
+      return;
+    }
+  };
 
   const onError = () => {};
 
@@ -109,6 +140,7 @@ const SignUpPage = () => {
                   theme="primary-line"
                   p="s"
                   size="small"
+                  onClick={getAuthCode}
                 />
               </div>
               {/* 인증번호 입력 */}
@@ -136,12 +168,6 @@ const SignUpPage = () => {
                     onClick={checkAuthCode}
                   />
                 </div>
-                {/* 성공 메세지 */}
-                {isAuthChecked && (
-                  <span className={classes.success_text}>
-                    인증이 완료되었습니다.
-                  </span>
-                )}
               </div>
               {/* 비밀번호 입력 */}
               <BaseInput

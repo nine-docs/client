@@ -5,11 +5,7 @@ import { useAuthStore } from "stores/authStore";
 
 import httpClient from "apis/networks/HttpClient";
 
-const deleteUserMockData = {
-  success: true,
-  errorCode: null,
-  data: null,
-};
+const deleteUserMockData = null;
 
 const useDeleteUser = () => {
   const navigate = useNavigate();

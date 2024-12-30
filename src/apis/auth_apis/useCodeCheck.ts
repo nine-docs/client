@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+
 import httpClient from "apis/networks/HttpClient";
 
 type CodeCheckPayload = {
@@ -6,19 +7,22 @@ type CodeCheckPayload = {
   emailVerificationCode: string;
 };
 
+type CodeCheckResponse = {
+  verificationExpiredAt: string;
+};
+
 const mockData = {
-  success: true,
-  errorCode: null,
-  data: {
-    verificationExpiredAt: "2024-12-20 16:31:01.123",
-  },
+  verificationExpiredAt: "2024-12-20 16:31:01.123",
 };
 
 const useCodeCheck = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const { mutateAsync } = useMutation({
-    mutationFn: ({ email, emailVerificationCode }: CodeCheckPayload) => {
+    mutationFn: ({
+      email,
+      emailVerificationCode,
+    }: CodeCheckPayload): Promise<CodeCheckResponse> => {
       const params = {
         email: email,
         emailVerificationCode: emailVerificationCode,

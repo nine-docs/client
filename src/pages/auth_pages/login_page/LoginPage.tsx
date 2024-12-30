@@ -48,13 +48,8 @@ const LoginPage = () => {
         password: data.password,
       });
 
-      if (loginRes.success) {
-        setAuthInfo(
-          loginRes.data.accessToken,
-          loginRes.data.accessTokenExpiredAt,
-        );
-        navigate("/mypage/subscribe");
-      }
+      setAuthInfo(loginRes.accessToken, loginRes.accessTokenExpiredAt);
+      navigate("/mypage/subscribe");
     } catch (e) {
       toast.error((e as Error).message);
     }

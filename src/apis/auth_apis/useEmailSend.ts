@@ -1,23 +1,24 @@
 import { useMutation } from "@tanstack/react-query";
+
 import httpClient from "apis/networks/HttpClient";
 
 type EmailPayload = {
   email: string;
 };
 
+type EmailResponse = {
+  verificationCodeExpiredAt: string;
+};
+
 const mockData = {
-  success: true,
-  errorCode: null,
-  data: {
-    verificationCodeExpiredAt: "2024-12-27 11:31:11.123123",
-  },
+  verificationCodeExpiredAt: "2024-12-27 11:31:11.123123",
 };
 
 const useEmailSend = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const { mutateAsync } = useMutation({
-    mutationFn: ({ email }: EmailPayload) => {
+    mutationFn: ({ email }: EmailPayload): Promise<EmailResponse> => {
       const params = {
         email: email,
       };

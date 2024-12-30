@@ -8,21 +8,13 @@ type LoginPayload = {
 };
 
 type LoginResponse = {
-  success: boolean;
-  errorCode: number | null;
-  data: {
-    accessToken: string;
-    accessTokenExpiredAt: string;
-  };
+  accessToken: string;
+  accessTokenExpiredAt: string;
 };
 
 const mockData = {
-  success: true,
-  errorCode: null,
-  data: {
-    accessToken: "ejbqpio3wejdfqlkwaedsmvwejkflskedjf",
-    accessTokenExpiredAt: "2025-01-03 10:01:10.152123",
-  },
+  accessToken: "ejbqpio3wejdfqlkwaedsmvwejkflskedjf",
+  accessTokenExpiredAt: "2025-01-03 10:01:10.152123",
 };
 
 const useLogin = () => {
