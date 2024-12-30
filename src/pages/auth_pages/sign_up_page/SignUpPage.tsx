@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import LogoIcon from "assets/images/logos/LogoIcon";
 
@@ -23,6 +24,7 @@ const SignUpPage = () => {
   const initialFormValue = {
     nickname: "",
     email: "",
+    authCode: "",
     password: "",
     passwordCheck: "",
   };
@@ -34,11 +36,28 @@ const SignUpPage = () => {
     defaultValues: initialFormValue,
   });
 
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
+
   const handleLoginClick = () => {
     navigate("/login");
   };
 
-  const onSubmit = () => {};
+  const checkAuthCode = async () => {
+    const isValid = await methods.trigger("authCode");
+
+    if (isValid) {
+      /* 인증코드 API 호출 */
+      try {
+        setIsAuthChecked(true);
+      } catch (e) {
+        setIsAuthChecked(false);
+      }
+    } else {
+      toast.error(methods.formState?.errors["authCode"]?.message);
+    }
+  };
+
+  const onSubmit = (data: FormValues) => {};
 
   const onError = () => {};
 
@@ -55,6 +74,7 @@ const SignUpPage = () => {
             onSubmit={methods.handleSubmit(onSubmit, onError)}
           >
             <div className={classes.signup_input_wrap}>
+              {/* 닉네임 */}
               <BaseInput
                 type="text"
                 width="100%"
@@ -91,29 +111,39 @@ const SignUpPage = () => {
                   size="small"
                 />
               </div>
-
               {/* 인증번호 입력 */}
-              <div className={classes.signup_input_button_wrap}>
-                <BaseInput
-                  type="text"
-                  width="100%"
-                  placeholder="인증번호"
-                  align="start"
-                  registerName="authCode"
-                  registerOption={{
-                    required: "인증번호를 입력해 주세요.",
-                  }}
-                />
-                <TextButton
-                  type="button"
-                  width={"120px"}
-                  height={"35"}
-                  text="인증번호 확인"
-                  theme="primary-line"
-                  p="s"
-                  size="small"
-                />
+              <div className={classes.input_with_success_text}>
+                {/* 버튼과 input UI */}
+                <div className={classes.signup_input_button_wrap}>
+                  <BaseInput
+                    type="text"
+                    width="100%"
+                    placeholder="인증번호"
+                    align="start"
+                    registerName="authCode"
+                    registerOption={{
+                      required: "인증번호를 입력해 주세요.",
+                    }}
+                  />
+                  <TextButton
+                    type="button"
+                    width={"120px"}
+                    height={"35"}
+                    text="인증번호 확인"
+                    theme="primary-line"
+                    p="s"
+                    size="small"
+                    onClick={checkAuthCode}
+                  />
+                </div>
+                {/* 성공 메세지 */}
+                {isAuthChecked && (
+                  <span className={classes.success_text}>
+                    인증이 완료되었습니다.
+                  </span>
+                )}
               </div>
+              {/* 비밀번호 입력 */}
               <BaseInput
                 type="password"
                 width="100%"
@@ -128,6 +158,7 @@ const SignUpPage = () => {
                   },
                 }}
               />
+              {/* 비밀번호 확인 */}
               <BaseInput
                 type="password"
                 width="100%"

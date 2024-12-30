@@ -47,3 +47,18 @@
     font-size: variables.$fs;
   }
 }
+
+.input_with_success_text {
+  @include mixin.flex(column, start, start);
+  width: 100%;
+}
+
+.success_text {
+  @include mixin.font(
+    variables.$fs,
+    normal,
+    variables.$blue01,
+    variables.$defaultFont
+  );
+  text-align: start;
+}
