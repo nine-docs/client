@@ -20,6 +20,7 @@ const subscribeListMockData = {
   },
 };
 
+/* 내 구독 목록 조회 */
 export const useGetSubscribeList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
@@ -45,3 +46,6 @@ export const useGetSubscribeList = () => {
 
   return { data };
 };
+
+/* 전체 구독 카테고리 조회 : /api/v1/my-page/subscription/all-categories*/
+export const useGetCategoryList = () => {};
