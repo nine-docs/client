@@ -1,6 +1,5 @@
-import { getValue } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FieldErrors, FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -92,7 +91,9 @@ const SignUpPage = () => {
     }
   };
 
-  const onError = () => {};
+  const onError = (e: FieldErrors) => {
+    toast.error(e.root?.message);
+  };
 
   return (
     <main className={classes.page_wrap}>
