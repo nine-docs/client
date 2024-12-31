@@ -15,7 +15,7 @@ CSR방식에서는 사용자가 메인 페이지에 접속하면, 브라우저�
 
 SSR 방식에서는 각 페이지 URL마다 보여줄 내용이 미리 결정되어 있다. 사용자가 웹 페이지에 접속하면 브라우저가 해당 URL을 서버에 요청하고, 서버는 이 URL을 기준으로 어떤 페이지를 렌더링할지 결정한다. 서버는 렌더링 엔진을 이용해 페이지를 렌더하고, 완성된 HTML을 브라우저에 응답한다. HTML뿐 아니라, 필요에 따라 js 파일 등의 추가 리소스도 포함될 수 있다. 이후 CSR와 마찬가지로 HTML을 해석하여 DOM을 생성하고 Hydration을 수행한다.
 
-< 참고 >
+_< 참고 >_
 - [What is Hydration?](https://www.youtube.com/watch?v=D46aT3mx9LU)`;
 
 const useGetArticle = ({ articleId }: getArticlePayload) => {
