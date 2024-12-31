@@ -36,6 +36,11 @@ $brand01Light: var(--color_brand01_light);
 $brand01: var(--color_brand01);
 $brand02: var(--color_brand02);
 $brandBg: var(--color_brand_bg);
+$brandGradient: linear-gradient(
+  180deg,
+  transparent 50%,
+  var(--color_brand01_light)
+);
 
 $white: var(--color_white);
 $grey01: var(--color_grey01);

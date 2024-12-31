@@ -10,27 +10,13 @@
   overflow-y: scroll;
 }
 
-.section_wrap {
-  @include mixin.flex(column, start, start, 8px);
+.content_wrap {
+  @include mixin.flex(column, start, start, 20px);
   width: 100%;
 }
 
-.question_wrap {
-  @include mixin.flex(column, start, start);
+.article_wrap {
   width: 100%;
-  background-color: variables.$brandBg;
-  border-radius: 8px;
-  padding: 20px;
-  white-space: pre-wrap;
-
-  > * {
-    line-height: 1.5;
-  }
-}
-
-.answer_wrap {
-  width: 100%;
-  background-color: variables.$brandBg;
   border-radius: 8px;
   padding: 20px;
   line-height: 1.6;
@@ -43,8 +29,7 @@
   h1,
   h2,
   h3 {
-    border-bottom: 1px solid #eaecef;
-    padding-bottom: 0.3em;
+    padding-bottom: 0.5em;
     margin-top: 8px;
     font-weight: bold;
     line-height: 1.25;
@@ -136,8 +121,4 @@
       text-decoration: underline;
     }
   }
-}
-
-.section_title {
-  color: variables.$brand01;
 }

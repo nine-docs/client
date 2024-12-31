@@ -3,7 +3,7 @@
 
 .first_section {
   @include mixin.flex(column, center, center, 20px);
-  background: linear-gradient(180deg, transparent 50%, variables.$brand01Light);
+  background: variables.$brandGradient;
   width: 100%;
   height: calc(100vh - 60px);
 }
