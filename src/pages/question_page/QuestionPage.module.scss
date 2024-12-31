@@ -1,0 +1,7 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.page_wrap {
+  @include mixin.flex(column, center, center, 40px);
+  height: calc(100vh - 60px);
+}
