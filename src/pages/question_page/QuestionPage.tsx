@@ -1,27 +1,31 @@
-import React from "react";
 import Markdown from "react-markdown";
+import { useParams } from "react-router-dom";
+
+import useGetArticle from "apis/article_apis/useGetArticle";
 
 import classes from "./QuestionPage.module.scss";
 
 const QuestionPage = () => {
-  const mdFile = `
-  A paragraph with *emphasis* and **strong importance**.
+  const articleId = useParams().articleId;
 
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-### sdf
-* Lists
-* [ ] todo
-* [x] done
-
-A table:
-
-| a | b |
-| - | - |
-`;
+  const { data } = useGetArticle({
+    articleId: Number(articleId),
+  });
 
   return (
     <div className={classes.page_wrap}>
-      <Markdown>{mdFile}</Markdown>
+      {/* 문제 section */}
+      <section className={classes.section_wrap}>
+        <h2 className={classes.section_title}>Q.</h2>
+        <article className={classes.question_wrap}>{data.ArticleTitle}</article>
+      </section>
+      {/* 답안 section */}
+      <section className={classes.section_wrap}>
+        <h2 className={classes.section_title}>A.</h2>
+        <article className={classes.answer_wrap}>
+          <Markdown>{data.ArticleContents}</Markdown>
+        </article>
+      </section>
     </div>
   );
 };

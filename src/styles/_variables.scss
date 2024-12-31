@@ -2,6 +2,7 @@
   --color_brand01_light: #ffc5a5;
   --color_brand01: #fe7e37;
   --color_brand02: #ee493d;
+  --color_brand_bg: #ffe9df;
 
   --color_white: #fff;
   --color_grey01: #fdfdfd;
@@ -34,6 +35,7 @@ $defaultFont: "Pretendard", sans-serif;
 $brand01Light: var(--color_brand01_light);
 $brand01: var(--color_brand01);
 $brand02: var(--color_brand02);
+$brandBg: var(--color_brand_bg);
 
 $white: var(--color_white);
 $grey01: var(--color_grey01);

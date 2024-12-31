@@ -2,7 +2,142 @@
 @use "styles/mixin";
 
 .page_wrap {
-  @include mixin.flex(column, center, center, 40px);
+  @include mixin.flex(column, start, center, 20px);
+  width: 100vw;
+  max-width: 1000px;
   height: calc(100vh - 60px);
+  padding: 0 40px;
   overflow-y: scroll;
+}
+
+.section_wrap {
+  @include mixin.flex(column, start, start, 8px);
+  width: 100%;
+}
+
+.question_wrap {
+  @include mixin.flex(column, start, start);
+  width: 100%;
+  background-color: variables.$brandBg;
+  border-radius: 8px;
+  padding: 20px;
+  white-space: pre-wrap;
+
+  > * {
+    line-height: 1.5;
+  }
+}
+
+.answer_wrap {
+  width: 100%;
+  background-color: variables.$brandBg;
+  border-radius: 8px;
+  padding: 20px;
+  line-height: 1.6;
+
+  p,
+  div {
+    padding-bottom: 1rem;
+  }
+
+  h1,
+  h2,
+  h3 {
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+    margin-top: 8px;
+    font-weight: bold;
+    line-height: 1.25;
+  }
+
+  h1 {
+    font-size: 2.25em;
+  }
+
+  h2 {
+    font-size: 1.75em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  code {
+    background-color: #f6f8fa;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-family: "Courier New", monospace;
+  }
+
+  pre {
+    background-color: #f6f8fa;
+    padding: 16px;
+    border-radius: 6px;
+    overflow: auto;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+  }
+
+  ul,
+  ol {
+    padding-left: 2em;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  li {
+    display: list-item;
+    list-style-type: circle;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f6f8fa;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  a {
+    color: -webkit-link; /* 보통 파란색 */
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.section_title {
+  color: variables.$brand01;
 }
