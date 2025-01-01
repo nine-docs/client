@@ -21,6 +21,11 @@
   cursor: pointer;
   border: 1px solid variables.$grey03;
 
+  * {
+    text-align: start;
+    white-space: pre-wrap;
+  }
+
   &:hover {
     background-color: variables.$grey02;
   }

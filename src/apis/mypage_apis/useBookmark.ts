@@ -38,7 +38,7 @@ const bookMarkListMockData = {
       bookmarkId: 42,
       article: {
         id: 14,
-        title: "useState 란?",
+        title: "React의 다양한 상태관리 라이브러리의 동향 (2024)",
         category: {
           id: 10,
           name: "Frontend",
