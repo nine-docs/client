@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetBookmarkList } from "apis/mypage_apis/useBookmark";
 
 import classes from "./BookmarkPage.module.scss";
+import BookmarkItem from "./components/bookmark_item/BookmarkItem";
 
 const BookmarkPage = () => {
   const navigate = useNavigate();
@@ -18,18 +19,13 @@ const BookmarkPage = () => {
     <main className={classes.content_wrap}>
       <section className={classes.list_wrap}>
         {data.items.map((item) => (
-          <button
+          <BookmarkItem
             key={item.bookmarkId}
-            className={classes.item_wrap}
+            item={item}
             onClick={() => {
-              handleItemClick(item.article.id);
+              handleItemClick(item.bookmarkId);
             }}
-          >
-            <span className={classes.category}>
-              {item.article.category.name}
-            </span>
-            <h4>{item.article.title}</h4>
-          </button>
+          />
         ))}
       </section>
     </main>

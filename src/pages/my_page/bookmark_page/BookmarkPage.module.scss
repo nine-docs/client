@@ -11,39 +11,3 @@
   @include mixin.flex(column, start, start, 12px);
   width: 100%;
 }
-
-.item_wrap {
-  @include mixin.flex(column, start, start, 4px);
-  width: 100%;
-  padding: 12px 20px;
-  border-radius: 8px;
-  transition: 0.2s;
-  cursor: pointer;
-  border: 1px solid variables.$grey03;
-
-  * {
-    text-align: start;
-    white-space: pre-wrap;
-  }
-
-  &:hover {
-    background-color: variables.$grey02;
-  }
-
-  &:focus {
-    border: 1px solid variables.$brand01;
-  }
-
-  &:active {
-    background-color: transparent;
-  }
-
-  > .category {
-    @include mixin.font(
-      variables.$fs,
-      normal,
-      variables.$grey05,
-      variables.$defaultFont
-    );
-  }
-}

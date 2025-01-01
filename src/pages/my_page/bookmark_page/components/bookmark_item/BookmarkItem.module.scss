@@ -1,0 +1,45 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.item_wrap {
+  @include mixin.flex(row, start, start, 4px);
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: 0.2s;
+  cursor: pointer;
+  border: 1px solid variables.$grey03;
+
+  &:hover {
+    background-color: variables.$grey02;
+  }
+
+  &:focus {
+    border: 1px solid variables.$brand01;
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+}
+
+.item_info_wrap {
+  @include mixin.flex(column, start, start);
+  width: 100%;
+}
+
+.category {
+  @include mixin.font(
+    variables.$fs,
+    normal,
+    variables.$grey05,
+    variables.$defaultFont
+  );
+  text-align: start;
+  white-space: pre-wrap;
+}
+
+.title {
+  text-align: start;
+  white-space: pre-wrap;
+}

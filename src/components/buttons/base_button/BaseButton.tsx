@@ -5,7 +5,7 @@ import classes from "./BaseButton.module.scss";
 type BaseButtonProps = {
   type?: "button" | "submit";
   theme?: "primary" | "primary-line" | "gray" | "none";
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   width?: 0 | "fit-content" | string;
   height?: "35";
   br?: "0" | "4" | "8" | "20";
