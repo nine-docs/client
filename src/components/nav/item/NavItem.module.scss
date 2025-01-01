@@ -3,11 +3,13 @@
 
 .item_wrap {
   @include mixin.flex(row, center, center);
-  padding: 8px 16px;
-  transition: 0.2s;
+  padding: 8px;
+  margin: 4px;
   max-width: 150px;
   min-width: 100px;
-  border-bottom: 1px solid transparent;
+  border: 1px solid transparent;
+  border-radius: 4px; // outline이 둥글게
+  transition: 0.2s;
 
   > * {
     transition: 0.2s;
@@ -16,13 +18,28 @@
   &:hover {
     background-color: variables.$grey03;
   }
+
+  &:focus-visible {
+    outline: 1px solid variables.$grey04;
+    outline-offset: 2px; // 버튼과 테두리 간 여백
+  }
 }
 
 .cur_item {
-  border-bottom: 1px solid variables.$brand01;
+  position: relative;
 
   > * {
     color: variables.$brand01;
     font-weight: 600;
+  }
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    height: 1px;
+    background-color: variables.$brand01; // border-bottom 대체
+    width: calc(100%);
   }
 }

@@ -47,14 +47,15 @@
 
 .button_primary {
   background-color: variables.$brand01;
-  border: 1px solid variables.$brand01;
+  border: 1px solid transparent;
 
   > * {
     color: variables.$white;
   }
 
-  &:focus {
-    border: 1px solid variables.$brand01Light;
+  &:focus-visible {
+    background-color: variables.$brand01Light;
+    border: 1px solid variables.$brand02;
   }
 }
 
@@ -65,7 +66,7 @@
     color: variables.$brand01;
   }
 
-  &:focus {
+  &:focus-visible {
     border: 1px solid variables.$brand01Light;
   }
 }
@@ -77,7 +78,15 @@
     color: variables.$grey05;
   }
 
-  &:focus {
+  &:focus-visible {
     border: 1px solid variables.$brand01;
+  }
+}
+
+.button_none {
+  border: 1px solid transparent;
+
+  &:focus-visible {
+    border: 1px solid variables.$grey04;
   }
 }

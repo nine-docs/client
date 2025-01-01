@@ -33,7 +33,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
               ? classes.button_gray
               : theme === "primary-line"
                 ? classes.button_primary_line
-                : undefined
+                : classes.button_none
         } 
         ${
           br === "4"
