@@ -16,8 +16,6 @@ const BookmarkPage = () => {
 
   return (
     <main className={classes.content_wrap}>
-      <h3>북마크 목록</h3>
-
       <section className={classes.list_wrap}>
         {data.items.map((item) => (
           <button
