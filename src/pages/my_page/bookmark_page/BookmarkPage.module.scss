@@ -16,17 +16,17 @@
   @include mixin.flex(column, start, start, 4px);
   width: 100%;
   padding: 12px 20px;
-  box-shadow: 0 0 3px 0 variables.$brand01Light;
   border-radius: 8px;
   transition: 0.2s;
   cursor: pointer;
+  border: 1px solid variables.$grey03;
 
   &:hover {
     background-color: variables.$grey02;
   }
 
   &:focus {
-    box-shadow: 0 0 3px 0 variables.$brand01;
+    border: 1px solid variables.$brand01;
   }
 
   &:active {
