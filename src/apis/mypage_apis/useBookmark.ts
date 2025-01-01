@@ -3,6 +3,23 @@ import { useQuery } from "@tanstack/react-query";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
+type getBookMarkListResponse = {
+  data: {
+    cursor: number;
+    items: Array<{
+      bookmarkId: number;
+      article: {
+        id: number;
+        title: string;
+        category: {
+          id: number;
+          name: string;
+        };
+      };
+    }>;
+  };
+};
+
 const bookMarkListMockData = {
   cursor: 42, // 직전 페이지의 마지막 북마크 id
   items: [
@@ -31,15 +48,18 @@ const bookMarkListMockData = {
   ],
 };
 
-export const useGetBookmarkList = (cursor: number, limit: number) => {
+export const useGetBookmarkList = (
+  cursor: number,
+  limit: number,
+): getBookMarkListResponse => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const fallback = {
-    cursor: null,
+    cursor: 0,
     items: [],
   };
 
-  const { data = fallback } = useQuery({
+  const { data = fallback } = useQuery<getBookMarkListResponse["data"]>({
     queryKey: queryKeyFactory.bookmark({ cursor: cursor, limit: limit })
       .queryKey,
     queryFn: () => {

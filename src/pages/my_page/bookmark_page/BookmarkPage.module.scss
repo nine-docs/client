@@ -2,12 +2,43 @@
 @use "styles/mixin";
 
 .content_wrap {
-  @include mixin.flex(column, start, center, 20px);
+  @include mixin.flex(column, start, start, 20px);
   padding: 12px 20px;
+  width: 100%;
 }
 
-.section_wrap {
-  @include mixin.flex(column, start, start);
-
+.list_wrap {
+  @include mixin.flex(column, start, start, 12px);
   width: 100%;
+}
+
+.item_wrap {
+  @include mixin.flex(column, start, start, 4px);
+  width: 100%;
+  padding: 12px 20px;
+  box-shadow: 0 0 3px 0 variables.$brand01Light;
+  border-radius: 8px;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: variables.$grey02;
+  }
+
+  &:focus {
+    box-shadow: 0 0 3px 0 variables.$brand01;
+  }
+
+  &:active {
+    background-color: transparent;
+  }
+
+  > .category {
+    @include mixin.font(
+      variables.$fs,
+      normal,
+      variables.$grey05,
+      variables.$defaultFont
+    );
+  }
 }

@@ -2,15 +2,16 @@
 @use "styles/mixin";
 
 .page_wrap {
-  @include mixin.flex(column, start, start);
+  @include mixin.flex(column, start, center);
   width: 100vw;
-  max-width: 1000px;
   height: calc(100vh - 60px);
+  overflow-y: auto;
 }
 
 .content_wrap {
   @include mixin.flex(row, start, start);
 
   width: 100%;
+  max-width: 1000px;
   padding: 12px 20px;
 }
