@@ -7,7 +7,7 @@ const Nav = () => {
   const navList = [
     { title: "구독 관리", path: "/mypage/subscribe" },
     { title: "북마크", path: "/mypage/bookmark" },
-    { title: "알림", path: "/mypage/alarm" },
+    { title: "알람", path: "/mypage/alarm" },
   ];
 
   return (
