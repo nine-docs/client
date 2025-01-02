@@ -48,6 +48,8 @@
   @include mixin.flex(column, center, center);
   width: 25px;
   height: 25px;
+  background-color: variables.$white;
+  border-radius: 8px;
 
   &:hover {
     pointer-events: auto; // hover 시 자식 요소만 hover 가능

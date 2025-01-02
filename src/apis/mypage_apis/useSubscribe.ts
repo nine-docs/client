@@ -3,6 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
+type GetCategoryListType = {
+  categories: Array<{
+    id: number;
+    name: string;
+  }>;
+};
+
 const subscribeListMockData = {
   categories: [
     // 내가 구독한 카테고리 목록
@@ -86,7 +93,7 @@ export const useGetCategoryList = () => {
 
   const { data = fallback } = useQuery({
     queryKey: queryKeyFactory.allCategory().queryKey,
-    queryFn: () => {
+    queryFn: (): Promise<GetCategoryListType> => {
       if (isApiMock) {
         return new Promise((resolve) =>
           setTimeout(() => resolve(allCategoryMockData), 100),
