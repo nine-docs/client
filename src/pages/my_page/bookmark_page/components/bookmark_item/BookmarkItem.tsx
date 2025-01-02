@@ -1,5 +1,4 @@
 import React from "react";
-import { toast } from "react-toastify";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
 

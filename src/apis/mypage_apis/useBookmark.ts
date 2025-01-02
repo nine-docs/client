@@ -49,6 +49,8 @@ const bookMarkListMockData = {
   ],
 };
 
+const deleteBookmarkResponse = null;
+
 export const useGetBookmarkList = (
   cursor: number,
   limit: number,
@@ -82,9 +84,17 @@ export const useGetBookmarkList = (
 export const useDeleteBookmark = () => {
   const queryClient = useQueryClient();
 
+  const isApiMock = process.env.REACT_APP_API_MOCK === "true";
+
   const { mutateAsync } = useMutation({
     mutationFn: ({ bookmarkId }: { bookmarkId: number }) => {
-      return httpClient.delete(`/api/v1/bookmark/${bookmarkId}`);
+      if (isApiMock) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(deleteBookmarkResponse)),
+        );
+      } else {
+        return httpClient.delete(`/api/v1/bookmark/${bookmarkId}`);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

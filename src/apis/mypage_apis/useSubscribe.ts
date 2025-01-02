@@ -20,6 +20,35 @@ const subscribeListMockData = {
   },
 };
 
+const allCategoryMockData = {
+  categories: [
+    {
+      id: 1,
+      name: "Kubernetes",
+    },
+    {
+      id: 2,
+      name: "Helm",
+    },
+    {
+      id: 3,
+      name: "Java",
+    },
+    {
+      id: 4,
+      name: "Javascript",
+    },
+    {
+      id: 5,
+      name: "Python",
+    },
+    {
+      id: 6,
+      name: "Redis",
+    },
+  ],
+};
+
 /* 내 구독 목록 조회 */
 export const useGetSubscribeList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
@@ -48,4 +77,25 @@ export const useGetSubscribeList = () => {
 };
 
 /* 전체 구독 카테고리 조회 : /api/v1/my-page/subscription/all-categories*/
-export const useGetCategoryList = () => {};
+export const useGetCategoryList = () => {
+  const isApiMock = process.env.REACT_APP_API_MOCK === "true";
+
+  const fallback = {
+    categories: [],
+  };
+
+  const { data = fallback } = useQuery({
+    queryKey: queryKeyFactory.allCategory().queryKey,
+    queryFn: () => {
+      if (isApiMock) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(allCategoryMockData), 100),
+        );
+      } else {
+        return httpClient.get(`/api/v1/my-page/subscription/all-categories`);
+      }
+    },
+  });
+
+  return { data };
+};
