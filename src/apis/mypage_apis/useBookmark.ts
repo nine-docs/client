@@ -90,7 +90,6 @@ export const useDeleteBookmark = () => {
       queryClient.invalidateQueries({
         queryKey: ["ninedocs", "bookmark"],
       });
-      toast.success("북마크가 해제되었습니다.");
     },
   });
 

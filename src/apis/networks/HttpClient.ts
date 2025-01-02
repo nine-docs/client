@@ -11,12 +11,6 @@ const http = new Axios({
 
 http.interceptors.request.use(
   (config) => {
-    const token = useAuthStore((state) => state.token);
-
-    if (token !== "") {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
     return config;
   },
   (error) => {
@@ -29,14 +23,6 @@ http.interceptors.response.use(
     return response.data;
   },
   (error) => {
-    const deleteAuthInfo = useAuthStore((state) => state.deleteAuthInfo);
-
-    if (error.response?.status === 401) {
-      // 강제 로그아웃
-      deleteAuthInfo();
-      window.location.href = "/login";
-    }
-
     return Promise.reject(error);
   },
 );
