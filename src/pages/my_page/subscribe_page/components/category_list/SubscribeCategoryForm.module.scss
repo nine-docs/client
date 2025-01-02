@@ -1,0 +1,15 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.section_wrap {
+  @include mixin.flex(column, start, start, 12px);
+}
+
+.input_list_wrap {
+  @include mixin.flex(row, start, start, 8px);
+  flex-wrap: wrap;
+}
+
+.checkbox_wrap {
+  @include mixin.flex(row, start, center, 4px);
+}
