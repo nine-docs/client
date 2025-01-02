@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";

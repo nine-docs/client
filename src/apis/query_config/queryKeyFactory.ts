@@ -5,6 +5,7 @@ const queryKeyFactory = createQueryKeys("ninedocs", {
   bookmark: (params?: object) => [{ ...params }],
   article: (params?: object) => [{ ...params }],
   allCategory: (params?: object) => [{ ...params }],
+  alarm: (params?: object) => [{ ...params }],
 });
 
 export default queryKeyFactory;
