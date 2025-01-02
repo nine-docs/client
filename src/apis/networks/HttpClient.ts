@@ -26,7 +26,6 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (response) => {
-    // 에러가 없으면 나는 data 만 가져가도 됨.
     return response.data;
   },
   (error) => {

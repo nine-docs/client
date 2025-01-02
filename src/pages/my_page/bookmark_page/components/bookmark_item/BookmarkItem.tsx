@@ -1,6 +1,9 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
+
+import { useDeleteBookmark } from "apis/mypage_apis/useBookmark";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
 
@@ -25,11 +28,12 @@ type BookmarkItemPropsType = {
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const BookmarkItem = ({ item, onClick = () => {} }: BookmarkItemPropsType) => {
-  const handleDeleteClick = (e?: React.MouseEvent<HTMLButtonElement>) => {
-    if (!!e) {
-      e.stopPropagation();
-    }
+const BookmarkItem: React.FC<BookmarkItemPropsType> = ({
+  item,
+  onClick = () => {},
+}: BookmarkItemPropsType) => {
+  const handleDeleteClick = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    e?.stopPropagation();
   };
 
   return (
@@ -42,8 +46,10 @@ const BookmarkItem = ({ item, onClick = () => {} }: BookmarkItemPropsType) => {
         <span className={classes.category}>{item.article.category.name}</span>
         <h4 className={classes.title}>{item.article.title}</h4>
       </div>
-      <BaseButton theme="none" onClick={handleDeleteClick}>
-        <DeleteIcon width={20} height={20} />
+      <BaseButton theme="gray-line" p="none" onClick={handleDeleteClick}>
+        <div className={classes.icon_button}>
+          <DeleteIcon width={14} height={14} />
+        </div>
       </BaseButton>
     </button>
   );

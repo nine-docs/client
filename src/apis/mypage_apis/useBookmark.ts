@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
@@ -76,4 +77,22 @@ export const useGetBookmarkList = (
   });
 
   return { data };
+};
+
+export const useDeleteBookmark = () => {
+  const queryClient = useQueryClient();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: ({ bookmarkId }: { bookmarkId: number }) => {
+      return httpClient.delete(`/api/v1/bookmark/${bookmarkId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["ninedocs", "bookmark"],
+      });
+      toast.success("북마크가 해제되었습니다.");
+    },
+  });
+
+  return { mutateAsync };
 };

@@ -4,12 +4,12 @@ import classes from "./BaseButton.module.scss";
 
 type BaseButtonProps = {
   type?: "button" | "submit";
-  theme?: "primary" | "primary-line" | "gray" | "none";
+  theme?: "primary" | "primary-line" | "gray" | "gray-line" | "none";
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   width?: 0 | "fit-content" | string;
   height?: "35";
   br?: "0" | "4" | "8" | "20";
-  p?: "xl" | "l" | "n" | "s";
+  p?: "xl" | "l" | "n" | "s" | "none";
   children?: React.ReactNode;
 };
 
@@ -33,7 +33,9 @@ const BaseButton: React.FC<BaseButtonProps> = ({
               ? classes.button_gray
               : theme === "primary-line"
                 ? classes.button_primary_line
-                : classes.button_none
+                : theme === "gray-line"
+                  ? classes.button_gray_line
+                  : classes.button_none
         } 
         ${
           br === "4"
@@ -53,7 +55,9 @@ const BaseButton: React.FC<BaseButtonProps> = ({
                 ? classes.p_n
                 : p === "s"
                   ? classes.p_s
-                  : undefined
+                  : p === "none"
+                    ? classes.p_none
+                    : undefined
         }
         ${height === "35" ? classes.h35 : undefined}
         `}
