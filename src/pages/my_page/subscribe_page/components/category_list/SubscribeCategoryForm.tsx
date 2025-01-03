@@ -9,6 +9,7 @@ import {
 import {
   useGetCategoryList,
   useGetSubscribeList,
+  useUpdateSubscribe,
 } from "apis/mypage_apis/useSubscribe";
 
 import Checkbox from "components/inputs/checkbox/Checkbox";
@@ -36,6 +37,8 @@ const SubscribeCategoryForm = () => {
     control: methods.control,
     name: "category",
   });
+
+  const { mutateAsync } = useUpdateSubscribe();
 
   useEffect(() => {
     if (subscribeListData.categories.length > 0) {
@@ -72,8 +75,15 @@ const SubscribeCategoryForm = () => {
                       id={`category.${index}`}
                       name={field.name}
                       checked={renderField.value}
-                      onChange={(e) => {
-                        renderField.onChange(e.target.checked);
+                      onChange={async (e) => {
+                        const categoryIds = methods
+                          .getValues("category")
+                          .filter((category) => category.checked)
+                          .map((category) => {
+                            return category.id;
+                          });
+
+                        await mutateAsync({ categoryIds: categoryIds });
                       }}
                       onBlur={renderField.onBlur}
                     />

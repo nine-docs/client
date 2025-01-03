@@ -1,22 +1,29 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
+type CategoryType = {
+  id: number;
+  name: string;
+};
+
 type SubscribeListType = {
-  categories: Array<{ id: number; name: string }>;
+  categories: Array<CategoryType>;
   mailReceivingSchedule: {
     dayOfWeek: Array<string>;
   };
 };
 
 type GetCategoryListType = {
-  categories: Array<{
-    id: number;
-    name: string;
-  }>;
+  categories: Array<CategoryType>;
 };
 
+type UpdateSubscribeResType = {
+  categories: Array<CategoryType>;
+};
+
+/* 구독정보 조회 응답 목데이터 */
 const subscribeListMockData = {
   categories: [
     // 내가 구독한 카테고리 목록
@@ -34,6 +41,7 @@ const subscribeListMockData = {
   },
 };
 
+/* 전체 카테고리 응답 목데이터 */
 const categoryMockData = {
   categories: [
     {
@@ -63,6 +71,20 @@ const categoryMockData = {
   ],
 };
 
+/* 구독정보 업데이터 응답 목데이터 */
+const updateSubscribeMockData = {
+  categories: [
+    {
+      id: 1,
+      name: "Kubernetes",
+    },
+    {
+      id: 3,
+      name: "Java",
+    },
+  ],
+};
+
 /* 내 구독 목록 조회 */
 export const useGetSubscribeList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
@@ -79,7 +101,7 @@ export const useGetSubscribeList = () => {
     queryFn: (): Promise<SubscribeListType> => {
       if (isApiMock) {
         return new Promise((resolve) => {
-          setTimeout(() => resolve(subscribeListMockData), 2000);
+          setTimeout(() => resolve(subscribeListMockData), 300);
         });
       } else {
         return httpClient.get(`/api/v1/my-page/subscription`);
@@ -112,4 +134,39 @@ export const useGetCategoryList = () => {
   });
 
   return { data };
+};
+
+/* 구독 카테고리 변경 */
+export const useUpdateSubscribe = () => {
+  const queryClient = useQueryClient();
+
+  const isApiMock = process.env.REACT_APP_API_MOCK === "true";
+
+  const { mutateAsync } = useMutation({
+    mutationFn: ({
+      categoryIds,
+    }: {
+      categoryIds: Array<number>;
+    }): Promise<UpdateSubscribeResType> => {
+      const params = { categoryIds: categoryIds };
+
+      if (isApiMock) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(updateSubscribeMockData), 100),
+        );
+      } else {
+        return httpClient.post(
+          `/api/v1/my-page/subscription/my-categories`,
+          params,
+        );
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["ninedocs", "subscribe"],
+      });
+    },
+  });
+
+  return { mutateAsync };
 };
