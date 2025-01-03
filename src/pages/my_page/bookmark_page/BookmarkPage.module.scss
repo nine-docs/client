@@ -3,7 +3,6 @@
 
 .content_wrap {
   @include mixin.flex(column, start, start, 20px);
-  padding: 12px 20px;
   width: 100%;
 }
 

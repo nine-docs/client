@@ -79,7 +79,7 @@ export const useGetSubscribeList = () => {
     queryFn: (): Promise<SubscribeListType> => {
       if (isApiMock) {
         return new Promise((resolve) => {
-          setTimeout(() => resolve(subscribeListMockData), 500);
+          setTimeout(() => resolve(subscribeListMockData), 2000);
         });
       } else {
         return httpClient.get(`/api/v1/my-page/subscription`);
@@ -103,7 +103,7 @@ export const useGetCategoryList = () => {
     queryFn: (): Promise<GetCategoryListType> => {
       if (isApiMock) {
         return new Promise((resolve) =>
-          setTimeout(() => resolve(categoryMockData), 600),
+          setTimeout(() => resolve(categoryMockData), 100),
         );
       } else {
         return httpClient.get(`/api/v1/my-page/subscription/all-categories`);

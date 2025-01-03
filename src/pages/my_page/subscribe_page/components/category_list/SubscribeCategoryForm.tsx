@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Controller,
   FormProvider,
@@ -21,10 +22,9 @@ const SubscribeCategoryForm = () => {
     defaultValues: {
       category: categoryListData.categories.map((category) => {
         return {
-          ...category,
-          checked: subscribeListData.categories
-            .map((category) => category.id)
-            .includes(category.id),
+          id: category.id,
+          name: category.name,
+          checked: false,
         };
       }),
     },
@@ -36,6 +36,23 @@ const SubscribeCategoryForm = () => {
       name: "category",
     },
   );
+
+  useEffect(() => {
+    if (subscribeListData.categories.length > 0) {
+      const updateCategory = methods.getValues("category").map((field) => {
+        return {
+          ...field,
+          checked: subscribeListData.categories
+            .map((category) => category.id)
+            .includes(field.id),
+        };
+      });
+
+      methods.reset({
+        category: updateCategory,
+      });
+    }
+  }, [methods, subscribeListData]);
 
   return (
     <FormProvider {...methods}>
