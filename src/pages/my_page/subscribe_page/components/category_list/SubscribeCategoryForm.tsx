@@ -1,5 +1,9 @@
-import React from "react";
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import {
+  Controller,
+  FormProvider,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
 
 import {
   useGetCategoryList,
@@ -12,7 +16,19 @@ const SubscribeCategoryForm = () => {
   const { data: categoryListData } = useGetCategoryList();
   const { data: subscribeListData } = useGetSubscribeList();
 
-  const methods = useForm({ mode: "all" });
+  const methods = useForm({
+    mode: "all",
+    defaultValues: {
+      category: categoryListData.categories.map((category) => {
+        return {
+          ...category,
+          checked: subscribeListData.categories
+            .map((category) => category.id)
+            .includes(category.id),
+        };
+      }),
+    },
+  });
 
   const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
     {
@@ -26,14 +42,40 @@ const SubscribeCategoryForm = () => {
       <form className={classes.section_wrap}>
         <h4>구독 카테고리</h4>
         <div className={classes.input_list_wrap}>
-          {categoryListData.categories.map((category) => {
+          {fields.map((field, index) => {
+            console.log(field);
+
             return (
-              <div key={category.id} className={classes.checkbox_wrap}>
-                <input type="checkbox" id={`category_${category.id}`} />
-                <label htmlFor={`category_${category.id}`}>
-                  {category.name}
-                </label>
-              </div>
+              <Controller
+                key={field.id}
+                control={methods.control}
+                name={`category.${index}.checked`}
+                render={({ field: renderField }) => {
+                  return (
+                    <div className={classes.checkbox_wrap}>
+                      <input
+                        type="checkbox"
+                        id={`category.${index}`}
+                        checked={renderField.value}
+                        onChange={(e) => {
+                          renderField.onChange(e.target.checked);
+                        }}
+                        onBlur={renderField.onBlur}
+                        ref={renderField.ref}
+                      />
+                      <label
+                        htmlFor={`category.${index}`}
+                        className={`${classes.label} ${renderField.value ? classes.isChecked : undefined}`}
+                      >
+                        <span
+                          className={`${classes.checkbox} ${renderField.value ? classes.checkbox_checked : undefined}`}
+                        />
+                        <p>{field.name}</p>
+                      </label>
+                    </div>
+                  );
+                }}
+              />
             );
           })}
         </div>

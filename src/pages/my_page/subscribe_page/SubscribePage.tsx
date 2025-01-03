@@ -14,9 +14,9 @@ const SubscribePage = () => {
 
   return (
     <main className={classes.content_wrap}>
-      <form className={classes.section_wrap}>
+      <section className={classes.section_wrap}>
         {categoryListData.categories.length > 0 && <SubscribeCategoryForm />}
-      </form>
+      </section>
     </main>
   );
 };

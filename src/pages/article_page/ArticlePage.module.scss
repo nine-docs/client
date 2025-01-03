@@ -5,21 +5,20 @@
   @include mixin.flex(column, start, center, 20px);
   width: 100%;
   height: calc(100vh - 60px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .content_wrap {
   @include mixin.flex(column, start, start, 20px);
   width: 100%;
   width: 100vw;
-  padding: 0 40px 40px 40px;
+  padding: 20px 40px 40px 40px;
   max-width: 1000px;
 }
 
 .article_wrap {
   width: 100%;
   border-radius: 8px;
-  padding: 20px;
   line-height: 1.8;
 
   p,

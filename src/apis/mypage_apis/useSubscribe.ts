@@ -3,6 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
+type SubscribeListType = {
+  categories: Array<{ id: number; name: string }>;
+  mailReceivingSchedule: {
+    dayOfWeek: Array<string>;
+  };
+};
+
 type GetCategoryListType = {
   categories: Array<{
     id: number;
@@ -27,7 +34,7 @@ const subscribeListMockData = {
   },
 };
 
-const allCategoryMockData = {
+const categoryMockData = {
   categories: [
     {
       id: 1,
@@ -69,7 +76,7 @@ export const useGetSubscribeList = () => {
 
   const { data = fallback } = useQuery({
     queryKey: queryKeyFactory.subscribe().queryKey,
-    queryFn: () => {
+    queryFn: (): Promise<SubscribeListType> => {
       if (isApiMock) {
         return new Promise((resolve) => {
           setTimeout(() => resolve(subscribeListMockData), 500);
@@ -96,7 +103,7 @@ export const useGetCategoryList = () => {
     queryFn: (): Promise<GetCategoryListType> => {
       if (isApiMock) {
         return new Promise((resolve) =>
-          setTimeout(() => resolve(allCategoryMockData), 600),
+          setTimeout(() => resolve(categoryMockData), 600),
         );
       } else {
         return httpClient.get(`/api/v1/my-page/subscription/all-categories`);
