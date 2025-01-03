@@ -1,0 +1,45 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.checkbox_wrap {
+  @include mixin.flex(row, start, center);
+  transition: 0.2s;
+
+  > input {
+    width: 0;
+  }
+
+  .label {
+    @include mixin.flex(row, start, center, 4px);
+    cursor: pointer;
+  }
+
+  .checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid variables.$grey04;
+    display: block;
+    transition: 0.2s;
+  }
+
+  .checkbox_checked {
+    @include mixin.flex(row, center, center);
+    background-color: variables.$brand01;
+    border: 1px solid variables.$brand01;
+
+    &::after {
+      content: "✔";
+      font-size: variables.$fs;
+      color: variables.$white;
+    }
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:active {
+    opacity: 1;
+  }
+}

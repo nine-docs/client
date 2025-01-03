@@ -11,6 +11,8 @@ import {
   useGetSubscribeList,
 } from "apis/mypage_apis/useSubscribe";
 
+import Checkbox from "components/inputs/checkbox/Checkbox";
+
 import classes from "./SubscribeCategoryForm.module.scss";
 
 const SubscribeCategoryForm = () => {
@@ -30,12 +32,10 @@ const SubscribeCategoryForm = () => {
     },
   });
 
-  const { fields, append, prepend, remove, swap, move, insert } = useFieldArray(
-    {
-      control: methods.control,
-      name: "category",
-    },
-  );
+  const { fields } = useFieldArray({
+    control: methods.control,
+    name: "category",
+  });
 
   useEffect(() => {
     if (subscribeListData.categories.length > 0) {
@@ -60,8 +60,6 @@ const SubscribeCategoryForm = () => {
         <h4>구독 카테고리</h4>
         <div className={classes.input_list_wrap}>
           {fields.map((field, index) => {
-            console.log(field);
-
             return (
               <Controller
                 key={field.id}
@@ -69,27 +67,16 @@ const SubscribeCategoryForm = () => {
                 name={`category.${index}.checked`}
                 render={({ field: renderField }) => {
                   return (
-                    <div className={classes.checkbox_wrap}>
-                      <input
-                        type="checkbox"
-                        id={`category.${index}`}
-                        checked={renderField.value}
-                        onChange={(e) => {
-                          renderField.onChange(e.target.checked);
-                        }}
-                        onBlur={renderField.onBlur}
-                        ref={renderField.ref}
-                      />
-                      <label
-                        htmlFor={`category.${index}`}
-                        className={`${classes.label} ${renderField.value ? classes.isChecked : undefined}`}
-                      >
-                        <span
-                          className={`${classes.checkbox} ${renderField.value ? classes.checkbox_checked : undefined}`}
-                        />
-                        <p>{field.name}</p>
-                      </label>
-                    </div>
+                    <Checkbox
+                      ref={renderField.ref}
+                      id={`category.${index}`}
+                      name={field.name}
+                      checked={renderField.value}
+                      onChange={(e) => {
+                        renderField.onChange(e.target.checked);
+                      }}
+                      onBlur={renderField.onBlur}
+                    />
                   );
                 }}
               />
