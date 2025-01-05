@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
@@ -190,9 +191,13 @@ export const useUpdateSubscribe = () => {
       }
     },
     onSuccess: () => {
+      toast.success("구독 카테고리 설정이 변경되었습닌다.");
       queryClient.invalidateQueries({
         queryKey: ["ninedocs", "subscribe"],
       });
+    },
+    onError: () => {
+      toast.error("구독 카테고리 설정 변경에 실패했습니다.");
     },
   });
 
@@ -244,7 +249,11 @@ export const useUpdateSubscribeCycle = () => {
       }
     },
     onSuccess: () => {
+      toast.success("메일 수신 주기가 변경되었습니다.");
       queryClient.invalidateQueries({ queryKey: ["ninedocs", "subscribe"] });
+    },
+    onError: () => {
+      toast.error("메일 수신 주기 설정에 실패했습니다.");
     },
   });
 
