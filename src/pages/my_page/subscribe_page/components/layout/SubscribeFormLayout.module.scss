@@ -1,0 +1,21 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.form_wrap {
+  @include mixin.flex(column, start, start);
+  width: 100%;
+  border: 1px solid variables.$grey03;
+  border-radius: 8px;
+}
+
+.form_title {
+  width: 100%;
+  padding: 12px 20px;
+  border-bottom: 1px solid variables.$grey03;
+}
+
+.input_list_wrap {
+  @include mixin.flex(row, start, start, 20px);
+  flex-wrap: wrap;
+  padding: 20px;
+}

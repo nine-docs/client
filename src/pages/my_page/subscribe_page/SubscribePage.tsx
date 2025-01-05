@@ -7,6 +7,7 @@ import {
 
 import classes from "./SubscribePage.module.scss";
 import SubscribeCategoryForm from "./components/category_list/SubscribeCategoryForm";
+import MailCycle from "./components/mail_cycle/MailCycle";
 
 const SubscribePage = () => {
   const { data: categoryListData } = useGetCategoryList();
@@ -14,9 +15,8 @@ const SubscribePage = () => {
 
   return (
     <main className={classes.content_wrap}>
-      <section className={classes.section_wrap}>
-        {categoryListData.categories.length > 0 && <SubscribeCategoryForm />}
-      </section>
+      {categoryListData.categories.length > 0 && <SubscribeCategoryForm />}
+      <MailCycle />
     </main>
   );
 };

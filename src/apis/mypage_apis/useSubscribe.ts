@@ -23,6 +23,10 @@ type UpdateSubscribeResType = {
   categories: Array<CategoryType>;
 };
 
+type AllSubscribeCycleType = {
+  schedules: Array<"MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN">;
+};
+
 /* 구독정보 조회 응답 목데이터 */
 const subscribeListMockData = {
   categories: [
@@ -83,6 +87,13 @@ const updateSubscribeMockData = {
       name: "Java",
     },
   ],
+};
+
+/* 전체 메일수신주기 조회 응답 목데이터 */
+const allMailCycleMockData = {
+  schedules: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as Array<
+    "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"
+  >,
 };
 
 /* 내 구독 목록 조회 */
@@ -169,4 +180,30 @@ export const useUpdateSubscribe = () => {
   });
 
   return { mutateAsync };
+};
+
+/* 전체 수신주기 카테고리 조회 */
+export const useGetSubscribeCycleList = () => {
+  const isApiMock = process.env.REACT_APP_API_MOCK === "true";
+
+  const fallback = {
+    schedules: [],
+  };
+
+  const { data = fallback } = useQuery({
+    queryKey: queryKeyFactory.allSubscribeCycle().queryKey,
+    queryFn: (): Promise<AllSubscribeCycleType> => {
+      if (isApiMock) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(allMailCycleMockData), 100),
+        );
+      } else {
+        return httpClient.get(
+          `/api/v1/my-page/subscription/available-schedules`,
+        );
+      }
+    },
+  });
+
+  return { data };
 };

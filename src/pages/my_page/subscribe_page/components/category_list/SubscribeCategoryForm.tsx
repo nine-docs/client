@@ -14,6 +14,8 @@ import {
 
 import Checkbox from "components/inputs/checkbox/Checkbox";
 
+import SubscribeFormLayout from "pages/my_page/subscribe_page/components/layout/SubscribeFormLayout";
+
 import classes from "./SubscribeCategoryForm.module.scss";
 
 const SubscribeCategoryForm = () => {
@@ -59,8 +61,7 @@ const SubscribeCategoryForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className={classes.form_wrap}>
-        <h4 className={classes.form_title}>구독 카테고리</h4>
+      <SubscribeFormLayout title={"구독 카테고리"}>
         <div className={classes.input_list_wrap}>
           {fields.map((field, index) => {
             return (
@@ -93,7 +94,7 @@ const SubscribeCategoryForm = () => {
             );
           })}
         </div>
-      </form>
+      </SubscribeFormLayout>
     </FormProvider>
   );
 };
