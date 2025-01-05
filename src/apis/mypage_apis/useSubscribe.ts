@@ -23,8 +23,16 @@ type UpdateSubscribeResType = {
   categories: Array<CategoryType>;
 };
 
+/* 전체 수신주기 카테고리 조회 API Hook의 return data type */
 type AllSubscribeCycleType = {
   schedules: Array<"MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN">;
+};
+
+/* 메일 수신 주기 변경 API Hook의 return data type */
+type UpdateSubscribeCycleResponseType = {
+  mailReceivingSchedule: {
+    dayOfWeek: Array<string>;
+  };
 };
 
 /* 구독정보 조회 응답 목데이터 */
@@ -96,7 +104,16 @@ const allMailCycleMockData = {
   >,
 };
 
-/* 내 구독 목록 조회 */
+/* 메일수신주기 변경 응답 목데이터 */
+const updateMailCycleResMockData = {
+  mailReceivingSchedule: {
+    dayOfWeek: ["MON", "WED", "SAT"] as Array<
+      "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"
+    >,
+  },
+};
+
+/* 내 구독 목록 조회 API Hook */
 export const useGetSubscribeList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
@@ -123,7 +140,7 @@ export const useGetSubscribeList = () => {
   return { data };
 };
 
-/* 전체 구독 카테고리 조회 : /api/v1/my-page/subscription/all-categories*/
+/* 전체 구독 카테고리 조회 API Hook */
 export const useGetCategoryList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
@@ -147,7 +164,7 @@ export const useGetCategoryList = () => {
   return { data };
 };
 
-/* 구독 카테고리 변경 */
+/* 구독 카테고리 변경 API Hook */
 export const useUpdateSubscribe = () => {
   const queryClient = useQueryClient();
 
@@ -182,7 +199,7 @@ export const useUpdateSubscribe = () => {
   return { mutateAsync };
 };
 
-/* 전체 수신주기 카테고리 조회 */
+/* 전체 수신주기 카테고리 조회 API Hook */
 export const useGetSubscribeCycleList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
@@ -206,4 +223,30 @@ export const useGetSubscribeCycleList = () => {
   });
 
   return { data };
+};
+
+/* 메일 수신 주기 변경 API Hook */
+export const useUpdateSubscribeCycle = () => {
+  const queryClient = useQueryClient();
+
+  const isApiMock = process.env.REACT_APP_API_MOCK === "true";
+
+  const { mutate } = useMutation({
+    mutationFn: (): Promise<UpdateSubscribeCycleResponseType> => {
+      const params = {};
+
+      if (isApiMock) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(updateMailCycleResMockData), 100),
+        );
+      } else {
+        return httpClient.post(`/api/v1/my-page/subscription/schedule`, params);
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["ninedocs", "subscribe"] });
+    },
+  });
+
+  return { mutate };
 };

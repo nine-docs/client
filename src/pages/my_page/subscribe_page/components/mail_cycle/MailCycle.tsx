@@ -9,6 +9,7 @@ import {
 import {
   useGetSubscribeCycleList,
   useGetSubscribeList,
+  useUpdateSubscribeCycle,
 } from "apis/mypage_apis/useSubscribe";
 
 import Checkbox from "components/inputs/checkbox/Checkbox";
@@ -19,6 +20,7 @@ import classes from "./MailCycle.module.scss";
 const MailCycle = () => {
   const { data: allSubscribeCycleListData } = useGetSubscribeCycleList();
   const { data: subscribeListData } = useGetSubscribeList();
+  const { mutate } = useUpdateSubscribeCycle();
 
   const methods = useForm({
     mode: "all",
@@ -71,7 +73,9 @@ const MailCycle = () => {
                       id={`schedules.${index}`}
                       name={field.name}
                       checked={renderField.value}
-                      onChange={renderField.onChange}
+                      onChange={() => {
+                        mutate();
+                      }}
                       onBlur={renderField.onBlur}
                     />
                   );
