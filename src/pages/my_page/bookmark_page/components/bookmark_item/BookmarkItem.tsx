@@ -31,14 +31,12 @@ const BookmarkItem: React.FC<BookmarkItemPropsType> = ({
   item,
   onClick = () => {},
 }: BookmarkItemPropsType) => {
-  const { mutateAsync } = useDeleteBookmark();
+  const { mutate } = useDeleteBookmark();
 
   const handleDeleteClick = async (e?: React.MouseEvent<HTMLButtonElement>) => {
     e?.stopPropagation();
 
-    try {
-      await mutateAsync({ bookmarkId: item.bookmarkId });
-    } catch (e) {}
+    mutate({ bookmarkId: item.bookmarkId });
   };
 
   return (
