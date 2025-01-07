@@ -6,3 +6,8 @@
   width: 100%;
   padding: 12px 20px;
 }
+
+.right_order_wrap {
+  @include mixin.flex(row, end, center);
+  width: 100%;
+}
