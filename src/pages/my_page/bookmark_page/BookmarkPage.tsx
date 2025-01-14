@@ -23,7 +23,7 @@ const BookmarkPage = () => {
             key={item.bookmarkId}
             item={item}
             onClick={() => {
-              handleItemClick(item.bookmarkId);
+              handleItemClick(item.article.id);
             }}
           />
         ))}
