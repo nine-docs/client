@@ -2,7 +2,7 @@ import React from "react";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
 
-import { useDeleteBookmark } from "apis/mypage_apis/useBookmark";
+import { useDeleteBookmark } from "apis/bookmark_apis/useDeleteBookmark";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
 
