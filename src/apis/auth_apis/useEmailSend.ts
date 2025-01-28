@@ -7,11 +7,17 @@ type EmailPayload = {
 };
 
 type EmailResponse = {
-  verificationCodeExpiredAt: string;
+  success: boolean;
+  data: {
+    verificationCodeExpiredAt: string;
+  };
 };
 
 const mockData = {
-  verificationCodeExpiredAt: "2024-12-27 11:31:11.123123",
+  success: true,
+  data: {
+    verificationCodeExpiredAt: "2024-12-27 11:31:11.123123",
+  },
 };
 
 const useEmailSend = () => {

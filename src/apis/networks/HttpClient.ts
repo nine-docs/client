@@ -20,7 +20,7 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (response) => {
-    return response.data;
+    return JSON.parse(response.data);
   },
   (error) => {
     return Promise.reject(error);
