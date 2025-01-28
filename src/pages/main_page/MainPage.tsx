@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import TextButton from "components/buttons/text_button/TextButton";
@@ -14,6 +15,8 @@ const MainPage = () => {
   const handleLoginClick = () => {
     navigate("/login");
   };
+
+  useEffect(() => {}, []);
 
   return (
     <>

@@ -10,7 +10,7 @@ import MyPage from "pages/my_page/MyPage";
 const Router = () => {
   return (
     <Routes>
-      <Route path="/main" element={<MainPage />} />
+      <Route path="/*" element={<MainPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/mypage/*" element={<MyPage />} />

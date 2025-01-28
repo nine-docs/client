@@ -8,11 +8,17 @@ type CodeCheckPayload = {
 };
 
 type CodeCheckResponse = {
-  verificationExpiredAt: string;
+  success: boolean;
+  data: {
+    verificationExpiredAt: string;
+  };
 };
 
 const mockData = {
-  verificationExpiredAt: "2024-12-20 16:31:01.123",
+  success: true,
+  data: {
+    verificationExpiredAt: "2024-12-20 16:31:01.123",
+  },
 };
 
 const useCodeCheck = () => {

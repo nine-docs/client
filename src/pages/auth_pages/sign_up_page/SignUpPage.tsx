@@ -7,6 +7,7 @@ import LogoIcon from "assets/images/logos/LogoIcon";
 
 import useCodeCheck from "apis/auth_apis/useCodeCheck";
 import useEmailSend from "apis/auth_apis/useEmailSend";
+import useSignUp from "apis/auth_apis/useSignUp";
 
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
@@ -30,6 +31,7 @@ const SignUpPage = () => {
 
   const { mutateAsync: sendEmailMutateAsync } = useEmailSend();
   const { mutateAsync: codeCheckMutateAsync } = useCodeCheck();
+  const { mutateAsync: signUpMutateAsync } = useSignUp();
 
   const initialFormValue = {
     nickname: "",
@@ -51,6 +53,13 @@ const SignUpPage = () => {
 
   /* 인증번호 받기 버튼 누르면 실행되는 함수 */
   const getAuthCode = async () => {
+    const isValid = await methods.trigger("email");
+
+    if (!isValid) {
+      toast.error("잘못된 이메일 형식입니다.");
+      return;
+    }
+
     try {
       const emailSendRes = await sendEmailMutateAsync({
         email: methods.getValues("email"),
@@ -72,9 +81,13 @@ const SignUpPage = () => {
         emailVerificationCode: methods.getValues("authCode"),
       });
 
-      toast.success("이메일이 인증되었습니다.");
-      setIsAuthCodeChecked(true);
+      if (res.success) {
+        toast.success("이메일이 인증되었습니다.");
+        setIsAuthCodeChecked(true);
+        methods.clearErrors("authCode");
+      }
     } catch (e) {
+      toast.error("인증번호 확인에 실패했습니다.");
       methods.setError("authCode", {
         type: "authCheck",
         message: "인증번호 확인이 필요합니다.",
@@ -91,6 +104,21 @@ const SignUpPage = () => {
         message: "인증번호 확인이 필요합니다.",
       });
       return;
+    }
+
+    try {
+      const res = await signUpMutateAsync({
+        email: data.email,
+        nickname: data.nickname,
+        password: data.password,
+      });
+
+      if (res.success) {
+        toast.success("회원가입이 완료되었습니다.");
+        navigate("/login");
+      }
+    } catch (e) {
+      toast.error("회원가입에 실패했습니다.");
     }
   };
 
