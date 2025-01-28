@@ -3,7 +3,6 @@ import React from "react";
 import {
   useGetCategoryList,
   useGetSubscribeCycleList,
-  useGetSubscribeList,
 } from "apis/mypage_apis/useSubscribe";
 
 import classes from "./SubscribePage.module.scss";
@@ -17,8 +16,8 @@ const SubscribePage = () => {
 
   return (
     <main className={classes.content_wrap}>
-      {categoryListData.categories.length > 0 && <SubscribeCategoryForm />}
-      {allSubscribeCycleListData.schedules.length > 0 && <MailCycle />}
+      {categoryListData.data.categories.length > 0 && <SubscribeCategoryForm />}
+      {allSubscribeCycleListData.data.schedules.length > 0 && <MailCycle />}
       <div className={classes.right_order_wrap}>
         <DeleteUserButton />
       </div>

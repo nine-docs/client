@@ -16,15 +16,15 @@ const MainHeader = () => {
 
   const handleLogoClick = () => {
     if (token === "") {
-      navigate("/main");
+      navigate("/");
     } else {
       navigate("/mypage/subscribe");
     }
   };
 
   const handleLogoutClick = () => {
+    navigate("/login");
     deleteAuthInfo();
-    navigate("/main");
     toast.success("로그아웃 되었습니다.");
   };
 

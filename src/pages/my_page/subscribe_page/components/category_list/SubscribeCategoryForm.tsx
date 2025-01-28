@@ -20,12 +20,12 @@ import classes from "./SubscribeCategoryForm.module.scss";
 
 const SubscribeCategoryForm = () => {
   const { data: categoryListData } = useGetCategoryList();
-  const { data: subscribeListData } = useGetSubscribeList();
+  const { data: subscribeListData, isError } = useGetSubscribeList();
 
   const methods = useForm({
     mode: "all",
     defaultValues: {
-      category: categoryListData.categories.map((category) => {
+      category: categoryListData.data.categories.map((category) => {
         return {
           id: category.id,
           name: category.name,
@@ -43,11 +43,13 @@ const SubscribeCategoryForm = () => {
   const { mutateAsync } = useUpdateSubscribe();
 
   useEffect(() => {
-    if (subscribeListData.categories.length > 0) {
+    if (isError) return;
+
+    if (subscribeListData.data.categories.length > 0) {
       const updateCategory = methods.getValues("category").map((field) => {
         return {
           ...field,
-          checked: subscribeListData.categories
+          checked: subscribeListData.data.categories
             .map((category) => category.id)
             .includes(field.id),
         };
@@ -57,7 +59,11 @@ const SubscribeCategoryForm = () => {
         category: updateCategory,
       });
     }
-  }, [methods, subscribeListData]);
+  }, [methods, subscribeListData, isError]);
+
+  if (isError) {
+    return <div>Error</div>;
+  }
 
   return (
     <FormProvider {...methods}>

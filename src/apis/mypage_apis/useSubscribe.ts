@@ -10,23 +10,35 @@ type CategoryType = {
 };
 
 type SubscribeListType = {
-  categories: Array<CategoryType>;
-  mailReceivingSchedule: {
-    dayOfWeek: Array<string>;
+  success: boolean;
+  data: {
+    categories: Array<CategoryType>;
+    mailReceivingSchedule: {
+      dayOfWeek: Array<string>;
+    };
   };
 };
 
 type GetCategoryListType = {
-  categories: Array<CategoryType>;
+  success: boolean;
+  data: {
+    categories: Array<CategoryType>;
+  };
 };
 
 type UpdateSubscribeResType = {
-  categories: Array<CategoryType>;
+  success: boolean;
+  data: {
+    categories: Array<CategoryType>;
+  };
 };
 
 /* 전체 수신주기 카테고리 조회 API Hook의 return data type */
 type AllSubscribeCycleType = {
-  schedules: Array<"MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN">;
+  success: boolean;
+  data: {
+    schedules: Array<"MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN">;
+  };
 };
 
 /* 메일 수신 주기 변경 API Hook의 return data type */
@@ -38,71 +50,83 @@ type UpdateSubscribeCycleResponseType = {
 
 /* 구독정보 조회 응답 목데이터 */
 const subscribeListMockData = {
-  categories: [
-    // 내가 구독한 카테고리 목록
-    {
-      id: 1,
-      name: "Kubernetes",
+  success: true,
+  data: {
+    categories: [
+      // 내가 구독한 카테고리 목록
+      {
+        id: 1,
+        name: "Kubernetes",
+      },
+      {
+        id: 2,
+        name: "Helm",
+      },
+    ],
+    mailReceivingSchedule: {
+      dayOfWeek: ["MON", "WED", "SAT"],
     },
-    {
-      id: 2,
-      name: "Helm",
-    },
-  ],
-  mailReceivingSchedule: {
-    dayOfWeek: ["MON", "WED", "SAT"],
   },
 };
 
 /* 전체 카테고리 응답 목데이터 */
 const categoryMockData = {
-  categories: [
-    {
-      id: 1,
-      name: "Kubernetes",
-    },
-    {
-      id: 2,
-      name: "Helm",
-    },
-    {
-      id: 3,
-      name: "Java",
-    },
-    {
-      id: 4,
-      name: "Javascript",
-    },
-    {
-      id: 5,
-      name: "Python",
-    },
-    {
-      id: 6,
-      name: "Redis",
-    },
-  ],
+  success: true,
+  data: {
+    categories: [
+      {
+        id: 1,
+        name: "Kubernetes",
+      },
+      {
+        id: 2,
+        name: "Helm",
+      },
+      {
+        id: 3,
+        name: "Java",
+      },
+      {
+        id: 4,
+        name: "Javascript",
+      },
+      {
+        id: 5,
+        name: "Python",
+      },
+      {
+        id: 6,
+        name: "Redis",
+      },
+    ],
+  },
 };
 
 /* 구독정보 업데이터 응답 목데이터 */
 const updateSubscribeMockData = {
-  categories: [
-    {
-      id: 1,
-      name: "Kubernetes",
-    },
-    {
-      id: 3,
-      name: "Java",
-    },
-  ],
+  success: true,
+  data: {
+    categories: [
+      {
+        id: 1,
+        name: "Kubernetes",
+      },
+      {
+        id: 3,
+        name: "Java",
+      },
+    ],
+  },
 };
 
 /* 전체 메일수신주기 조회 응답 목데이터 */
 const allMailCycleMockData = {
-  schedules: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as Array<
-    "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"
-  >,
+  success: true,
+  data: {
+    schedules: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as Array<
+      "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"
+    >,
+  },
 };
 
 /* 메일수신주기 변경 응답 목데이터 */
@@ -119,26 +143,39 @@ export const useGetSubscribeList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const fallback = {
-    categories: [],
-    mailReceivingSchedule: {
-      dayOfWeek: [],
+    success: true,
+    data: {
+      categories: [],
+      mailReceivingSchedule: {
+        dayOfWeek: [],
+      },
     },
   };
 
-  const { data = fallback } = useQuery({
+  const { data = fallback, isError } = useQuery({
     queryKey: queryKeyFactory.subscribe().queryKey,
-    queryFn: (): Promise<SubscribeListType> => {
-      if (isApiMock) {
-        return new Promise((resolve) => {
-          setTimeout(() => resolve(subscribeListMockData), 300);
-        });
-      } else {
-        return httpClient.get(`/api/v1/my-page/subscription`);
+    queryFn: async (): Promise<SubscribeListType> => {
+      try {
+        if (isApiMock) {
+          return new Promise((resolve) => {
+            setTimeout(() => resolve(subscribeListMockData), 300);
+          });
+        } else {
+          const res: SubscribeListType = await httpClient.get(
+            `/api/v1/my-page/subscription`,
+          );
+
+          if (res.success) {
+            return res;
+          } else throw new Error("Failed to fetch subscription list");
+        }
+      } catch (e) {
+        throw new Error("Failed to fetch subscription list");
       }
     },
   });
 
-  return { data };
+  return { data, isError };
 };
 
 /* 전체 구독 카테고리 조회 API Hook */
@@ -146,7 +183,10 @@ export const useGetCategoryList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const fallback = {
-    categories: [],
+    success: true,
+    data: {
+      categories: [],
+    },
   };
 
   const { data = fallback } = useQuery({
@@ -209,7 +249,10 @@ export const useGetSubscribeCycleList = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const fallback = {
-    schedules: [],
+    success: true,
+    data: {
+      schedules: [],
+    },
   };
 
   const { data = fallback } = useQuery({

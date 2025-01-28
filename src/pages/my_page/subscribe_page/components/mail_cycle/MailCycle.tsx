@@ -19,13 +19,13 @@ import classes from "./MailCycle.module.scss";
 
 const MailCycle = () => {
   const { data: allSubscribeCycleListData } = useGetSubscribeCycleList();
-  const { data: subscribeListData } = useGetSubscribeList();
+  const { data: subscribeListData, isError } = useGetSubscribeList();
   const { mutate } = useUpdateSubscribeCycle();
 
   const methods = useForm({
     mode: "all",
     defaultValues: {
-      schedules: allSubscribeCycleListData.schedules.map((schedule) => {
+      schedules: allSubscribeCycleListData.data.schedules.map((schedule) => {
         return {
           name: schedule,
           checked: false,
@@ -40,13 +40,16 @@ const MailCycle = () => {
   });
 
   useEffect(() => {
-    if (subscribeListData.mailReceivingSchedule.dayOfWeek.length > 0) {
+    if (isError) return;
+
+    if (subscribeListData.data.mailReceivingSchedule.dayOfWeek.length > 0) {
       const updateSchedules = methods.getValues("schedules").map((schedule) => {
         return {
           name: schedule.name,
-          checked: subscribeListData.mailReceivingSchedule.dayOfWeek.includes(
-            schedule.name,
-          ),
+          checked:
+            subscribeListData.data.mailReceivingSchedule.dayOfWeek.includes(
+              schedule.name,
+            ),
         };
       });
 
@@ -54,7 +57,9 @@ const MailCycle = () => {
         schedules: updateSchedules,
       });
     }
-  }, [methods, subscribeListData]);
+  }, [methods, subscribeListData, isError]);
+
+  if (isError) return <div>Error</div>;
 
   return (
     <FormProvider {...methods}>
