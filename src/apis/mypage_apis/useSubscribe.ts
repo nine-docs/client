@@ -14,7 +14,7 @@ type SubscribeListType = {
   data: {
     categories: Array<CategoryType>;
     mailReceivingSchedule: {
-      dayOfWeek: Array<string>;
+      dayOfWeeks: Array<string>;
     };
   };
 };
@@ -64,7 +64,7 @@ const subscribeListMockData = {
       },
     ],
     mailReceivingSchedule: {
-      dayOfWeek: ["MON", "WED", "SAT"],
+      dayOfWeeks: ["MON", "WED", "SAT"],
     },
   },
 };
@@ -147,7 +147,7 @@ export const useGetSubscribeList = () => {
     data: {
       categories: [],
       mailReceivingSchedule: {
-        dayOfWeek: [],
+        dayOfWeeks: [],
       },
     },
   };

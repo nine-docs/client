@@ -21,3 +21,5 @@ const persistStore = persist(store, { name: "authStore" });
 export const useAuthStore = create(
   devtools(persistStore, { name: "authStore" }),
 );
+
+export const getAuthStore = () => useAuthStore.getState();

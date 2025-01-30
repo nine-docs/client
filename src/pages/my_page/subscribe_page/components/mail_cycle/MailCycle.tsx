@@ -42,12 +42,12 @@ const MailCycle = () => {
   useEffect(() => {
     if (isError) return;
 
-    if (subscribeListData.data.mailReceivingSchedule.dayOfWeek.length > 0) {
+    if (subscribeListData.data.mailReceivingSchedule.dayOfWeeks.length > 0) {
       const updateSchedules = methods.getValues("schedules").map((schedule) => {
         return {
           name: schedule.name,
           checked:
-            subscribeListData.data.mailReceivingSchedule.dayOfWeek.includes(
+            subscribeListData.data.mailReceivingSchedule.dayOfWeeks.includes(
               schedule.name,
             ),
         };
