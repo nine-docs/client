@@ -5,6 +5,7 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
+import { toast } from "react-toastify";
 
 import {
   useGetSubscribeCycleList,
@@ -20,7 +21,7 @@ import classes from "./MailCycle.module.scss";
 const MailCycle = () => {
   const { data: allSubscribeCycleListData } = useGetSubscribeCycleList();
   const { data: subscribeListData, isError } = useGetSubscribeList();
-  const { mutate } = useUpdateSubscribeCycle();
+  const { mutateAsync } = useUpdateSubscribeCycle();
 
   const methods = useForm({
     mode: "all",
@@ -78,8 +79,26 @@ const MailCycle = () => {
                       id={`schedules.${index}`}
                       name={field.name}
                       checked={renderField.value}
-                      onChange={() => {
-                        mutate();
+                      onChange={async (e) => {
+                        const isChecked = e.target.checked;
+
+                        methods.setValue(
+                          `schedules.${index}.checked`,
+                          isChecked,
+                        );
+
+                        const res = await mutateAsync({
+                          schedules: methods
+                            .getValues("schedules")
+                            .filter((schedule) => schedule.checked)
+                            .map((schedule) => schedule.name),
+                        });
+
+                        if (res.success) {
+                          toast.success("메일 수신주기 변경에 성공했습니다.");
+                        } else {
+                          toast.error("메일 수신주기 변경에 실패했습니다.");
+                        }
                       }}
                       onBlur={renderField.onBlur}
                     />

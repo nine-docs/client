@@ -26,6 +26,9 @@ type GetCategoryListType = {
   };
 };
 
+export type SchedulesType = Array<
+  "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"
+>;
 type UpdateSubscribeResType = {
   success: boolean;
   data: {
@@ -37,14 +40,17 @@ type UpdateSubscribeResType = {
 type AllSubscribeCycleType = {
   success: boolean;
   data: {
-    schedules: Array<"MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN">;
+    schedules: SchedulesType;
   };
 };
 
 /* 메일 수신 주기 변경 API Hook의 return data type */
 type UpdateSubscribeCycleResponseType = {
-  mailReceivingSchedule: {
-    dayOfWeek: Array<string>;
+  success: boolean;
+  data: {
+    mailReceivingSchedule: {
+      dayOfWeek: Array<string>;
+    };
   };
 };
 
@@ -64,7 +70,7 @@ const subscribeListMockData = {
       },
     ],
     mailReceivingSchedule: {
-      dayOfWeeks: ["MON", "WED", "SAT"],
+      dayOfWeeks: ["MON", "WED", "SAT"] as SchedulesType,
     },
   },
 };
@@ -123,18 +129,25 @@ const updateSubscribeMockData = {
 const allMailCycleMockData = {
   success: true,
   data: {
-    schedules: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as Array<
-      "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"
-    >,
+    schedules: [
+      "MON",
+      "TUE",
+      "WED",
+      "THU",
+      "FRI",
+      "SAT",
+      "SUN",
+    ] as SchedulesType,
   },
 };
 
 /* 메일수신주기 변경 응답 목데이터 */
 const updateMailCycleResMockData = {
-  mailReceivingSchedule: {
-    dayOfWeek: ["MON", "WED", "SAT"] as Array<
-      "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"
-    >,
+  success: true,
+  data: {
+    mailReceivingSchedule: {
+      dayOfWeek: ["MON", "WED", "SAT"] as SchedulesType,
+    },
   },
 };
 
@@ -279,9 +292,15 @@ export const useUpdateSubscribeCycle = () => {
 
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
-  const { mutate } = useMutation({
-    mutationFn: (): Promise<UpdateSubscribeCycleResponseType> => {
-      const params = {};
+  const { mutateAsync } = useMutation({
+    mutationFn: async ({
+      schedules,
+    }: {
+      schedules: SchedulesType;
+    }): Promise<UpdateSubscribeCycleResponseType> => {
+      const params = {
+        schedules: schedules,
+      };
 
       if (isApiMock) {
         return new Promise((resolve) =>
@@ -291,14 +310,7 @@ export const useUpdateSubscribeCycle = () => {
         return httpClient.post(`/api/v1/my-page/subscription/schedule`, params);
       }
     },
-    onSuccess: () => {
-      toast.success("메일 수신 주기가 변경되었습니다.");
-      queryClient.invalidateQueries({ queryKey: ["ninedocs", "subscribe"] });
-    },
-    onError: () => {
-      toast.error("메일 수신 주기 설정에 실패했습니다.");
-    },
   });
 
-  return { mutate };
+  return { mutateAsync };
 };
