@@ -19,22 +19,22 @@ const ArticlePage = () => {
     articleId: Number(articleId),
   });
 
-  const { data: bookmarkListData } = useGetBookmarkList(1, 1);
+  const { data: bookmarkListData, isError } = useGetBookmarkList(1, 1);
 
-  const isBookmark =
-    bookmarkListData.items.filter(
-      (item) => item.article.id === Number(articleId),
-    ).length > 0;
+  const isBookmark = Array.isArray(bookmarkListData?.data?.items)
+    ? bookmarkListData.data.items.filter(
+        (item) => item.article.id === Number(articleId),
+      ).length > 0
+    : false;
 
   const { mutate: addBookmarkMutate } = useAddBookmark();
   const { mutate: deleteBookmarkMutate } = useDeleteBookmark();
 
   const handleBookmarkClick = () => {
     if (isBookmark) {
-      const bookmarkId = bookmarkListData.items.filter(
+      const bookmarkId = bookmarkListData.data.items.filter(
         (item) => item.article.id === Number(articleId),
       )[0].bookmarkId;
-
       deleteBookmarkMutate({ bookmarkId });
     } else {
       addBookmarkMutate({ articleId: Number(articleId) });
@@ -45,12 +45,19 @@ const ArticlePage = () => {
     <div className={classes.page_wrap}>
       <main className={classes.content_wrap}>
         {/* 북마크 추가 / 해제 버튼 */}
-        <BaseButton theme="none" p="none" onClick={handleBookmarkClick}>
-          <BookmarkIcon isFill={isBookmark} />
-        </BaseButton>
+        <section className={classes.tool_wrap}>
+          <BaseButton
+            theme="none"
+            p="none"
+            onClick={handleBookmarkClick}
+            title="북마크 추가/해제"
+          >
+            <BookmarkIcon width={20} height={20} isFill={isBookmark} />
+          </BaseButton>
+        </section>
         {/* 아티클 */}
         <article className={classes.article_wrap}>
-          <Markdown>{articleData}</Markdown>
+          <Markdown>{articleData.data}</Markdown>
         </article>
       </main>
     </div>

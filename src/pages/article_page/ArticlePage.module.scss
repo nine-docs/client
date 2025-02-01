@@ -8,8 +8,13 @@
   overflow-y: auto;
 }
 
+.tool_wrap {
+  width: 100%;
+  @include mixin.flex(row, end, center, 8px);
+}
+
 .content_wrap {
-  @include mixin.flex(column, start, start, 20px);
+  @include mixin.flex(column, start, start, 12px);
   width: 100%;
   width: 100vw;
   padding: 20px 40px 40px 40px;

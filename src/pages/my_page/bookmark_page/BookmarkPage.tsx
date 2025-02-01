@@ -18,7 +18,7 @@ const BookmarkPage = () => {
   return (
     <main className={classes.content_wrap}>
       <section className={classes.list_wrap}>
-        {data.items.map((item) => (
+        {data.data.items.map((item) => (
           <BookmarkItem
             key={item.bookmarkId}
             item={item}

@@ -14,6 +14,7 @@ type TextButtonProps = {
   br?: "0" | "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s";
   onClick?: () => void;
+  title?: string;
 };
 const TextButton: React.FC<TextButtonProps> = ({
   type,
@@ -25,6 +26,7 @@ const TextButton: React.FC<TextButtonProps> = ({
   br,
   p,
   onClick,
+  title,
 }) => {
   return (
     <BaseButton
@@ -35,6 +37,7 @@ const TextButton: React.FC<TextButtonProps> = ({
       onClick={onClick}
       br={br}
       p={p}
+      title={title}
     >
       <span
         className={`

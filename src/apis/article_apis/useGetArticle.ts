@@ -3,11 +3,18 @@ import { useQuery } from "@tanstack/react-query";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
-type getArticlePayload = {
+type getArticlePayloadType = {
   articleId: number;
 };
 
-const mockData = `
+type getArticleResponseType = {
+  success: boolean;
+  data: string;
+};
+
+const mockData = {
+  success: true,
+  data: `
 ### 웹 화면을 렌더링하는 방식 **SSR** vs **CSR** 
 **SSR**과 **CSR**은 대표적인 웹 렌더링 방식이다. 용어를 보고 오해할 수 있지만 100% 서버만 또는 100% 클라이언트(브라우저)만 일을 하는 것은 아니다. 웹에 렌더링하기 위해서는 브라우저가 일을 해야하며, 적어도 최초 한 번은 서버로부터 페이지의 기본 정보를 받아와야 한다. 
 
@@ -30,18 +37,21 @@ export default MyPage () {
 \`\`\`
 
 _< 참고 >_
-- [What is Hydration?](https://www.youtube.com/watch?v=D46aT3mx9LU)`;
-
-const useGetArticle = ({ articleId }: getArticlePayload) => {
+- [What is Hydration?](https://www.youtube.com/watch?v=D46aT3mx9LU)`,
+};
+const useGetArticle = ({ articleId }: getArticlePayloadType) => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const params = { articleId: articleId };
 
-  const fallback = "";
+  const fallback = {
+    success: true,
+    data: "",
+  };
 
   const { data = fallback } = useQuery({
     queryKey: queryKeyFactory.article(params).queryKey,
-    queryFn: (): Promise<string> => {
+    queryFn: (): Promise<getArticleResponseType> => {
       if (isApiMock) {
         return new Promise((resolve) =>
           setTimeout(() => resolve(mockData), 500),

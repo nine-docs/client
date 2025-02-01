@@ -11,6 +11,7 @@ type BaseButtonProps = {
   br?: "0" | "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s" | "none";
   children?: React.ReactNode;
+  title?: string;
 };
 
 const BaseButton: React.FC<BaseButtonProps> = ({
@@ -22,10 +23,12 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   br = "4",
   p = "n",
   children,
+  title,
 }) => {
   return (
     <button
       className={`${classes.button_wrap} 
+     
         ${
           theme === "primary"
             ? classes.button_primary
@@ -63,6 +66,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
         `}
       type={type}
       onClick={onClick}
+      title={title}
       style={{ width: width }}
     >
       {children}
