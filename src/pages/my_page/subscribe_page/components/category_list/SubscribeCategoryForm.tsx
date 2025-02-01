@@ -12,6 +12,7 @@ import {
   useUpdateSubscribe,
 } from "apis/mypage_apis/useSubscribe";
 
+import Error from "components/error/Error";
 import Checkbox from "components/inputs/checkbox/Checkbox";
 
 import SubscribeFormLayout from "pages/my_page/subscribe_page/components/layout/SubscribeFormLayout";
@@ -40,12 +41,13 @@ const SubscribeCategoryForm = () => {
     name: "category",
   });
 
-  const { mutateAsync } = useUpdateSubscribe();
+  const { mutate } = useUpdateSubscribe();
 
   useEffect(() => {
-    if (isError) return;
-
-    if (subscribeListData.data.categories.length > 0) {
+    if (
+      Array.isArray(subscribeListData?.data?.categories) &&
+      subscribeListData?.data?.categories?.length > 0
+    ) {
       const updateCategory = methods.getValues("category").map((field) => {
         return {
           ...field,
@@ -59,46 +61,52 @@ const SubscribeCategoryForm = () => {
         category: updateCategory,
       });
     }
-  }, [methods, subscribeListData, isError]);
-
-  if (isError) {
-    return <div>Error</div>;
-  }
+  }, [methods, subscribeListData]);
 
   return (
     <FormProvider {...methods}>
       <SubscribeFormLayout title={"구독 카테고리"}>
         <div className={classes.input_list_wrap}>
-          {fields.map((field, index) => {
-            return (
-              <Controller
-                key={field.id}
-                control={methods.control}
-                name={`category.${index}.checked`}
-                render={({ field: renderField }) => {
-                  return (
-                    <Checkbox
-                      ref={renderField.ref}
-                      id={`category.${index}`}
-                      name={field.name}
-                      checked={renderField.value}
-                      onChange={async (e) => {
-                        const categoryIds = methods
-                          .getValues("category")
-                          .filter((category) => category.checked)
-                          .map((category) => {
-                            return category.id;
-                          });
+          {isError ? (
+            <Error />
+          ) : (
+            fields.map((field, index) => {
+              return (
+                <Controller
+                  key={field.id}
+                  control={methods.control}
+                  name={`category.${index}.checked`}
+                  render={({ field: renderField }) => {
+                    return (
+                      <Checkbox
+                        ref={renderField.ref}
+                        id={`category.${index}`}
+                        name={field.name}
+                        checked={renderField.value}
+                        onChange={async (e) => {
+                          const isChecked = e.target.checked;
+                          methods.setValue(
+                            `category.${index}.checked`,
+                            isChecked,
+                          );
 
-                        await mutateAsync({ categoryIds: categoryIds });
-                      }}
-                      onBlur={renderField.onBlur}
-                    />
-                  );
-                }}
-              />
-            );
-          })}
+                          const categoryIds = methods
+                            .getValues("category")
+                            .filter((category) => category.checked)
+                            .map((category) => {
+                              return category.id;
+                            });
+
+                          mutate({ categoryIds: categoryIds });
+                        }}
+                        onBlur={renderField.onBlur}
+                      />
+                    );
+                  }}
+                />
+              );
+            })
+          )}
         </div>
       </SubscribeFormLayout>
     </FormProvider>

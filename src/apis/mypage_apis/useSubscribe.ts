@@ -214,7 +214,7 @@ export const useUpdateSubscribe = () => {
 
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
-  const { mutateAsync } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: ({
       categoryIds,
     }: {
@@ -244,7 +244,7 @@ export const useUpdateSubscribe = () => {
     },
   });
 
-  return { mutateAsync };
+  return { mutate };
 };
 
 /* 전체 수신주기 카테고리 조회 API Hook */

@@ -1,0 +1,13 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.page_wrap {
+  @include mixin.flex(column, center, center);
+  width: 100vw;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+
+  > h1 {
+    color: variables.$brand01;
+  }
+}

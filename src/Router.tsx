@@ -11,15 +11,16 @@ import MyPage from "pages/my_page/MyPage";
 
 const Router = () => {
   return (
-    // <ErrorBoundary FallbackComponent={ErrorPage}>
-    <Routes>
-      <Route path="/*" element={<MainPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/mypage/*" element={<MyPage />} />
-      <Route path="/article/:articleId" element={<ArticlePage />} />
-    </Routes>
-    // </ErrorBoundary>
+    <ErrorBoundary FallbackComponent={ErrorPage}>
+      <Routes>
+        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/mypage/*" element={<MyPage />} />
+        <Route path="/article/:articleId" element={<ArticlePage />} />
+      </Routes>
+    </ErrorBoundary>
   );
 };
 

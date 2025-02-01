@@ -5,7 +5,6 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
-import { toast } from "react-toastify";
 
 import {
   useGetSubscribeCycleList,
@@ -13,6 +12,7 @@ import {
   useUpdateSubscribeCycle,
 } from "apis/mypage_apis/useSubscribe";
 
+import Error from "components/error/Error";
 import Checkbox from "components/inputs/checkbox/Checkbox";
 
 import SubscribeFormLayout from "../layout/SubscribeFormLayout";
@@ -41,9 +41,12 @@ const MailCycle = () => {
   });
 
   useEffect(() => {
-    if (isError) return;
-
-    if (subscribeListData.data.mailReceivingSchedule.dayOfWeeks.length > 0) {
+    if (
+      Array.isArray(
+        subscribeListData.data?.mailReceivingSchedule?.dayOfWeeks,
+      ) &&
+      subscribeListData.data.mailReceivingSchedule.dayOfWeeks.length > 0
+    ) {
       const updateSchedules = methods.getValues("schedules").map((schedule) => {
         return {
           name: schedule.name,
@@ -60,47 +63,49 @@ const MailCycle = () => {
     }
   }, [methods, subscribeListData, isError]);
 
-  if (isError) return <div>Error</div>;
-
   return (
     <FormProvider {...methods}>
       <SubscribeFormLayout title="메일 수신 주기 설정">
         <div className={classes.input_list_wrap}>
-          {fields.map((field, index) => {
-            return (
-              <Controller
-                key={field.id}
-                control={methods.control}
-                name={`schedules.${index}.checked`}
-                render={({ field: renderField }) => {
-                  return (
-                    <Checkbox
-                      ref={renderField.ref}
-                      id={`schedules.${index}`}
-                      name={field.name}
-                      checked={renderField.value}
-                      onChange={async (e) => {
-                        const isChecked = e.target.checked;
+          {isError ? (
+            <Error />
+          ) : (
+            fields.map((field, index) => {
+              return (
+                <Controller
+                  key={field.id}
+                  control={methods.control}
+                  name={`schedules.${index}.checked`}
+                  render={({ field: renderField }) => {
+                    return (
+                      <Checkbox
+                        ref={renderField.ref}
+                        id={`schedules.${index}`}
+                        name={field.name}
+                        checked={renderField.value}
+                        onChange={async (e) => {
+                          const isChecked = e.target.checked;
 
-                        methods.setValue(
-                          `schedules.${index}.checked`,
-                          isChecked,
-                        );
+                          methods.setValue(
+                            `schedules.${index}.checked`,
+                            isChecked,
+                          );
 
-                        mutate({
-                          schedules: methods
-                            .getValues("schedules")
-                            .filter((schedule) => schedule.checked)
-                            .map((schedule) => schedule.name),
-                        });
-                      }}
-                      onBlur={renderField.onBlur}
-                    />
-                  );
-                }}
-              />
-            );
-          })}
+                          mutate({
+                            schedules: methods
+                              .getValues("schedules")
+                              .filter((schedule) => schedule.checked)
+                              .map((schedule) => schedule.name),
+                          });
+                        }}
+                        onBlur={renderField.onBlur}
+                      />
+                    );
+                  }}
+                />
+              );
+            })
+          )}
         </div>
       </SubscribeFormLayout>
     </FormProvider>
