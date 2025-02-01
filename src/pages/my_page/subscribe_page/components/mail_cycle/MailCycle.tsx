@@ -21,7 +21,7 @@ import classes from "./MailCycle.module.scss";
 const MailCycle = () => {
   const { data: allSubscribeCycleListData } = useGetSubscribeCycleList();
   const { data: subscribeListData, isError } = useGetSubscribeList();
-  const { mutateAsync } = useUpdateSubscribeCycle();
+  const { mutate } = useUpdateSubscribeCycle();
 
   const methods = useForm({
     mode: "all",
@@ -87,18 +87,12 @@ const MailCycle = () => {
                           isChecked,
                         );
 
-                        const res = await mutateAsync({
+                        mutate({
                           schedules: methods
                             .getValues("schedules")
                             .filter((schedule) => schedule.checked)
                             .map((schedule) => schedule.name),
                         });
-
-                        if (res.success) {
-                          toast.success("메일 수신주기 변경에 성공했습니다.");
-                        } else {
-                          toast.error("메일 수신주기 변경에 실패했습니다.");
-                        }
                       }}
                       onBlur={renderField.onBlur}
                     />

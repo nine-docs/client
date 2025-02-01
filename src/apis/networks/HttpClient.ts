@@ -34,15 +34,11 @@ http.interceptors.response.use(
   (response) => {
     const data = JSON.parse(response.data);
 
-    if (!!data?.status && data?.status === 401) {
-      getAuthStore().deleteAuthInfo();
-      window.location.href = "/login"; // ✅ 로그인 페이지로 이동
+    if (data.success) {
+      return data;
+    } else {
+      return Promise.reject("클라이언트 처리 에러");
     }
-    if (!!data?.status && data?.status !== 200) {
-      return Promise.reject("에러");
-    }
-
-    return data;
   },
   (error) => {
     return Promise.reject(error);

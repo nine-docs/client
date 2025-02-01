@@ -167,23 +167,13 @@ export const useGetSubscribeList = () => {
 
   const { data = fallback, isError } = useQuery({
     queryKey: queryKeyFactory.subscribe().queryKey,
-    queryFn: async (): Promise<SubscribeListType> => {
-      try {
-        if (isApiMock) {
-          return new Promise((resolve) => {
-            setTimeout(() => resolve(subscribeListMockData), 300);
-          });
-        } else {
-          const res: SubscribeListType = await httpClient.get(
-            `/api/v1/my-page/subscription`,
-          );
-
-          if (res.success) {
-            return res;
-          } else throw new Error("Failed to fetch subscription list");
-        }
-      } catch (e) {
-        throw new Error("Failed to fetch subscription list");
+    queryFn: (): Promise<SubscribeListType> => {
+      if (isApiMock) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(subscribeListMockData), 100),
+        );
+      } else {
+        return httpClient.get(`/api/v1/my-page/subscription`);
       }
     },
   });
@@ -292,7 +282,7 @@ export const useUpdateSubscribeCycle = () => {
 
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
-  const { mutateAsync } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async ({
       schedules,
     }: {
@@ -310,7 +300,16 @@ export const useUpdateSubscribeCycle = () => {
         return httpClient.post(`/api/v1/my-page/subscription/schedule`, params);
       }
     },
+    onSuccess: () => {
+      toast.success("메일 수신주기가 변경되었습니다.");
+      queryClient.invalidateQueries({
+        queryKey: ["ninedocs", "subscribe"],
+      });
+    },
+    onError: () => {
+      toast.error("메일 수신주기 변경에 실패했습니다.");
+    },
   });
 
-  return { mutateAsync };
+  return { mutate };
 };
