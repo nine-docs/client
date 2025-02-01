@@ -2,9 +2,10 @@
 @use "styles/mixin";
 
 .page_wrap {
-  @include mixin.flex(column, center, center);
+  @include mixin.flex(column, center, center, 8px);
   width: 100vw;
-  height: calc(100vh - 60px);
+  height: 100%;
+  min-height: 500px;
   overflow-y: auto;
 
   > h1 {

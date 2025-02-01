@@ -38,10 +38,7 @@ const useLogin = () => {
           setTimeout(() => resolve(mockData), 1000),
         );
       } else {
-        return httpClient.post(
-          `/api/v1/login`,
-          params,
-        ) as Promise<LoginResponse>;
+        return httpClient.post(`/api/v1/login`, params);
       }
     },
   });

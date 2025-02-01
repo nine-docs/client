@@ -20,13 +20,16 @@ const useDeleteUser = () => {
           setTimeout(() => resolve(deleteUserMockData), 100),
         );
       } else {
-        return httpClient.delete(`/api/v1/my-page/unregister`);
+        return httpClient.post(`/api/v1/my-page/unregister`);
       }
     },
     onSuccess: () => {
       toast.success("탈퇴되었습니다.");
       deleteAuthInfo();
-      navigate("/main");
+      navigate("/");
+    },
+    onError: () => {
+      toast.error("탈퇴에 실패했습니다.");
     },
   });
 

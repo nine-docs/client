@@ -56,7 +56,7 @@ const LoginPage = () => {
         navigate("/mypage/subscribe");
       }
     } catch (e) {
-      toast.error((e as Error).message);
+      toast.error("아이디, 비밀번호를 다시 확인해 주세요.");
     }
   };
 
