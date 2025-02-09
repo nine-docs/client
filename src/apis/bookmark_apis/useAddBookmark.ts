@@ -30,7 +30,7 @@ export const useAddBookmark = () => {
     onSuccess: () => {
       toast.success("북마크가 추가되었습니다.");
       queryClient.invalidateQueries({
-        queryKey: ["ninedocs", "bookmark"],
+        queryKey: ["ninedocs", "isBookmark"],
       });
     },
     onError: () => {

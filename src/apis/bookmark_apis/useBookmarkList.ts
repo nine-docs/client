@@ -56,7 +56,7 @@ const bookMarkListMockData = {
   },
 };
 
-export const useGetBookmarkList = (cursor: number, limit: number) => {
+export const useGetBookmarkList = (cursor: number | null, limit: number) => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
   const fallback = {
@@ -77,7 +77,7 @@ export const useGetBookmarkList = (cursor: number, limit: number) => {
         );
       } else {
         return httpClient.get(
-          `/api/v1/bookmarks?cursor=${cursor}&limit=${limit}`,
+          `/api/v1/my-page/bookmarks?${!!cursor ? `cursor=${cursor}&` : ``}limit=${limit}`,
         );
       }
     },

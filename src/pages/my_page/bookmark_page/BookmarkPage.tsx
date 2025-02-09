@@ -9,7 +9,7 @@ import BookmarkItem from "./components/bookmark_item/BookmarkItem";
 const BookmarkPage = () => {
   const navigate = useNavigate();
 
-  const { data } = useGetBookmarkList(1, 10);
+  const { data } = useGetBookmarkList(null, 10);
 
   const handleItemClick = (articleId: number) => {
     navigate(`/article/${articleId}`);
