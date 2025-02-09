@@ -65,7 +65,7 @@ export const useGetComments = (
       cursor: 0,
       items: [],
     },
-  };
+  } as GetCommentsResType;
 
   const { data = fallback } = useQuery({
     queryKey: queryKeyFactory.comments(params).queryKey,

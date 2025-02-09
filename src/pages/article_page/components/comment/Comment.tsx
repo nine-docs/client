@@ -12,7 +12,12 @@ const Comment = ({ articleId }: { articleId: string }) => {
       <ReplyInput />
       <div className={classes.comment_list}>
         {data.data.items.map((commentItem) => {
-          return <CommentItem commentItem={commentItem} />;
+          return (
+            <CommentItem
+              key={commentItem.commentId}
+              commentItem={commentItem}
+            />
+          );
         })}
       </div>
     </section>
