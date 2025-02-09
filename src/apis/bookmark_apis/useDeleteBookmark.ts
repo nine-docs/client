@@ -3,7 +3,10 @@ import { toast } from "react-toastify";
 
 import httpClient from "apis/networks/HttpClient";
 
-const deleteBookmarkResponse = null;
+const deleteBookmarkResponse = {
+  success: true,
+  data: null,
+};
 
 export const useDeleteBookmark = () => {
   const queryClient = useQueryClient();

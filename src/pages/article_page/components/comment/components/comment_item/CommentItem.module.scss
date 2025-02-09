@@ -1,0 +1,17 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.item_wrap {
+  width: 100%;
+  @include mixin.flex(column, flex-start, flex-start, 4px);
+  border-bottom: 1px solid variables.$grey03;
+  padding: 0.75rem;
+}
+
+.nickname {
+  @include mixin.font(14px, 600);
+}
+
+.content {
+  width: 100%;
+}

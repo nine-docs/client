@@ -1,0 +1,7 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.tool_wrap {
+  width: 100%;
+  @include mixin.flex(row, end, center, 8px);
+}

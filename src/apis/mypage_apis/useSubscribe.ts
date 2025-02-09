@@ -4,11 +4,6 @@ import { toast } from "react-toastify";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
-type CategoryType = {
-  id: number;
-  name: string;
-};
-
 type SubscribeListType = {
   success: boolean;
   data: {
@@ -26,9 +21,6 @@ type GetCategoryListType = {
   };
 };
 
-export type SchedulesType = Array<
-  "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"
->;
 type UpdateSubscribeResType = {
   success: boolean;
   data: {

@@ -1,5 +1,4 @@
 import axios, { Axios } from "axios";
-import { getAuthStore } from "stores/authStore";
 
 const API_URL = process.env.REACT_APP_API_URL;
 

@@ -1,0 +1,12 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.comment_wrap {
+  @include mixin.flex(column, flex-start, center);
+  width: 100%;
+}
+
+.comment_list {
+  width: 100%;
+  @include mixin.flex(column, flex-start, center, 8px);
+}
