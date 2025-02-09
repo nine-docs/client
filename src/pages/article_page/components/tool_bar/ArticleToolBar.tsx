@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import BookmarkIcon from "assets/images/icons/BookmarkIcon";
 
 import { useAddBookmark } from "apis/bookmark_apis/useAddBookmark";
-import { useGetBookmarkList } from "apis/bookmark_apis/useBookmark";
+import { useGetBookmarkList } from "apis/bookmark_apis/useBookmarkList";
 import { useDeleteBookmark } from "apis/bookmark_apis/useDeleteBookmark";
+import useGetIsBookmark from "apis/bookmark_apis/useGetIsBookmark";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
 
@@ -13,26 +14,22 @@ import classes from "./ArticleToolBar.module.scss";
 const ArticleToolBar = () => {
   const articleId = useParams().articleId;
 
-  const { data: bookmarkListData } = useGetBookmarkList(1, 1);
+  const { data: isBookmarkData } = useGetIsBookmark(Number(articleId));
   const { mutate: deleteBookmarkMutate } = useDeleteBookmark();
   const { mutate: addBookmarkMutate } = useAddBookmark();
 
-  const isBookmark = Array.isArray(bookmarkListData?.data?.items)
-    ? bookmarkListData.data.items.filter(
-        (item) => item.article.id === Number(articleId),
-      ).length > 0
-    : false;
+  const isBookmark = !isBookmarkData.data === null;
+  const bookmarkId =
+    !isBookmarkData.data === null ? isBookmarkData.data?.bookmarkId : undefined;
 
   const handleBookmarkClick = () => {
-    if (isBookmark) {
-      const bookmarkId = bookmarkListData.data.items.filter(
-        (item) => item.article.id === Number(articleId),
-      )[0].bookmarkId;
+    if (isBookmark && !!bookmarkId) {
       deleteBookmarkMutate({ bookmarkId });
     } else {
       addBookmarkMutate({ articleId: Number(articleId) });
     }
   };
+
   return (
     <section className={classes.tool_wrap}>
       <BaseButton

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useGetBookmarkList } from "apis/bookmark_apis/useBookmark";
+import { useGetBookmarkList } from "apis/bookmark_apis/useBookmarkList";
 
 import classes from "./BookmarkPage.module.scss";
 import BookmarkItem from "./components/bookmark_item/BookmarkItem";

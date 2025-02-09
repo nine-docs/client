@@ -16,7 +16,7 @@ export const useAddBookmark = () => {
   const { mutate } = useMutation({
     mutationFn: ({ articleId }: { articleId: number }) => {
       const params = {
-        "article-id": articleId,
+        articleId: articleId,
       };
 
       if (isApiMock) {
