@@ -48,7 +48,7 @@ const mockData: GetCommentsResType = {
 
 export const useGetComments = (
   articleId: number,
-  cursor: number,
+  cursor: number | null,
   limit: number,
 ) => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
@@ -76,7 +76,7 @@ export const useGetComments = (
         );
       } else {
         return httpClient.get(
-          `/api/v1/article/${articleId}/comments?cursor=${cursor}&limit=${limit}`,
+          `/api/v1/article/${articleId}/comments?${!!cursor ? `cursor=${cursor}&` : ``}limit=${limit}`,
         );
       }
     },

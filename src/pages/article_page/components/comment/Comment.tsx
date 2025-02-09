@@ -5,7 +5,7 @@ import CommentItem from "./components/comment_item/CommentItem";
 import ReplyInput from "./components/reply_input/ReplyInput";
 
 const Comment = ({ articleId }: { articleId: string }) => {
-  const { data } = useGetComments(Number(articleId), 1, 1);
+  const { data } = useGetComments(Number(articleId), null, 10);
 
   return (
     <section className={classes.comment_wrap}>
