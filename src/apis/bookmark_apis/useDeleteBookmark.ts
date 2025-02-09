@@ -28,6 +28,9 @@ export const useDeleteBookmark = () => {
       queryClient.invalidateQueries({
         queryKey: ["ninedocs", "isBookmark"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["ninedocs", "bookmark"],
+      });
     },
     onError: () => {
       toast.error("북마크 해제에 실패했습니다.");
