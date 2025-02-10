@@ -9,7 +9,7 @@ import BookmarkItem from "./components/bookmark_item/BookmarkItem";
 const BookmarkPage = () => {
   const navigate = useNavigate();
 
-  const { data } = useGetBookmarkList(null, 10);
+  const { data, isLoading } = useGetBookmarkList(null, 10);
 
   const handleItemClick = (articleId: number) => {
     navigate(`/article/${articleId}`);
@@ -27,6 +27,9 @@ const BookmarkPage = () => {
             }}
           />
         ))}
+        {!isLoading && data.data.items.length === 0 && (
+          <div className={classes.error_wrap}>북마크된 문제가 없습니다.</div>
+        )}
       </section>
     </main>
   );

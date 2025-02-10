@@ -10,3 +10,10 @@
   @include mixin.flex(column, start, start, 12px);
   width: 100%;
 }
+
+.error_wrap {
+  @include mixin.flex(column, center, center);
+  width: 100%;
+  padding: 20px;
+  color: variables.$grey05;
+}

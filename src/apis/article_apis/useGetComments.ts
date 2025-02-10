@@ -25,6 +25,10 @@ const mockData: GetCommentsResType = {
         reply: {
           count: 5,
         },
+        like: {
+          count: null,
+          isUserLike: false,
+        },
         content: "댓글내용 댓글내용 ~!!!!!! 1234567",
         createdAt: "2024-12-26 23:11:25.195",
         updatedAt: "2024-12-26 23:11:25.195",
@@ -37,6 +41,10 @@ const mockData: GetCommentsResType = {
         },
         reply: {
           count: 0,
+        },
+        like: {
+          count: 1,
+          isUserLike: false,
         },
         content: "댓글내용 댓글내용 ~!!!!!! 1234567",
         createdAt: "2024-12-26 23:11:25.195",

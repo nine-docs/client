@@ -8,6 +8,10 @@ type CommentItemType = {
     count: number;
   };
   content: string;
+  like: {
+    count: null | number;
+    isUserLike: boolean;
+  };
   createdAt: string;
   updatedAt: string;
 };

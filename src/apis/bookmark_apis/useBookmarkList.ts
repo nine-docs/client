@@ -67,7 +67,11 @@ export const useGetBookmarkList = (cursor: number | null, limit: number) => {
     },
   };
 
-  const { data = fallback, isError } = useQuery({
+  const {
+    data = fallback,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: queryKeyFactory.bookmark({ cursor: cursor, limit: limit })
       .queryKey,
     queryFn: (): Promise<GetBookMarkListResponse> => {
@@ -83,5 +87,5 @@ export const useGetBookmarkList = (cursor: number | null, limit: number) => {
     },
   });
 
-  return { data, isError };
+  return { data, isLoading, isError };
 };

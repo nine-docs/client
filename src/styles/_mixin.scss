@@ -10,7 +10,7 @@
   height: $h;
 }
 
-@mixin flex($d: null, $j: space-between, $a: center, $g: 0, $fg: 0) {
+@mixin flex($d: null, $j: space-between, $a: center, $g: 0, $fg: null) {
   display: flex;
   flex-direction: $d;
   justify-content: $j;
