@@ -20,7 +20,10 @@ const ArticlePage = () => {
     <div className={classes.page_wrap}>
       <main className={classes.content_wrap}>
         <ArticleToolBar />
-        <MarkdownViewer markdown={articleData.data} />
+        <MarkdownViewer
+          title={articleData.data.title}
+          markdown={articleData.data.contents}
+        />
         <Comment articleId={articleId} />
       </main>
     </div>

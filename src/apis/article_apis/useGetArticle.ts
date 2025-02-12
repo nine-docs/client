@@ -9,12 +9,21 @@ type getArticlePayloadType = {
 
 type getArticleResponseType = {
   success: boolean;
-  data: string;
+  data: {
+    title: string;
+    contents: null | string;
+    category: {
+      id: number;
+      title: string;
+    };
+  };
 };
 
 const mockData = {
   success: true,
-  data: `
+  data: {
+    title: "문제 제목",
+    contents: `
 ### 웹 화면을 렌더링하는 방식 **SSR** vs **CSR** 
 **SSR**과 **CSR**은 대표적인 웹 렌더링 방식이다. 용어를 보고 오해할 수 있지만 100% 서버만 또는 100% 클라이언트(브라우저)만 일을 하는 것은 아니다. 웹에 렌더링하기 위해서는 브라우저가 일을 해야하며, 적어도 최초 한 번은 서버로부터 페이지의 기본 정보를 받아와야 한다. 
 
@@ -38,6 +47,11 @@ export default MyPage () {
 
 _< 참고 >_
 - [What is Hydration?](https://www.youtube.com/watch?v=D46aT3mx9LU)`,
+    category: {
+      id: 1,
+      title: "카테고리 제목 임시",
+    },
+  },
 };
 const useGetArticle = ({ articleId }: getArticlePayloadType) => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
@@ -46,7 +60,14 @@ const useGetArticle = ({ articleId }: getArticlePayloadType) => {
 
   const fallback = {
     success: true,
-    data: "",
+    data: {
+      title: "",
+      contents: "",
+      category: {
+        id: 0,
+        title: "",
+      },
+    },
   };
 
   const { data = fallback } = useQuery({
