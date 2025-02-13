@@ -31,6 +31,12 @@
   width: 100%;
 }
 
+.delete_icon_wrap {
+  @include mixin.flex(column, center, center);
+  width: 24px;
+  height: 24px;
+}
+
 .like_wrap {
   @include mixin.flex(column, center, center);
   > span {

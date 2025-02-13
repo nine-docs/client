@@ -14,6 +14,9 @@ const Comment = ({ articleId }: { articleId: string }) => {
     <section className={classes.comment_wrap}>
       <CommentInput />
       <div className={classes.comment_list}>
+        {!isLoading && data?.pages[0].data.items.length === 0 && (
+          <div className={classes.no_comment}>아직 댓글이 없습니다.</div>
+        )}
         {!isLoading &&
           !isError &&
           !!data &&

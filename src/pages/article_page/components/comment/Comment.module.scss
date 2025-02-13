@@ -11,3 +11,8 @@
   width: 100%;
   @include mixin.flex(column, flex-start, center, 0);
 }
+
+.no_comment {
+  @include mixin.font(14px, normal, variables.$grey05);
+  padding: 40px 20px;
+}

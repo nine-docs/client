@@ -47,7 +47,7 @@ const BookmarkItem: React.FC<BookmarkItemPropsType> = ({
     >
       <div className={classes.item_info_wrap}>
         <span className={classes.category}>{item.article.category.name}</span>
-        <h5 className={classes.title}>{item.article.title}</h5>
+        <h4 className={classes.title}>{item.article.title}</h4>
       </div>
       <BaseButton theme="gray-line" p="none" onClick={handleDeleteClick}>
         <div className={classes.icon_button}>

@@ -1,4 +1,5 @@
 import { FieldErrors, FormProvider, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import useAddComment from "apis/comment_apis/useAddComment";
@@ -13,6 +14,8 @@ type FormValues = {
 };
 
 const CommentInput = () => {
+  const articleId = useParams().articleId;
+
   const initialFormValue = {
     comment: "",
   };
@@ -26,7 +29,7 @@ const CommentInput = () => {
 
   const onSubmit = (data: FormValues) => {
     mutate(
-      { content: data.comment },
+      { content: data.comment, articleId: Number(articleId) },
       {
         onSuccess: () => {
           methods.reset();
