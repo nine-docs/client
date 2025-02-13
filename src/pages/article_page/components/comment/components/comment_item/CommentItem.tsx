@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { useParams } from "react-router-dom";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
+import EditIcon from "assets/images/icons/EditIcon";
 import HeartIcon from "assets/images/icons/HeartIcon";
 
 import useDeleteComment from "apis/comment_apis/useDeleteComment";
@@ -19,6 +20,8 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
   const isMeLike = commentItem.like.isUserLike;
 
   const handleLikeClick = () => {};
+
+  const handleEditClick = () => {};
 
   const handleDeleteClick = () => {
     mutate({
@@ -38,11 +41,18 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
             {dayjs(commentItem.createdAt).format("YYYY-MM-DD A hh:mm")}
             {/* 댓글 삭제 버튼 */}
             {isMe && (
-              <BaseButton theme="none" p="none" onClick={handleDeleteClick}>
-                <div className={classes.delete_icon_wrap}>
-                  <DeleteIcon width={14} height={14} />
-                </div>
-              </BaseButton>
+              <>
+                <BaseButton theme="none" p="none" onClick={handleDeleteClick}>
+                  <div className={classes.delete_icon_wrap}>
+                    <DeleteIcon width={14} height={14} />
+                  </div>
+                </BaseButton>
+                <BaseButton theme="none" p="none" onClick={handleEditClick}>
+                  <div className={classes.delete_icon_wrap}>
+                    <EditIcon width={14} height={14} />
+                  </div>
+                </BaseButton>
+              </>
             )}
           </div>
         </div>
