@@ -1,15 +1,18 @@
 import { FieldErrors, FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+
+import useAddComment from "apis/article_apis/useAddComment";
 
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
 
-import classes from "./ReplyInput.module.scss";
+import classes from "./CommentInput.module.scss";
 
 type FormValues = {
   comment: string;
 };
 
-const ReplyInput = () => {
+const CommentInput = () => {
   const initialFormValue = {
     comment: "",
   };
@@ -19,9 +22,31 @@ const ReplyInput = () => {
     defaultValues: initialFormValue,
   });
 
+  const { mutate } = useAddComment();
+
+  const onSubmit = (data: FormValues) => {
+    mutate(
+      { content: data.comment },
+      {
+        onSuccess: () => {
+          methods.reset();
+        },
+      },
+    );
+  };
+
+  const onError = (e: FieldErrors) => {
+    if (e?.comment?.message && typeof e?.comment?.message === "string") {
+      toast.error(e.comment.message);
+    }
+  };
+
   return (
     <FormProvider {...methods}>
-      <div className={classes.reply_input_wrap}>
+      <form
+        className={classes.reply_input_wrap}
+        onSubmit={methods.handleSubmit(onSubmit, onError)}
+      >
         <div className={classes.input_wrap}>
           <BaseInput
             type="text"
@@ -39,10 +64,10 @@ const ReplyInput = () => {
             }}
           />
         </div>
-        <TextButton text="등록하기" p={"s"} />
-      </div>
+        <TextButton type="submit" text="등록하기" p={"s"} size="small" />
+      </form>
     </FormProvider>
   );
 };
 
-export default ReplyInput;
+export default CommentInput;

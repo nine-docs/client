@@ -3,14 +3,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
-type GetCommentsResType = {
-  success: boolean;
-  data: {
-    cursor: number | null;
-    items: CommentItemType[];
-  };
-};
-
 const LIMIT = 5;
 
 export const useGetComment = (articleId: number) => {
@@ -26,7 +18,7 @@ export const useGetComment = (articleId: number) => {
     isError,
     data,
   } = useInfiniteQuery({
-    queryKey: ["ninedocs", "comment", `${articleId}`],
+    queryKey: queryKeyFactory.comment({ articleId: articleId }).queryKey,
     queryFn: ({ pageParam }) => httpClient.get(pageParam),
     initialPageParam: initialUrl,
     getNextPageParam: (lastPage) => {

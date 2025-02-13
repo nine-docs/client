@@ -3,8 +3,8 @@ import { useGetComment } from "apis/article_apis/useGetComment";
 import TextButton from "components/buttons/text_button/TextButton";
 
 import classes from "./Comment.module.scss";
+import CommentInput from "./components/comment_input/CommentInput";
 import CommentItem from "./components/comment_item/CommentItem";
-import ReplyInput from "./components/reply_input/ReplyInput";
 
 const Comment = ({ articleId }: { articleId: string }) => {
   const { data, isLoading, isError, hasNextPage, fetchNextPage } =
@@ -12,8 +12,8 @@ const Comment = ({ articleId }: { articleId: string }) => {
 
   return (
     <section className={classes.comment_wrap}>
+      <CommentInput />
       <div className={classes.comment_list}>
-        <ReplyInput />
         {!isLoading &&
           !isError &&
           !!data &&
