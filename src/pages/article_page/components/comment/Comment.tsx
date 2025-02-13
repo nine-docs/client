@@ -20,13 +20,17 @@ const Comment = ({ articleId }: { articleId: string }) => {
         {!isLoading &&
           !isError &&
           !!data &&
-          data.pages.map((page) =>
-            page.data.items.map((commentItem: CommentItemType) => (
-              <CommentItem
-                key={commentItem.commentId}
-                commentItem={commentItem}
-              />
-            )),
+          data.pages.map((page, pageIndex) =>
+            page.data.items.map(
+              (commentItem: CommentItemType, itemIndex: number) => {
+                return (
+                  <CommentItem
+                    key={commentItem.commentId}
+                    commentItem={commentItem}
+                  />
+                );
+              },
+            ),
           )}
         {hasNextPage && (
           <TextButton

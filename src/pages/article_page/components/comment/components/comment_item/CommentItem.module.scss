@@ -4,7 +4,6 @@
 .item_wrap {
   width: 100%;
   @include mixin.flex(row, flex-start, flex-start, 4px);
-  border-bottom: 1px solid variables.$grey03;
   padding: 0.75rem;
 }
 
@@ -21,6 +20,10 @@
 .date_time {
   width: 100%;
   @include mixin.font(12px, 300, variables.$grey05);
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 
 .nickname {
