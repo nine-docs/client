@@ -3,6 +3,7 @@ type CommentItemType = {
   author: {
     id: number;
     nickname: string;
+    isMe: boolean;
   };
   reply: {
     count: number;

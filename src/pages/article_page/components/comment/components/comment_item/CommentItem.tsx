@@ -15,6 +15,7 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
 
   const { mutate } = useDeleteComment();
 
+  const isMe = commentItem.author.isMe;
   const isMeLike = commentItem.like.isUserLike;
 
   const handleLikeClick = () => {};
@@ -36,11 +37,13 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
           <div className={classes.date_time}>
             {dayjs(commentItem.createdAt).format("YYYY-MM-DD A hh:mm")}
             {/* 댓글 삭제 버튼 */}
-            <BaseButton theme="none" p="none" onClick={handleDeleteClick}>
-              <div className={classes.delete_icon_wrap}>
-                <DeleteIcon width={14} height={14} />
-              </div>
-            </BaseButton>
+            {isMe && (
+              <BaseButton theme="none" p="none" onClick={handleDeleteClick}>
+                <div className={classes.delete_icon_wrap}>
+                  <DeleteIcon width={14} height={14} />
+                </div>
+              </BaseButton>
+            )}
           </div>
         </div>
         {/* 컨텐츠 */}
