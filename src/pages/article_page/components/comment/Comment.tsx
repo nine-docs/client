@@ -1,4 +1,4 @@
-import { useGetComment } from "apis/article_apis/useGetComment";
+import { useGetComment } from "apis/comment_apis/useGetComment";
 
 import TextButton from "components/buttons/text_button/TextButton";
 

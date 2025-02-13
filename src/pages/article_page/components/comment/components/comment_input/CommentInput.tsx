@@ -1,7 +1,7 @@
 import { FieldErrors, FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-import useAddComment from "apis/article_apis/useAddComment";
+import useAddComment from "apis/comment_apis/useAddComment";
 
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
