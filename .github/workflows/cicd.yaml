@@ -32,11 +32,11 @@ jobs:
         # 일시적인 끊김이 발생할 수 있으나, CloudFront의 캐싱을 믿어보는걸로..
         run: aws s3 sync build/ s3://${{ vars.S3_BUCKET_NAME }} --delete
       
-      # - name: 캐시 무력화
-      #   uses: chetan/invalidate-cloudfront-action@v2
-      #   env:
-      #     DISTRIBUTION: ${{ vars.AWS_CLOUDFRONT_ID }}
-      #     PATHS: "/*"
-      #     AWS_REGION: ${{ vars.AWS_REGION}}
-      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: 캐시 무력화
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ vars.AWS_CLOUDFRONT_ID }}
+          PATHS: "/*"
+          AWS_REGION: ${{ vars.AWS_REGION}}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
