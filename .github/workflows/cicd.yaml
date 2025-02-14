@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feat/NINEDOCS-242-cloudfront-cache-invalidation
 
 jobs:
   deploy:
