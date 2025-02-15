@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
@@ -8,6 +10,7 @@ import HeartIcon from "assets/images/icons/HeartIcon";
 import useDeleteComment from "apis/comment_apis/useDeleteComment";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
+import BaseInput from "components/inputs/base_input/BaseInput";
 
 import classes from "./CommentItem.module.scss";
 
@@ -19,9 +22,20 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
   const isMe = commentItem.author.isMe;
   const isMeLike = commentItem.like.isUserLike;
 
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const methods = useForm({
+    mode: "all",
+    defaultValues: {
+      content: commentItem.content,
+    },
+  });
+
   const handleLikeClick = () => {};
 
-  const handleEditClick = () => {};
+  const handleEditClick = () => {
+    setIsEditMode((prev) => !prev);
+  };
 
   const handleDeleteClick = () => {
     mutate({
@@ -57,7 +71,21 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
           </div>
         </div>
         {/* 컨텐츠 */}
-        <p className={classes.content}>{commentItem.content}</p>
+        {!isEditMode && (
+          <p className={classes.content}>{commentItem.content}</p>
+        )}
+        {isEditMode && (
+          <FormProvider {...methods}>
+            <form style={{ width: "100%" }}>
+              <BaseInput
+                type="text"
+                registerName="content"
+                registerOption={{ required: "내용을 입력해 주세요." }}
+                placeholder="내용을 입력해 주세요."
+              />
+            </form>
+          </FormProvider>
+        )}
       </div>
       {/* 좋아요 버튼, 개수 표시 */}
       <div className={classes.like_wrap}>
