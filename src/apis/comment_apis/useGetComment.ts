@@ -38,7 +38,7 @@ const mockData: GetCommentResType = {
   success: true,
   errorCode: "",
   data: {
-    cursor: null,
+    cursor: 0,
     items: [
       {
         commentId: 0,
@@ -52,8 +52,8 @@ const mockData: GetCommentResType = {
         },
         content: "댓글 내용입니다.",
         like: {
-          count: 0,
-          isUserLike: true,
+          count: 1,
+          isUserLike: false,
         },
         createdAt: "2025-02-15T08:02:49.155Z",
         updatedAt: "2025-02-15T08:02:49.155Z",
