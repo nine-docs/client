@@ -20,6 +20,7 @@ const ArticlePage = () => {
     <div className={classes.page_wrap}>
       <main className={classes.content_wrap}>
         <ArticleToolBar />
+        <h3 className={classes.title}>Q. {articleData.data.title}</h3>
         <MarkdownViewer
           title={articleData.data.title}
           markdown={articleData.data.contents}

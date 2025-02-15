@@ -11,7 +11,7 @@ const MarkdownViewer = ({
 }) => {
   return (
     <article className={classes.markdown_wrap}>
-      <h3>{title}</h3>
+      {" "}
       <Markdown>{markdown}</Markdown>
     </article>
   );
