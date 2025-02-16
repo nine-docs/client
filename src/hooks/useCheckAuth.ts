@@ -42,7 +42,7 @@ const useCheckAuth = () => {
         navigate("/mypage/subscribe");
       }
     }
-  }, [pathname, token, accessTokenExpiredAt]);
+  }, [pathname, token, accessTokenExpiredAt, navigate, deleteAuthInfo]);
 };
 
 export default useCheckAuth;

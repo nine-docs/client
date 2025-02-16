@@ -29,16 +29,18 @@ const Comment = ({ articleId }: { articleId: string }) => {
 
     observer.current = new IntersectionObserver(handleObserver, options);
 
-    if (lastItemRef.current) {
+    const lastItem = lastItemRef.current; // ref 값을 로컬 변수로 저장
+
+    if (lastItem) {
       observer.current.observe(lastItemRef.current);
     }
 
     return () => {
-      if (observer.current && lastItemRef.current) {
-        observer.current.unobserve(lastItemRef.current); // 컴포넌트 언마운트 시 관찰 종료
+      if (observer.current && lastItem) {
+        observer.current.unobserve(lastItem); // 컴포넌트 언마운트 시 관찰 종료
       }
     };
-  }, [hasNextPage]);
+  }, [hasNextPage, fetchNextPage]);
 
   return (
     <section className={classes.comment_wrap}>
