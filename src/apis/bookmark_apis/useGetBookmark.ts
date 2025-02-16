@@ -1,7 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
+
+const LIMIT = 10;
 
 type ArticleType = {
   id: number;
@@ -20,15 +22,15 @@ type BookmarkItemType = {
 type GetBookMarkListResponse = {
   success: boolean;
   data: {
-    cursor: number;
+    cursor: number | null;
     items: BookmarkItemType[];
   };
 };
 
-const bookMarkListMockData = {
+const bookMarkListMockData: GetBookMarkListResponse = {
   success: true,
   data: {
-    cursor: 42, // 직전 페이지의 마지막 북마크 id
+    cursor: null, // 직전 페이지의 마지막 북마크 id
     items: [
       {
         bookmarkId: 1,
@@ -56,36 +58,49 @@ const bookMarkListMockData = {
   },
 };
 
-export const useGetBookmarkList = (cursor: number | null, limit: number) => {
+const useGetBookmark = () => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
-  const fallback = {
-    success: true,
-    data: {
-      cursor: 0,
-      items: [],
-    },
-  };
+  const initialUrl = `/api/v1/my-page/bookmarks?limit=${LIMIT}`;
 
   const {
-    data = fallback,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
     isLoading,
+    isFetching,
     isError,
-  } = useQuery({
-    queryKey: queryKeyFactory.bookmark({ cursor: cursor, limit: limit })
-      .queryKey,
-    queryFn: (): Promise<GetBookMarkListResponse> => {
+    data,
+  } = useInfiniteQuery({
+    queryKey: queryKeyFactory.bookmark().queryKey,
+    queryFn: ({ pageParam }): Promise<GetBookMarkListResponse> => {
       if (isApiMock) {
         return new Promise((resolve) =>
           setTimeout(() => resolve(bookMarkListMockData), 100),
         );
       } else {
-        return httpClient.get(
-          `/api/v1/my-page/bookmarks?${!!cursor ? `cursor=${cursor}&` : ``}limit=${limit}`,
-        );
+        return httpClient.get(pageParam);
+      }
+    },
+    initialPageParam: initialUrl,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage.data.cursor && typeof lastPage.data.cursor !== "number") {
+        return undefined;
+      } else {
+        return `/api/v1/my-page/bookmarks?cursor=${lastPage.data.cursor}&limit=${LIMIT}`;
       }
     },
   });
 
-  return { data, isLoading, isError };
+  return {
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isFetching,
+    isError,
+    data,
+  };
 };
+
+export default useGetBookmark;
