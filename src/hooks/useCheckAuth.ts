@@ -28,17 +28,17 @@ const useCheckAuth = () => {
       /* 1. 토큰이 없거나 만료날짜가 없음 */
       deleteAuthInfo(); // 로그아웃
       // 현재 페이지가 로그인, 회원가입, 메인화면이 아니면 메인화면으로 강제소환
-      if (pathname !== "/login" && pathname !== "/signUp" && pathname !== "/") {
+      if (pathname !== "/login" && pathname !== "/signup" && pathname !== "/") {
         navigate("/");
       }
     } else if (dayjs(accessTokenExpiredAt).isBefore(dayjs())) {
       /* 2. 토큰 만료 날짜가 지났음 */
       deleteAuthInfo();
-      if (pathname !== "/login" && pathname !== "/signUp" && pathname !== "/") {
+      if (pathname !== "/login" && pathname !== "/signup" && pathname !== "/") {
         navigate("/");
       }
     } else {
-      if (pathname === "/login" || pathname === "/signUp" || pathname === "/") {
+      if (pathname === "/login" || pathname === "/signup" || pathname === "/") {
         navigate("/mypage/subscribe");
       }
     }
