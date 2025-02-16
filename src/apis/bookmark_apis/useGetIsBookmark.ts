@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
+import useIsLogin from "hooks/useIsLogin";
+
 type GetIsBookmarkResType = {
   success: boolean;
   errorCode?: string;
@@ -13,6 +15,7 @@ type GetIsBookmarkResType = {
 
 const useGetIsBookmark = (articleId: number) => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
+  const { isLogin } = useIsLogin();
 
   const mockData: GetIsBookmarkResType = {
     success: true,
@@ -27,6 +30,7 @@ const useGetIsBookmark = (articleId: number) => {
   };
 
   const { data = fallback } = useQuery({
+    enabled: isLogin,
     queryKey: queryKeyFactory.isBookmark({ articleId: articleId }).queryKey,
     queryFn: (): Promise<GetIsBookmarkResType> => {
       if (isApiMock) {
