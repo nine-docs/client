@@ -9,10 +9,14 @@ import useGetIsBookmark from "apis/bookmark_apis/useGetIsBookmark";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
 
+import useIsLogin from "hooks/useIsLogin";
+
 import classes from "./ArticleToolBar.module.scss";
 
 const ArticleToolBar = () => {
   const articleId = useParams().articleId;
+
+  const { isLogin } = useIsLogin();
 
   const { data: isBookmarkData } = useGetIsBookmark(Number(articleId));
   const { mutate: deleteBookmarkMutate } = useDeleteBookmark();
@@ -22,6 +26,11 @@ const ArticleToolBar = () => {
   const bookmarkId = isBookmarkData.data?.bookmarkId || undefined;
 
   const handleBookmarkClick = () => {
+    if (!isLogin) {
+      toast.error("로그인이 필요합니다.");
+
+      return;
+    }
     if (isBookmark) {
       if (!!bookmarkId) {
         deleteBookmarkMutate({ bookmarkId });
