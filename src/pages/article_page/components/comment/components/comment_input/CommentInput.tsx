@@ -7,6 +7,8 @@ import useAddComment from "apis/comment_apis/useAddComment";
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
 
+import useIsLogin from "hooks/useIsLogin";
+
 import classes from "./CommentInput.module.scss";
 
 type FormValues = {
@@ -15,6 +17,7 @@ type FormValues = {
 
 const CommentInput = () => {
   const articleId = useParams().articleId;
+  const { isLogin } = useIsLogin();
 
   const initialFormValue = {
     comment: "",
@@ -46,10 +49,7 @@ const CommentInput = () => {
 
   return (
     <FormProvider {...methods}>
-      <form
-        className={classes.reply_input_wrap}
-        onSubmit={methods.handleSubmit(onSubmit, onError)}
-      >
+      <form className={classes.reply_input_wrap}>
         <div className={classes.input_wrap}>
           <BaseInput
             type="text"
@@ -67,7 +67,20 @@ const CommentInput = () => {
             }}
           />
         </div>
-        <TextButton type="submit" text="등록하기" p={"s"} size="small" />
+        <TextButton
+          type="button"
+          text="등록하기"
+          p={"s"}
+          size="small"
+          onClick={(e?: React.MouseEvent<HTMLButtonElement>) => {
+            e && e.preventDefault();
+            if (!isLogin) {
+              toast.error("로그인이 필요합니다.");
+              return;
+            }
+            methods.handleSubmit(onSubmit, onError)();
+          }}
+        />
       </form>
     </FormProvider>
   );

@@ -13,7 +13,7 @@ type TextButtonProps = {
   height?: "35";
   br?: "0" | "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s";
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   title?: string;
 };
 const TextButton: React.FC<TextButtonProps> = ({
