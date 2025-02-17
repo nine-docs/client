@@ -1,17 +1,23 @@
-import {
-  FieldErrors,
-  FormProvider,
-  useForm,
-  useFormContext,
-} from "react-hook-form";
+import { FieldErrors, FormProvider, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import useUpdateComment from "apis/comment_apis/useUpdateComment";
 
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseTextarea from "components/inputs/base_textarea/BaseTextarea";
 
 import classes from "./EditComment.module.scss";
 
-const EditComment = ({ commentItem }: { commentItem: CommentItemType }) => {
+const EditComment = ({
+  commentItem,
+  onClose,
+}: {
+  commentItem: CommentItemType;
+  onClose: () => void;
+}) => {
+  const articleId = useParams().articleId;
+
   const methods = useForm({
     mode: "all",
     defaultValues: {
@@ -19,7 +25,22 @@ const EditComment = ({ commentItem }: { commentItem: CommentItemType }) => {
     },
   });
 
-  const onSubmit = () => {};
+  const { mutate } = useUpdateComment();
+
+  const onSubmit = (data: { content: string }) => {
+    mutate(
+      {
+        articleId: Number(articleId),
+        content: data.content,
+        commentId: commentItem.commentId,
+      },
+      {
+        onSuccess: () => {
+          onClose();
+        },
+      },
+    );
+  };
 
   const onError = (e: FieldErrors) => {
     if (e?.content?.message && typeof e?.content?.message === "string") {

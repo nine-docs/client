@@ -67,7 +67,14 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
           <p className={classes.content}>{commentItem.content}</p>
         )}
         {/* 컨텐츠 - 편집 모드 */}
-        {isEditMode && <EditComment commentItem={commentItem} />}
+        {isEditMode && (
+          <EditComment
+            commentItem={commentItem}
+            onClose={() => {
+              setIsEditMode(false);
+            }}
+          />
+        )}
       </div>
       {/* 좋아요 버튼, 개수 표시 */}
       <div className={classes.like_wrap}>
