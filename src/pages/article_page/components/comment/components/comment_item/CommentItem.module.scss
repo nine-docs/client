@@ -8,8 +8,8 @@
 }
 
 .left_wrap {
-  flex-grow: 1;
   @include mixin.flex(column, flex-start, flex-start, 8px, 1);
+  width: calc(100% - 50px);
 }
 
 .first_line {
@@ -31,12 +31,8 @@
 }
 
 .content {
-  width: 100%;
-}
-
-.edit_mode_content {
-  width: 100%;
-  @include mixin.flex(column, center, end, 4px);
+  white-space: pre-wrap;
+  word-break: normal;
 }
 
 .delete_icon_wrap {

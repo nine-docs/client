@@ -50,7 +50,8 @@ const mockData: GetCommentResType = {
         reply: {
           count: 0,
         },
-        content: "댓글 내용입니다.",
+        content:
+          "댓글내용 앤터입니다.\n긴내용긴내용긴내용n긴내용긴내용긴n긴내용긴내용긴내용n긴내용긴내용긴내용n긴내용긴내용긴내용n긴내용긴내용긴내용n긴내용긴내용긴내용내용n긴내용긴내용긴내용n긴내용긴내용긴내용",
         like: {
           count: 1,
           isUserLike: false,
