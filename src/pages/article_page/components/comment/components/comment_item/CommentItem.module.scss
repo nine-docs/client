@@ -34,6 +34,11 @@
   width: 100%;
 }
 
+.edit_mode_content {
+  width: 100%;
+  @include mixin.flex(column, center, end, 4px);
+}
+
 .delete_icon_wrap {
   @include mixin.flex(column, center, center);
   width: 24px;

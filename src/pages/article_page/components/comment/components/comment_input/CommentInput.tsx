@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import useAddComment from "apis/comment_apis/useAddComment";
 
 import TextButton from "components/buttons/text_button/TextButton";
-import BaseInput from "components/inputs/base_input/BaseInput";
 import BaseTextarea from "components/inputs/base_textarea/BaseTextarea";
 
 import useIsLogin from "hooks/useIsLogin";

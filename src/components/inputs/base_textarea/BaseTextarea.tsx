@@ -4,12 +4,14 @@ import { useFormContext } from "react-hook-form";
 import classes from "./BaseTextarea.module.scss";
 
 const BaseTextarea = ({
+  width = "100%",
   placeholder = "",
   registerName,
   registerOption,
   maxLength = 100,
   style,
 }: {
+  width?: string;
   placeholder?: string;
   registerName: string;
   registerOption?: object;
@@ -24,7 +26,10 @@ const BaseTextarea = ({
       placeholder={placeholder}
       maxLength={maxLength}
       {...methods.register(registerName, { ...registerOption })}
-      style={style}
+      style={{
+        ...style,
+        width: width,
+      }}
     />
   );
 };
