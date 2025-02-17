@@ -7,6 +7,8 @@ import EditIcon from "assets/images/icons/EditIcon";
 import HeartIcon from "assets/images/icons/HeartIcon";
 
 import useDeleteComment from "apis/comment_apis/useDeleteComment";
+import useLikeComment from "apis/comment_apis/useLikeComment";
+import useUnLikeComment from "apis/comment_apis/useUnLikeComment";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
 
@@ -16,21 +18,35 @@ import EditComment from "./components/EditComment";
 const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
   const articleId = useParams().articleId;
 
-  const { mutate } = useDeleteComment();
+  const { mutate: deleteMutate } = useDeleteComment();
+  const { mutate: likeMutate } = useLikeComment();
+  const { mutate: unLikeMutate } = useUnLikeComment();
 
   const isMe = commentItem.author.isMe;
   const isMeLike = commentItem.like.isUserLike;
 
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const handleLikeClick = () => {};
+  const handleLikeClick = () => {
+    if (!isMeLike) {
+      likeMutate({
+        articleId: Number(articleId),
+        commentId: commentItem.commentId,
+      });
+    } else {
+      unLikeMutate({
+        articleId: Number(articleId),
+        commentId: commentItem.commentId,
+      });
+    }
+  };
 
   const handleEditClick = () => {
     setIsEditMode((prev) => !prev);
   };
 
   const handleDeleteClick = () => {
-    mutate({
+    deleteMutate({
       articleId: Number(articleId),
       commentId: commentItem.commentId,
     });

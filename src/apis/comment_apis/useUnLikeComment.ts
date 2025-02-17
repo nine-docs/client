@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import httpClient from "apis/networks/HttpClient";
 
-const useLikeComment = () => {
+const useUnLikeComment = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -14,7 +14,7 @@ const useLikeComment = () => {
       articleId: number;
       commentId: number;
     }) => {
-      return httpClient.post(
+      return httpClient.delete(
         `/api/v1/article/${articleId}/comment/${commentId}/like`,
       );
     },
@@ -24,9 +24,9 @@ const useLikeComment = () => {
       });
     },
     onError: () => {
-      toast.error("좋아요에 실패했습니다.");
+      toast.error("좋아요 해제에 실패했습니다.");
     },
   });
 };
 
-export default useLikeComment;
+export default useUnLikeComment;
