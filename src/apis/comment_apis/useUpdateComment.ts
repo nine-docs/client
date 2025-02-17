@@ -35,7 +35,7 @@ const useUpdateComment = () => {
           setTimeout(() => resolve(updateCommentMockData), 100),
         );
       } else {
-        return httpClient.post(
+        return httpClient.put(
           `/api/v1/article/${articleId}/comment/${commentId}`,
           {
             content: content,
