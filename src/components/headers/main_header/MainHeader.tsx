@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthStore } from "stores/authStore";
 
@@ -12,6 +12,7 @@ import useIsLogin from "hooks/useIsLogin";
 import classes from "./MainHeader.module.scss";
 
 const MainHeader = () => {
+  const pathname = useLocation().pathname;
   const navigate = useNavigate();
 
   const { token, deleteAuthInfo } = useAuthStore();
@@ -45,14 +46,17 @@ const MainHeader = () => {
         </div>
       </BaseButton>
       {/* 로그인이 안되어 있는 경우 : 로그인 버튼 */}
-      {!isLogin && (
-        <TextButton
-          text="로그인"
-          p="s"
-          size="small"
-          onClick={handleLoginClick}
-        />
-      )}
+      {!isLogin &&
+        pathname !== "/login" &&
+        pathname !== "/signup" &&
+        pathname !== "/" && (
+          <TextButton
+            text="로그인"
+            p="s"
+            size="small"
+            onClick={handleLoginClick}
+          />
+        )}
       {/* 로그인 되어 있는 경우 : 로그아웃 버튼 */}
       {isLogin && (
         <TextButton
