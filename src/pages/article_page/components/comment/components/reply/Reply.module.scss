@@ -8,3 +8,7 @@
   background-color: variables.$grey02;
   border-top: 1px solid variables.$grey03;
 }
+
+.no_reply {
+  @include mixin.font(12px, normal, variables.$grey05);
+}

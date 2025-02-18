@@ -16,3 +16,10 @@ type CommentItemType = {
   createdAt: string;
   updatedAt: string;
 };
+
+type ReplyItemType = {
+  replyId: number;
+  content: string;
+  createdAt: string;
+  updatedAt?: string | null;
+};

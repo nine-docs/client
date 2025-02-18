@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -98,15 +97,17 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
               )}
             </div>
           </div>
-          {/* 컨텐츠 */}
           {!isEditMode && (
             <>
+              {/* 컨텐츠 */}
               <p className={classes.content}>{commentItem.content}</p>
+              {/* 답글 버튼 */}
               <TextButton
                 size="small"
                 p={"xs"}
                 theme="primary-line"
                 text={`답글 ${commentItem.reply.count}`}
+                title={isReplyOpen ? "답글 접기" : "답글 보기"}
                 onClick={handleReplyClick}
               />
             </>

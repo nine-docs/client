@@ -10,12 +10,7 @@ type GetReplyResType = {
   errorCode?: string;
   data: {
     cursor: null | number;
-    items: {
-      replyId: number;
-      content: string;
-      createdAt: string;
-      updatedAt?: string | null;
-    }[];
+    items: ReplyItemType[];
   };
 };
 
