@@ -11,6 +11,7 @@ import useLikeComment from "apis/comment_apis/useLikeComment";
 import useUnLikeComment from "apis/comment_apis/useUnLikeComment";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
+import TextButton from "components/buttons/text_button/TextButton";
 
 import classes from "./CommentItem.module.scss";
 import EditComment from "./components/EditComment";
@@ -80,7 +81,15 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
         </div>
         {/* 컨텐츠 */}
         {!isEditMode && (
-          <p className={classes.content}>{commentItem.content}</p>
+          <>
+            <p className={classes.content}>{commentItem.content}</p>
+            <TextButton
+              size="small"
+              p={"xs"}
+              theme="primary-line"
+              text={`답글 ${commentItem.reply.count}`}
+            />
+          </>
         )}
         {/* 컨텐츠 - 편집 모드 */}
         {isEditMode && (

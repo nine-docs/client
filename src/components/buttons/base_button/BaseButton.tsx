@@ -9,9 +9,10 @@ type BaseButtonProps = {
   width?: 0 | "fit-content" | string;
   height?: "35";
   br?: "0" | "4" | "8" | "20";
-  p?: "xl" | "l" | "n" | "s" | "none";
+  p?: "xl" | "l" | "n" | "s" | "xs" | "none";
   children?: React.ReactNode;
   title?: string;
+  disabled?: boolean;
 };
 
 const BaseButton: React.FC<BaseButtonProps> = ({
@@ -24,9 +25,11 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   p = "n",
   children,
   title,
+  disabled = false,
 }) => {
   return (
     <button
+      disabled={disabled}
       className={`${classes.button_wrap} 
      
         ${
@@ -58,9 +61,11 @@ const BaseButton: React.FC<BaseButtonProps> = ({
                 ? classes.p_n
                 : p === "s"
                   ? classes.p_s
-                  : p === "none"
-                    ? classes.p_none
-                    : undefined
+                  : p === "xs"
+                    ? classes.p_xs
+                    : p === "none"
+                      ? classes.p_none
+                      : undefined
         }
         ${height === "35" ? classes.h35 : undefined}
         `}

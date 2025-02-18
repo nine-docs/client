@@ -12,9 +12,10 @@ type TextButtonProps = {
   width?: 0 | "fit-content" | string;
   height?: "35";
   br?: "0" | "4" | "8" | "20";
-  p?: "xl" | "l" | "n" | "s";
+  p?: "xl" | "l" | "n" | "s" | "xs" | "none";
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   title?: string;
+  disabled?: boolean;
 };
 const TextButton: React.FC<TextButtonProps> = ({
   type,
@@ -27,6 +28,7 @@ const TextButton: React.FC<TextButtonProps> = ({
   p,
   onClick,
   title,
+  disabled = false,
 }) => {
   return (
     <BaseButton
@@ -38,6 +40,7 @@ const TextButton: React.FC<TextButtonProps> = ({
       br={br}
       p={p}
       title={title}
+      disabled={disabled}
     >
       <span
         className={`

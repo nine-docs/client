@@ -52,6 +52,7 @@ const MainHeader = () => {
         pathname !== "/" && (
           <TextButton
             text="로그인"
+            title="로그인"
             p="s"
             size="small"
             onClick={handleLoginClick}
@@ -61,6 +62,7 @@ const MainHeader = () => {
       {isLogin && (
         <TextButton
           text="로그아웃"
+          title="로그아웃"
           p="s"
           size="small"
           onClick={handleLogoutClick}

@@ -21,6 +21,7 @@ const NavItem: React.FC<NavItemProps> = ({ title, path }) => {
   return (
     <button
       className={`${classes.item_wrap} ${isCurPath ? classes.cur_item : undefined}`}
+      title={title}
       onClick={handleClick}
     >
       <span>{title}</span>

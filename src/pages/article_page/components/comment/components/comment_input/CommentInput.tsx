@@ -76,7 +76,13 @@ const CommentInput = () => {
             placeholder="댓글을 입력해 주세요."
           />
         </div>
-        <TextButton type="submit" text="등록하기" p={"s"} size="small" />
+        <TextButton
+          type="submit"
+          text="등록하기"
+          title="댓글 등록하기"
+          p={"s"}
+          size="small"
+        />
       </form>
     </FormProvider>
   );
