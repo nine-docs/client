@@ -3,9 +3,14 @@
 
 .item_wrap {
   width: 100%;
+  border-bottom: 1px solid variables.$grey03;
+  @include mixin.flex(column, flex-start, flex-start, 8px, 1);
+}
+
+.comment_item_wrap {
+  width: 100%;
   @include mixin.flex(row, flex-start, flex-start, 4px);
   padding: 0.75rem;
-  border-bottom: 1px solid variables.$grey03;
 }
 
 .left_wrap {
@@ -48,4 +53,10 @@
   > span {
     @include mixin.font(12px, 300);
   }
+}
+
+.reply_wrap {
+  width: 100%;
+  @include mixin.flex(row, flex-start, flex-start, 4px);
+  padding: 0.75rem;
 }

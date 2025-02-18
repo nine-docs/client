@@ -27,6 +27,7 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
   const isMeLike = commentItem.like.isUserLike;
 
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isReplyOpen, setIsReplyOpen] = useState(false);
 
   const handleLikeClick = () => {
     if (!isMeLike) {
@@ -53,67 +54,81 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
     });
   };
 
+  const handleReplyClick = () => {
+    setIsReplyOpen((prev) => !prev);
+  };
+
   return (
     <article className={classes.item_wrap}>
-      {/* 유저이름, 등록일시, 컨텐츠 */}
-      <div className={classes.left_wrap}>
-        {/* 유저이름, 등록일시 */}
-        <div className={classes.first_line}>
-          <p className={classes.nickname}>{commentItem.author.nickname}</p>
-          <div className={classes.date_time}>
-            {dayjs(commentItem.createdAt).format("YYYY-MM-DD A hh:mm")}
-            {/* 댓글 삭제 버튼 */}
-            {isMe && (
-              <>
-                <BaseButton theme="none" p="none" onClick={handleDeleteClick}>
-                  <div className={classes.delete_icon_wrap}>
-                    <DeleteIcon width={14} height={14} />
-                  </div>
-                </BaseButton>
-                <BaseButton theme="none" p="none" onClick={handleEditClick}>
-                  <div className={classes.delete_icon_wrap}>
-                    <EditIcon width={14} height={14} />
-                  </div>
-                </BaseButton>
-              </>
-            )}
+      {/* 댓글 영역 */}
+      <div className={classes.comment_item_wrap}>
+        {/* 유저이름, 등록일시, 컨텐츠 */}
+        <div className={classes.left_wrap}>
+          {/* 유저이름, 등록일시 */}
+          <div className={classes.first_line}>
+            <p className={classes.nickname}>{commentItem.author.nickname}</p>
+            <div className={classes.date_time}>
+              {dayjs(commentItem.createdAt).format("YYYY-MM-DD A hh:mm")}
+              {/* 댓글 삭제 버튼 */}
+              {isMe && (
+                <>
+                  <BaseButton
+                    theme="none"
+                    p="none"
+                    onClick={handleDeleteClick}
+                    title="댓글 삭제하기"
+                  >
+                    <div className={classes.delete_icon_wrap}>
+                      <DeleteIcon width={14} height={14} />
+                    </div>
+                  </BaseButton>
+                  <BaseButton
+                    theme="none"
+                    p="none"
+                    onClick={handleEditClick}
+                    title="댓글 수정하기"
+                  >
+                    <div className={classes.delete_icon_wrap}>
+                      <EditIcon width={14} height={14} />
+                    </div>
+                  </BaseButton>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-        {/* 컨텐츠 */}
-        {!isEditMode && (
-          <>
-            <p className={classes.content}>{commentItem.content}</p>
-            <TextButton
-              size="small"
-              p={"xs"}
-              theme="primary-line"
-              text={`답글 ${commentItem.reply.count}`}
+          {/* 컨텐츠 */}
+          {!isEditMode && (
+            <>
+              <p className={classes.content}>{commentItem.content}</p>
+              <TextButton
+                size="small"
+                p={"xs"}
+                theme="primary-line"
+                text={`답글 ${commentItem.reply.count}`}
+                onClick={handleReplyClick}
+              />
+            </>
+          )}
+          {/* 컨텐츠 - 편집 모드 */}
+          {isEditMode && (
+            <EditComment
+              commentItem={commentItem}
+              onClose={() => {
+                setIsEditMode(false);
+              }}
             />
-          </>
-        )}
-        {/* 컨텐츠 - 편집 모드 */}
-        {isEditMode && (
-          <EditComment
-            commentItem={commentItem}
-            onClose={() => {
-              setIsEditMode(false);
-            }}
-          />
-        )}
+          )}
+        </div>
+        {/* 좋아요 버튼, 개수 표시 */}
+        <div className={classes.like_wrap}>
+          <BaseButton theme="none" p="none" onClick={handleLikeClick} br={"8"}>
+            <HeartIcon width={18} height={16} isFilled={isMeLike} />
+          </BaseButton>
+          <span>{commentItem.like.count || 0}</span>
+        </div>
       </div>
-      {/* 좋아요 버튼, 개수 표시 */}
-      <div className={classes.like_wrap}>
-        <BaseButton
-          theme="none"
-          p="none"
-          onClick={handleLikeClick}
-          br={"8"}
-          title="좋아요"
-        >
-          <HeartIcon width={18} height={16} isFilled={isMeLike} />
-        </BaseButton>
-        <span>{commentItem.like.count || 0}</span>
-      </div>
+      {/* 답글 영역 */}
+      {isReplyOpen && <div className={classes.reply_wrap}></div>}
     </article>
   );
 };

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 
 import classes from "./BaseButton.module.scss";
@@ -28,7 +29,16 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   disabled = false,
 }) => {
   return (
-    <button
+    <motion.button
+      whileHover={{
+        scale: 1.1,
+      }}
+      whileTap={{
+        scale: 0.95,
+      }}
+      transition={{
+        duration: 0.1,
+      }}
       disabled={disabled}
       className={`${classes.button_wrap} 
      
@@ -75,7 +85,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
       style={{ width: width }}
     >
       {children}
-    </button>
+    </motion.button>
   );
 };
 
