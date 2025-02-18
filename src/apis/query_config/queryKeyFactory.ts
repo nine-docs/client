@@ -9,6 +9,7 @@ const queryKeyFactory = createQueryKeys("ninedocs", {
   alarm: (params?: object) => [{ ...params }],
   allSubscribeCycle: (params?: object) => [{ ...params }],
   comment: (params?: object) => [{ ...params }],
+  reply: (params?: object) => [{ ...params }],
 });
 
 export default queryKeyFactory;
