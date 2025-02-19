@@ -57,7 +57,13 @@ const Reply = ({ commentItem }: { commentItem: CommentItemType }) => {
         !!data &&
         data.pages.map((page) =>
           page.data.items.map((replyItem: ReplyItemType) => {
-            return <ReplyItem key={replyItem.replyId} replyItem={replyItem} />;
+            return (
+              <ReplyItem
+                key={replyItem.replyId}
+                commentId={commentItem.commentId}
+                replyItem={replyItem}
+              />
+            );
           }),
         )}
       <span ref={lastItemRef} />

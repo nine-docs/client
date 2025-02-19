@@ -13,7 +13,7 @@
 }
 
 .input_head_info {
-  @include mixin.flex(row, flex-start, center, 4px);
+  @include mixin.flex(row, flex-start, center, 8px);
   width: 100%;
 }
 
