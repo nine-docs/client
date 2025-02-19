@@ -1,19 +1,21 @@
 @use "styles/variables";
 @use "styles/mixin";
 
-.reply_input_wrap {
+.input_wrap {
   width: 100%;
-  @include mixin.flex(row, center, center, 8px);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid variables.$grey03;
+  @include mixin.flex(row, flex-start, flex-start, 4px);
+  padding: 10px;
+}
+
+.input_right {
+  @include mixin.flex(row, flex-start, center, 8px, 1);
 
   @media (max-width: "750px") {
-    @include mixin.flex(column, center, flex-end, 8px);
+    @include mixin.flex(column, center, flex-end, 4px);
   }
 }
 
-.input_wrap {
+.input {
   @media (max-width: "750px") {
     width: 100%;
     max-width: 750px;

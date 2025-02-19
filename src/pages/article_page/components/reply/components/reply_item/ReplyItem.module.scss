@@ -1,0 +1,25 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.input_wrap {
+  width: 100%;
+  @include mixin.flex(row, flex-start, flex-start, 4px);
+  padding: 10px;
+  border-bottom: 1px solid variables.$grey03;
+}
+
+.input_right {
+  @include mixin.flex(column, flex-start, flex-start, 8px, 1);
+}
+
+.input_head_info {
+  @include mixin.flex(row, flex-start, center, 4px);
+  width: 100%;
+}
+
+.user_name {
+  @include mixin.font(14px, 500, variables.$grey08);
+}
+.date_time {
+  @include mixin.font(12px, 300, variables.$grey05);
+}

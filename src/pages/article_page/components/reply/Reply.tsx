@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import useGetReply from "apis/comment_apis/useGetReply";
 
 import classes from "./Reply.module.scss";
+import ReplyInput from "./components/reply_input/ReplyInput";
+import ReplyItem from "./components/reply_item/ReplyItem";
 
 const Reply = ({ commentItem }: { commentItem: CommentItemType }) => {
   const observer = useRef<IntersectionObserver | null>(null);
@@ -55,10 +57,11 @@ const Reply = ({ commentItem }: { commentItem: CommentItemType }) => {
         !!data &&
         data.pages.map((page) =>
           page.data.items.map((replyItem: ReplyItemType) => {
-            return <div key={replyItem.replyId}></div>;
+            return <ReplyItem key={replyItem.replyId} replyItem={replyItem} />;
           }),
         )}
       <span ref={lastItemRef} />
+      <ReplyInput commentId={commentItem.commentId} />
     </div>
   );
 };

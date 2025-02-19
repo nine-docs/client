@@ -13,7 +13,7 @@ import useUnLikeComment from "apis/comment_apis/useUnLikeComment";
 import BaseButton from "components/buttons/base_button/BaseButton";
 import TextButton from "components/buttons/text_button/TextButton";
 
-import Reply from "../reply/Reply";
+import Reply from "../../../reply/Reply";
 import classes from "./CommentItem.module.scss";
 import EditComment from "./components/EditComment";
 

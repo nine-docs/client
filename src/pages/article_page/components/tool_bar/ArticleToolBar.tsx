@@ -48,7 +48,7 @@ const ArticleToolBar = () => {
         theme="none"
         p="none"
         onClick={handleBookmarkClick}
-        title="북마크 추가/해제"
+        title={isBookmark ? "북마크 해제" : "북마크 추가"}
       >
         <BookmarkIcon width={20} height={20} isFill={isBookmark} />
       </BaseButton>

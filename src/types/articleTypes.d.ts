@@ -21,5 +21,10 @@ type ReplyItemType = {
   replyId: number;
   content: string;
   createdAt: string;
-  updatedAt?: string | null;
+  updatedAt: string;
+  author: {
+    id: number;
+    nickname: string;
+    isMe: boolean;
+  };
 };
