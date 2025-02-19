@@ -20,6 +20,7 @@ const useDeleteComment = () => {
     },
     onSuccess: () => {
       toast.success("댓글이 삭제되었습니다.");
+
       queryClient.invalidateQueries({
         queryKey: ["ninedocs", "comment"],
       });

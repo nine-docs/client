@@ -28,6 +28,9 @@ const useAddReply = () => {
     onSuccess: () => {
       toast.success("대댓글이 작성되었습니다.");
       queryClient.invalidateQueries({
+        queryKey: ["ninedocs", "comment"],
+      });
+      queryClient.invalidateQueries({
         queryKey: ["ninedocs", "reply"],
       });
     },
