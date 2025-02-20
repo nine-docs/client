@@ -9,7 +9,7 @@
 
 .comment_item_wrap {
   width: 100%;
-  @include mixin.flex(row, flex-start, flex-start, 4px);
+  @include mixin.flex(row, flex-start, flex-start, 8px);
   padding: 0.75rem;
 }
 

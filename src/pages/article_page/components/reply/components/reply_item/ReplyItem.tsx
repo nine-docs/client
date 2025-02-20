@@ -8,6 +8,8 @@ import HeartIcon from "assets/images/icons/HeartIcon";
 import ReplyIcon from "assets/images/icons/ReplyIcon";
 
 import useDeleteReply from "apis/comment_apis/useDeleteReply";
+import useLikeReply from "apis/comment_apis/useLikeReply";
+import useUnLikeReply from "apis/comment_apis/useUnLikeReply";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
 
@@ -25,18 +27,36 @@ const ReplyItem = ({
 
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const { mutate } = useDeleteReply();
+  const { mutate: deleteMutate } = useDeleteReply();
+  const { mutate: likeMutate } = useLikeReply();
+  const { mutate: unlikeMutate } = useUnLikeReply();
 
   const handleEditClick = () => {
     setIsEditMode((prev) => !prev);
   };
 
   const handleDeleteClick = () => {
-    mutate({
+    deleteMutate({
       articleId: Number(articleId),
       commentId: commentId,
       replyId: replyItem.replyId,
     });
+  };
+
+  const handleLikeClick = () => {
+    if (replyItem.like.isUserLike) {
+      unlikeMutate({
+        articleId: Number(articleId),
+        commentId: commentId,
+        replyId: replyItem.replyId,
+      });
+    } else {
+      likeMutate({
+        articleId: Number(articleId),
+        commentId: commentId,
+        replyId: replyItem.replyId,
+      });
+    }
   };
 
   return (
@@ -84,9 +104,9 @@ const ReplyItem = ({
       </div>
 
       <div className={classes.like_wrap}>
-        <BaseButton theme="none" p="none" onClick={() => {}} br={"8"}>
+        <BaseButton theme="none" p="none" onClick={handleLikeClick} br={"8"}>
           <HeartIcon
-            width={18}
+            width={16}
             height={16}
             isFilled={replyItem.like.isUserLike}
           />

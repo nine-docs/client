@@ -3,7 +3,7 @@
 
 .input_wrap {
   width: 100%;
-  @include mixin.flex(row, flex-start, flex-start, 4px);
+  @include mixin.flex(row, flex-start, flex-start, 8px);
   padding: 10px;
   border-bottom: 1px solid variables.$grey03;
 }
@@ -28,6 +28,6 @@
   @include mixin.flex(column, center, center);
   height: 100%;
   > span {
-    @include mixin.font(12px, 300);
+    @include mixin.font(11px, 300);
   }
 }
