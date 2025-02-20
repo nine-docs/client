@@ -4,12 +4,12 @@ import { useParams } from "react-router-dom";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
 import EditIcon from "assets/images/icons/EditIcon";
+import HeartIcon from "assets/images/icons/HeartIcon";
 import ReplyIcon from "assets/images/icons/ReplyIcon";
 
 import useDeleteReply from "apis/comment_apis/useDeleteReply";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
-import BaseTextarea from "components/inputs/base_textarea/BaseTextarea";
 
 import classes from "./ReplyItem.module.scss";
 import EditReply from "./edit_reply/EditReply";
@@ -81,6 +81,17 @@ const ReplyItem = ({
             }}
           />
         )}
+      </div>
+
+      <div className={classes.like_wrap}>
+        <BaseButton theme="none" p="none" onClick={() => {}} br={"8"}>
+          <HeartIcon
+            width={18}
+            height={16}
+            isFilled={replyItem.like.isUserLike}
+          />
+        </BaseButton>
+        <span>{replyItem.like.count || 0}</span>
       </div>
     </div>
   );

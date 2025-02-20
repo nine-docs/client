@@ -27,4 +27,8 @@ type ReplyItemType = {
     nickname: string;
     isMe: boolean;
   };
+  like: {
+    count: number;
+    isUserLike: boolean;
+  };
 };
