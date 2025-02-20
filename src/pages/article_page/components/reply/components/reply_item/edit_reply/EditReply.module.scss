@@ -1,0 +1,7 @@
+@use "styles/variables";
+@use "styles/mixin";
+
+.edit_mode_content {
+  width: 100%;
+  @include mixin.flex(column, center, end, 4px);
+}

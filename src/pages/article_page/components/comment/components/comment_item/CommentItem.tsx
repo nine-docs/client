@@ -15,7 +15,7 @@ import TextButton from "components/buttons/text_button/TextButton";
 
 import Reply from "../../../reply/Reply";
 import classes from "./CommentItem.module.scss";
-import EditComment from "./components/EditComment";
+import EditComment from "./edit_comment/EditComment";
 
 const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
   const articleId = useParams().articleId;

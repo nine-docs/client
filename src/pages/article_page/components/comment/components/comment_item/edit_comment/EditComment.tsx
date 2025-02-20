@@ -58,6 +58,7 @@ const EditComment = ({
           registerName="content"
           registerOption={{ required: "내용을 입력해 주세요." }}
           placeholder="내용을 입력해 주세요."
+          style={{ height: "60px" }}
         />
         <TextButton
           theme="primary-line"

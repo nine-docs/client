@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
@@ -8,8 +9,10 @@ import ReplyIcon from "assets/images/icons/ReplyIcon";
 import useDeleteReply from "apis/comment_apis/useDeleteReply";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
+import BaseTextarea from "components/inputs/base_textarea/BaseTextarea";
 
 import classes from "./ReplyItem.module.scss";
+import EditReply from "./edit_reply/EditReply";
 
 const ReplyItem = ({
   replyItem,
@@ -20,7 +23,13 @@ const ReplyItem = ({
 }) => {
   const articleId = useParams().articleId;
 
+  const [isEditMode, setIsEditMode] = useState(false);
+
   const { mutate } = useDeleteReply();
+
+  const handleEditClick = () => {
+    setIsEditMode((prev) => !prev);
+  };
 
   const handleDeleteClick = () => {
     mutate({
@@ -50,13 +59,28 @@ const ReplyItem = ({
               >
                 <DeleteIcon width={14} height={14} />
               </BaseButton>
-              <BaseButton theme="none" title="대댓글 수정하기" p="none">
+              <BaseButton
+                theme="none"
+                title="대댓글 수정하기"
+                p="none"
+                onClick={handleEditClick}
+              >
                 <EditIcon width={14} height={14} />
               </BaseButton>
             </>
           )}
         </div>
-        <div>{replyItem.content}</div>
+        {!isEditMode && <div>{replyItem.content}</div>}
+        {isEditMode && (
+          <EditReply
+            articleId={Number(articleId)}
+            commentId={commentId}
+            replyItem={replyItem}
+            onClose={() => {
+              setIsEditMode(false);
+            }}
+          />
+        )}
       </div>
     </div>
   );
