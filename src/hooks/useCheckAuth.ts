@@ -24,7 +24,6 @@ const useCheckAuth = () => {
   const { token, accessTokenExpiredAt, deleteAuthInfo } = useAuthStore();
 
   useEffect(() => {
-    console.log(`check auth 실행`);
     if (token === "" && accessTokenExpiredAt === "") {
       /* 1. 토큰이 없거나 만료날짜가 없음 */
       // 현재 페이지가 로그인, 회원가입, 메인화면, 문제페이지가 아니면 메인화면으로 강제소환

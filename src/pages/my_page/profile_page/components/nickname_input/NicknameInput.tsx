@@ -18,6 +18,7 @@ const NicknameInput = () => {
 
     if (!isValid) {
       toast.error("닉네임을 확인해 주세요.");
+      methods.setFocus("nickname");
       return;
     }
 
