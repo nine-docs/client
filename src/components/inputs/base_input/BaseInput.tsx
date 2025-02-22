@@ -10,7 +10,7 @@ type BaseInputProps = {
   width?: "fit-content" | 0 | string;
   align?: "center" | "start" | "end";
   registerName: string;
-  registerOption: object;
+  registerOption?: object;
   maxLength?: number;
   inputStyle?: CSSProperties;
 };
