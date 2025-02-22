@@ -7,6 +7,7 @@ import ErrorPage from "pages/error_page/ErrorPage";
 import classes from "./MyPage.module.scss";
 import AlarmPage from "./alarm_page/AlarmPage";
 import BookmarkPage from "./bookmark_page/BookmarkPage";
+import ProfilePage from "./profile_page/ProfilePage";
 import SubscribePage from "./subscribe_page/SubscribePage";
 
 const MyPage = () => {
@@ -18,7 +19,8 @@ const MyPage = () => {
           <Route path="/*" element={<ErrorPage />} />
           <Route path="/bookmark" element={<BookmarkPage />} />
           <Route path="/alarm" element={<AlarmPage />} />
-          <Route path="subscribe" element={<SubscribePage />} />
+          <Route path="/subscribe" element={<SubscribePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </div>
     </div>
