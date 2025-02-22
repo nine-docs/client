@@ -4,4 +4,5 @@
 .nav_wrap {
   @include mixin.flex(row, center, center);
   width: 100%;
+  max-width: 360px;
 }

@@ -2,12 +2,12 @@
 @use "styles/mixin";
 
 .content_wrap {
-  @include mixin.flex(column, start, start, 20px);
+  @include mixin.flex(column, flex-start, flex-start, 20px);
   width: 100%;
 }
 
 .list_wrap {
-  @include mixin.flex(column, start, start, 12px);
+  @include mixin.flex(column, flex-start, flex-start, 12px);
   width: 100%;
 }
 

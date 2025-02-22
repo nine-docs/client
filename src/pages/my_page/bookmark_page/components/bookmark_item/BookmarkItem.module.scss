@@ -2,7 +2,7 @@
 @use "styles/mixin";
 
 .item_wrap {
-  @include mixin.flex(row, start, center, 4px);
+  @include mixin.flex(row, flex-start, center, 4px);
   width: 100%;
   padding: 12px 20px;
   border-radius: 8px;
@@ -24,7 +24,7 @@
 }
 
 .item_info_wrap {
-  @include mixin.flex(column, start, start);
+  @include mixin.flex(column, flex-start, flex-start);
   width: calc(100% - 32px);
 }
 

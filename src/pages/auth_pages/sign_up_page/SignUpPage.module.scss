@@ -8,7 +8,7 @@
 }
 
 .signup_section {
-  @include mixin.flex(column, start, center, 20px);
+  @include mixin.flex(column, flex-start, center, 20px);
   width: 300px;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .sign_form {
-  @include mixin.flex(column, start, center, 20px);
+  @include mixin.flex(column, flex-start, center, 20px);
   width: 100%;
   border-radius: 8px;
   padding: 20px;

@@ -2,14 +2,14 @@
 @use "styles/mixin";
 
 .page_wrap {
-  @include mixin.flex(column, start, center, 20px);
+  @include mixin.flex(column, flex-start, center, 20px);
   width: 100%;
   height: calc(100vh - 60px);
   overflow-y: auto;
 }
 
 .content_wrap {
-  @include mixin.flex(column, start, start, 12px);
+  @include mixin.flex(column, flex-start, flex-start, 12px);
   width: 100%;
   width: 100vw;
   padding: 20px 40px 40px 40px;

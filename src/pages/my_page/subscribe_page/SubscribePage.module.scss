@@ -2,12 +2,12 @@
 @use "styles/mixin";
 
 .content_wrap {
-  @include mixin.flex(column, start, start, 20px);
+  @include mixin.flex(column, flex-start, flex-start, 20px);
   width: 100%;
   padding: 12px 20px;
 }
 
 .right_order_wrap {
-  @include mixin.flex(row, end, center);
+  @include mixin.flex(row, flex-end, center);
   width: 100%;
 }

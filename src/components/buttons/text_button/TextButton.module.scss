@@ -1,5 +1,9 @@
 @use "styles/variables";
 
+.text {
+  flex-shrink: 0;
+}
+
 .h1 {
   font-size: variables.$fh1;
   font-weight: 600;

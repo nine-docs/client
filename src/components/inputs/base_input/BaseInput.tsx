@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import classes from "./BaseInput.module.scss";
 
 type BaseInputProps = {
-  type: "text" | "number" | "password" | "";
+  type: "text" | "number" | "password" | "email" | "";
   placeholder?: string;
   disabled?: boolean;
   width?: "fit-content" | 0 | string;

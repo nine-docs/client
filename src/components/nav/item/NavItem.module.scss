@@ -2,11 +2,10 @@
 @use "styles/mixin";
 
 .item_wrap {
-  @include mixin.flex(row, center, center);
+  @include mixin.flex(row, center, center, 0, 1);
   padding: 8px;
   margin: 4px;
-  max-width: 150px;
-  min-width: 100px;
+
   border: 1px solid transparent;
   border-radius: 4px; // outline이 둥글게
   transition: 0.2s;

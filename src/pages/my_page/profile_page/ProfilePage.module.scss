@@ -2,6 +2,36 @@
 @use "styles/mixin";
 
 .page_wrap {
-  @include mixin.flex(column, start, start, 20px);
+  @include mixin.flex(column, flex-start, center, 20px);
   width: 100%;
+}
+
+.form_wrap {
+  @include mixin.flex(column, flex-start, flex-start, 20px);
+  width: 100%;
+  max-width: 410px;
+}
+
+.input_wrap {
+  @include mixin.flex(row, flex-start, center, 8px);
+  width: 100%;
+
+  > .input {
+    flex-grow: 1;
+  }
+
+  > .label {
+    color: variables.$grey05;
+    flex-shrink: 0;
+    width: 60px;
+  }
+
+  @media (max-width: 450px) {
+    @include mixin.flex(column, flex-start, flex-start, 8px);
+    width: 100%;
+
+    > .input {
+      width: 100%;
+    }
+  }
 }

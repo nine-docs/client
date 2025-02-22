@@ -8,7 +8,7 @@ type BaseButtonProps = {
   theme?: "primary" | "primary-line" | "gray" | "gray-line" | "none";
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   width?: 0 | "fit-content" | string;
-  height?: "35";
+  height?: string;
   br?: "0" | "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s" | "xs" | "none";
   children?: React.ReactNode;

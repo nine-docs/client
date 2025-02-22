@@ -10,7 +10,7 @@ type TextButtonProps = {
   text: string;
   size?: "small" | "normal" | "large" | "xlarge" | "h3" | "h2" | "h1";
   width?: 0 | "fit-content" | string;
-  height?: "35";
+  height?: string;
   br?: "0" | "4" | "8" | "20";
   p?: "xl" | "l" | "n" | "s" | "xs" | "none";
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;

@@ -2,5 +2,5 @@
 @use "styles/mixin";
 
 .modal_content_wrap {
-  @include mixin.flex(column, start, start);
+  @include mixin.flex(column, flex-start, flex-start);
 }

@@ -2,7 +2,7 @@
 @use "styles/mixin";
 
 .form_wrap {
-  @include mixin.flex(column, start, start);
+  @include mixin.flex(column, flex-start, flex-start);
   width: 100%;
   border: 1px solid variables.$grey03;
   border-radius: 8px;
@@ -15,7 +15,7 @@
 }
 
 .input_list_wrap {
-  @include mixin.flex(row, start, start, 20px);
+  @include mixin.flex(row, flex-start, flex-start, 20px);
   flex-wrap: wrap;
   padding: 20px;
 }
