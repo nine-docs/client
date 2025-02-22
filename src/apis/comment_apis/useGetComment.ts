@@ -3,7 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
-const LIMIT = 5;
+const LIMIT = 10;
 
 type CommentType = {
   commentId: number;
@@ -48,7 +48,7 @@ const mockData: GetCommentResType = {
           isMe: true,
         },
         reply: {
-          count: 0,
+          count: 1,
         },
         content:
           "댓글내용 앤터입니다.\n긴내용긴내용긴내용n긴내용긴내용긴n긴내용긴내용긴내용n긴내용긴내용긴내용n긴내용긴내용긴내용n긴내용긴내용긴내용n긴내용긴내용긴내용내용n긴내용긴내용긴내용n긴내용긴내용긴내용",
