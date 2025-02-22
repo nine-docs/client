@@ -13,7 +13,18 @@ type UseProfileResType = {
   };
 };
 
+const userProfileResMockData = {
+  success: true,
+  errorCode: null,
+  data: {
+    nickname: "홍길동",
+    email: "helim01033@naver.com",
+  },
+};
+
 const useProfile = () => {
+  const isApiMock = process.env.REACT_APP_API_MOCK === "true";
+
   const token = useAuthStore((state) => state.token);
 
   const fallback: UseProfileResType = {
@@ -25,15 +36,25 @@ const useProfile = () => {
     },
   };
 
-  const { data = fallback, isLoading } = useQuery({
+  const {
+    data = fallback,
+    isLoading,
+    isError,
+  } = useQuery({
     enabled: !!token,
     queryKey: queryKeyFactory.profile({ token: token }).queryKey,
     queryFn: (): Promise<UseProfileResType> => {
-      return httpClient.get(`/api/v1/my-page/profile`);
+      if (isApiMock) {
+        return new Promise((resolve) =>
+          setTimeout(() => resolve(userProfileResMockData), 100),
+        );
+      } else {
+        return httpClient.get(`/api/v1/my-page/profile`);
+      }
     },
   });
 
-  return { data, isLoading };
+  return { data, isLoading, isError };
 };
 
 export default useProfile;

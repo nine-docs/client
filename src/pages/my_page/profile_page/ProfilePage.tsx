@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
+import useDeleteUser from "apis/auth_apis/useDeleteUser";
 import useProfile from "apis/profile_apis/useProfile";
 
+import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
 
 import classes from "./ProfilePage.module.scss";
@@ -10,6 +12,7 @@ import NicknameInput from "./components/nickname_input/NicknameInput";
 
 const ProfilePage = () => {
   const { data: profileData, isLoading } = useProfile();
+  const { mutate } = useDeleteUser();
 
   const methods = useForm({
     mode: "all",
@@ -19,8 +22,15 @@ const ProfilePage = () => {
     },
   });
 
+  const handleDeleteUserButtonClick = () => {
+    mutate();
+  };
+
   useEffect(() => {
     if (isLoading) return;
+
+    if (profileData.data.nickname === "" && profileData.data.email === "")
+      return;
 
     methods.reset({
       nickname: profileData.data.nickname,
@@ -39,6 +49,19 @@ const ProfilePage = () => {
           </label>
           {/* 닉네임 */}
           <NicknameInput />
+          {/* 비밀번호 */}
+          <TextButton
+            width={"100%"}
+            theme="primary-line"
+            text="비밀번호 변경하기"
+          />
+          {/* 회원탈퇴 */}
+          <TextButton
+            width={"100%"}
+            theme="primary-line"
+            text="회원 탈퇴"
+            onClick={handleDeleteUserButtonClick}
+          />
         </form>
       </main>
     </FormProvider>

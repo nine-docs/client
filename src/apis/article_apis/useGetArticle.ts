@@ -53,6 +53,7 @@ _< 참고 >_
     },
   },
 };
+
 const useGetArticle = ({ articleId }: getArticlePayloadType) => {
   const isApiMock = process.env.REACT_APP_API_MOCK === "true";
 
