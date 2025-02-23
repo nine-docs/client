@@ -27,7 +27,17 @@ const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
       return;
     }
 
-    mutate(methods.getValues(`password`), methods.getValues(`newPassword`));
+    mutate(
+      {
+        originalPassword: methods.getValues(`password`),
+        newPassword: methods.getValues(`newPassword`),
+      },
+      {
+        onSuccess: () => {
+          onClose();
+        },
+      },
+    );
   };
 
   return (
