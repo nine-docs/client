@@ -67,11 +67,11 @@ const CommentInput = () => {
             registerOption={{
               required: "댓글을 입력해 주세요.",
               maxLength: {
-                value: 200,
+                value: 10000,
                 message: "200자 이내로 작성해 주세요.",
               },
             }}
-            maxLength={200}
+            maxLength={10000}
             style={{ height: "60px" }}
             placeholder="댓글을 입력해 주세요."
           />
