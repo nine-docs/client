@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import useDeleteUser from "apis/auth_apis/useDeleteUser";
@@ -9,21 +10,26 @@ import BaseInput from "components/inputs/base_input/BaseInput";
 
 import classes from "./ProfilePage.module.scss";
 import NicknameInput from "./components/nickname_input/NicknameInput";
+import PasswordUpdateModal from "./components/password_update_modal/PasswordUpdateModal";
 
 const ProfilePage = () => {
+  const [isPasswordEditModalOpen, setIsPasswordEditModalOpen] = useState(false);
+
   const { data: profileData, isLoading } = useProfile();
-  const { mutate } = useDeleteUser();
+  const { mutate: deleteUserMutate } = useDeleteUser();
 
   const methods = useForm({
     mode: "all",
     defaultValues: {
       nickname: "",
       email: "",
+      password: "",
+      newPassword: "",
     },
   });
 
   const handleDeleteUserButtonClick = () => {
-    mutate();
+    deleteUserMutate();
   };
 
   useEffect(() => {
@@ -54,6 +60,7 @@ const ProfilePage = () => {
             width={"100%"}
             theme="primary-line"
             text="비밀번호 변경하기"
+            onClick={() => setIsPasswordEditModalOpen(true)}
           />
           {/* 회원탈퇴 */}
           <TextButton
@@ -64,6 +71,15 @@ const ProfilePage = () => {
           />
         </form>
       </main>
+      <AnimatePresence>
+        {isPasswordEditModalOpen && (
+          <PasswordUpdateModal
+            onClose={() => {
+              setIsPasswordEditModalOpen(false);
+            }}
+          />
+        )}
+      </AnimatePresence>
     </FormProvider>
   );
 };
