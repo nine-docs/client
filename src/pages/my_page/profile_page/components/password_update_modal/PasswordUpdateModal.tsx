@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { useFormContext } from "react-hook-form";
+import { toast } from "react-toastify";
+
+import useUpdatePassword from "apis/profile_apis/useUpdatePassword";
 
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
@@ -8,6 +11,24 @@ import classes from "./PasswordUpdateModal.module.scss";
 
 const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
   const methods = useFormContext();
+
+  const { mutate } = useUpdatePassword();
+
+  const handleSubmit = async () => {
+    if (!(await methods.trigger(`password`))) {
+      methods.setFocus(`password`);
+      toast.error(`기존 비밀번호를 확인해 주세요.`);
+      return;
+    }
+
+    if (!(await methods.trigger(`newPassword`))) {
+      methods.setFocus(`newPassword`);
+      toast.error(`새 비밀번호를 확인해 주세요.`);
+      return;
+    }
+
+    mutate(methods.getValues(`password`), methods.getValues(`newPassword`));
+  };
 
   return (
     <motion.div
@@ -52,7 +73,7 @@ const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
           </label>
         </div>
         <div className={classes.modal_footer}>
-          <TextButton text="변경하기" />
+          <TextButton text="변경하기" onClick={handleSubmit} />
         </div>
       </motion.div>
     </motion.div>
