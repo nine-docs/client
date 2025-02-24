@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
 import EditIcon from "assets/images/icons/EditIcon";
@@ -13,6 +14,8 @@ import useUnLikeComment from "apis/comment_apis/useUnLikeComment";
 import BaseButton from "components/buttons/base_button/BaseButton";
 import TextButton from "components/buttons/text_button/TextButton";
 
+import useIsLogin from "hooks/useIsLogin";
+
 import Reply from "../../../reply/Reply";
 import classes from "./CommentItem.module.scss";
 import EditComment from "./edit_comment/EditComment";
@@ -20,6 +23,7 @@ import EditComment from "./edit_comment/EditComment";
 const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
   const articleId = useParams().articleId;
 
+  const { isLogin } = useIsLogin();
   const { mutate: deleteMutate } = useDeleteComment();
   const { mutate: likeMutate } = useLikeComment();
   const { mutate: unLikeMutate } = useUnLikeComment();
@@ -31,6 +35,10 @@ const CommentItem = ({ commentItem }: { commentItem: CommentItemType }) => {
   const [isReplyOpen, setIsReplyOpen] = useState(false);
 
   const handleLikeClick = () => {
+    if (!isLogin) {
+      toast.error("로그인이 필요합니다.");
+      return;
+    }
     if (!isMeLike) {
       likeMutate({
         articleId: Number(articleId),

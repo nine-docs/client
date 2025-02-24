@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import DeleteIcon from "assets/images/icons/DeleteIcon";
 import EditIcon from "assets/images/icons/EditIcon";
@@ -13,6 +14,8 @@ import useUnLikeReply from "apis/comment_apis/useUnLikeReply";
 
 import BaseButton from "components/buttons/base_button/BaseButton";
 
+import useIsLogin from "hooks/useIsLogin";
+
 import classes from "./ReplyItem.module.scss";
 import EditReply from "./edit_reply/EditReply";
 
@@ -24,6 +27,8 @@ const ReplyItem = ({
   commentId: number;
 }) => {
   const articleId = useParams().articleId;
+
+  const { isLogin } = useIsLogin();
 
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -44,6 +49,10 @@ const ReplyItem = ({
   };
 
   const handleLikeClick = () => {
+    if (!isLogin) {
+      toast.error("로그인이 필요합니다.");
+      return;
+    }
     if (replyItem.like.isUserLike) {
       unlikeMutate({
         articleId: Number(articleId),

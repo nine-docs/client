@@ -9,6 +9,8 @@ import useAddReply from "apis/comment_apis/useAddReply";
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseTextarea from "components/inputs/base_textarea/BaseTextarea";
 
+import useIsLogin from "hooks/useIsLogin";
+
 import classes from "./ReplyInput.module.scss";
 
 const ReplyInput = ({ commentId }: { commentId: number }) => {
@@ -22,6 +24,7 @@ const ReplyInput = ({ commentId }: { commentId: number }) => {
   });
 
   const { mutate } = useAddReply();
+  const { isLogin } = useIsLogin();
 
   const onError = (e: FieldErrors) => {
     if (e?.content?.message && typeof e?.content?.message === "string") {
@@ -48,7 +51,16 @@ const ReplyInput = ({ commentId }: { commentId: number }) => {
     <FormProvider {...methods}>
       <form
         className={classes.input_wrap}
-        onSubmit={methods.handleSubmit(onSubmit, onError)}
+        onSubmit={(e: React.FormEvent) => {
+          e.preventDefault();
+
+          if (!isLogin) {
+            toast.error("로그인이 필요합니다.");
+            return;
+          }
+
+          methods.handleSubmit(onSubmit, onError);
+        }}
       >
         <ReplyIcon />
         <div className={classes.input_right}>

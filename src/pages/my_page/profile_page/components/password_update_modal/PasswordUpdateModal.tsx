@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import useUpdatePassword from "apis/profile_apis/useUpdatePassword";
