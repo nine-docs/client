@@ -4,6 +4,7 @@
 
 - `yarn install`
 - `yarn start`
+- `.env.development`에서 `REACT_APP_API_MOCK = 'true'`를 설정하면 로컬환경에서 네트워크 요청 없이 테스트할 수 있습니다.
 
 
 # package dependencies
