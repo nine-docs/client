@@ -5,12 +5,21 @@
 - `yarn install`
 - `yarn start`
 
-# 프로젝트 빌드하기
 
--
+# package dependencies
 
-# 사용된 기술
-
-- React Query
-- Zustand
-- SASS
+- React Query : 1.3.4
+- Zustand : 5.0.2
+- SASS : 1.83.0
+- React Hook Form : 7.54.2
+- Framer Motion : 12.4.3
+- Storybook : 8.4.7
+- React-Toastify : 11.0.2
+- React Router : 7.1.0
+- Axios : 1.7.9
+- Dayjs : 1.11.13
+- React-Lottie-Player : 2.0.0
+- React-Markdown : 9.0.1
+- React-Error-Boundary : 5.0.0
+- @lukemorales/query-key-factory : 1.3.4
+- typescript : 4.4.2
