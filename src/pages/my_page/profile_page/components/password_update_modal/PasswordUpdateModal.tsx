@@ -73,7 +73,7 @@ const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
         >
           <div className={classes.modal_body}>
             <label className={classes.input_wrap}>
-              <div>기존 비밀번호</div>
+              <div className={classes.label}>기존 비밀번호</div>
               <BaseInput
                 type="password"
                 registerName="password"
@@ -82,7 +82,7 @@ const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
               />
             </label>
             <label className={classes.input_wrap}>
-              <div>새 비밀번호</div>
+              <div className={classes.label}>새 비밀번호</div>
               <BaseInput
                 type="password"
                 registerName="newPassword"
@@ -98,6 +98,7 @@ const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
             </label>
           </div>
           <div className={classes.modal_footer}>
+            <TextButton text="취소" onClick={onClose} theme="gray" />
             <TextButton text="변경하기" onClick={handleSubmit} />
           </div>
         </motion.div>
