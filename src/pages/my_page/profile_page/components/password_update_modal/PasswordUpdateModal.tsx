@@ -7,6 +7,8 @@ import useUpdatePassword from "apis/profile_apis/useUpdatePassword";
 import TextButton from "components/buttons/text_button/TextButton";
 import BaseInput from "components/inputs/base_input/BaseInput";
 
+import { PASSWORD_PATTERN } from "constants/validations";
+
 import classes from "./PasswordUpdateModal.module.scss";
 
 const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
@@ -17,13 +19,13 @@ const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
   const handleSubmit = async () => {
     if (!(await methods.trigger(`password`))) {
       methods.setFocus(`password`);
-      toast.error(`기존 비밀번호를 확인해 주세요.`);
+      toast.error(methods.formState.errors.password?.message as string);
       return;
     }
 
     if (!(await methods.trigger(`newPassword`))) {
       methods.setFocus(`newPassword`);
-      toast.error(`새 비밀번호를 확인해 주세요.`);
+      toast.error(methods.formState.errors.newPassword?.message as string);
       return;
     }
 
@@ -78,7 +80,13 @@ const PasswordUpdateModal = ({ onClose }: { onClose: () => void }) => {
               type="password"
               registerName="newPassword"
               placeholder="새 비밀번호"
-              registerOption={{ required: "기존 비밀번호를 입력해 주세요." }}
+              registerOption={{
+                required: "새 비밀번호를 입력해 주세요.",
+                pattern: {
+                  value: PASSWORD_PATTERN,
+                  message: "영문+숫자를 포함한 6자리 이상을 입력해 주세요.",
+                },
+              }}
             />
           </label>
         </div>
