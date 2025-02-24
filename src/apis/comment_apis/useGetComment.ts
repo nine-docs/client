@@ -1,7 +1,10 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useAuthStore } from "stores/authStore";
 
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
+
+import useIsLogin from "hooks/useIsLogin";
 
 const LIMIT = 10;
 
@@ -69,6 +72,8 @@ export const useGetComment = (articleId: number) => {
 
   const initialUrl: string = `/api/v1/article/${articleId}/comments?limit=${LIMIT}`;
 
+  const { isLogin } = useIsLogin();
+
   const {
     fetchNextPage,
     hasNextPage,
@@ -78,6 +83,7 @@ export const useGetComment = (articleId: number) => {
     isError,
     data,
   } = useInfiniteQuery({
+    enabled: !!isLogin,
     queryKey: queryKeyFactory.comment({ articleId: articleId }).queryKey,
     queryFn: ({ pageParam }): Promise<GetCommentResType> => {
       if (isApiMock) {

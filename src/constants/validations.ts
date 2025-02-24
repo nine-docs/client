@@ -6,4 +6,4 @@
 export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* 비밀번호 유효성검사 : 영문, 숫자 포함 6자리 이상 */
-export const PASSWORD_PATTERN = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+export const PASSWORD_PATTERN = /^(?=(.*[A-Za-z]))(?=(.*\d)).{6,}$/;

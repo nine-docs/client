@@ -3,6 +3,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import httpClient from "apis/networks/HttpClient";
 import queryKeyFactory from "apis/query_config/queryKeyFactory";
 
+import useIsLogin from "hooks/useIsLogin";
+
 const LIMIT = 5;
 
 type GetReplyResType = {
@@ -44,7 +46,10 @@ const useGetReply = (articleId: number, commentId: number) => {
 
   const initialUrl: string = `/api/v1/article/${articleId}/comment/${commentId}/replies?limit=${LIMIT}`;
 
+  const { isLogin } = useIsLogin();
+
   return useInfiniteQuery({
+    enabled: !!isLogin,
     queryKey: queryKeyFactory.reply({ commentId: commentId }).queryKey,
     queryFn: ({ pageParam }): Promise<GetReplyResType> => {
       if (isApiMock) {
