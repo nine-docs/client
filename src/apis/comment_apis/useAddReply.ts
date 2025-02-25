@@ -20,6 +20,8 @@ const useAddReply = () => {
         content: content,
       };
 
+      console.log("asdf");
+
       return httpClient.post(
         `/api/v1/article/${articleId}/comment/${commentId}/reply`,
         params,

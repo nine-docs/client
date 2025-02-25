@@ -27,12 +27,14 @@ const ReplyInput = ({ commentId }: { commentId: number }) => {
   const { isLogin } = useIsLogin();
 
   const onError = (e: FieldErrors) => {
+    console.log("onError 실행");
     if (e?.content?.message && typeof e?.content?.message === "string") {
       toast.error(e.content.message);
     }
   };
 
   const onSubmit = (data: { content: string }) => {
+    console.log(`onSubmit 실행`);
     mutate(
       {
         articleId: Number(articleId),
@@ -53,13 +55,11 @@ const ReplyInput = ({ commentId }: { commentId: number }) => {
         className={classes.input_wrap}
         onSubmit={(e: React.FormEvent) => {
           e.preventDefault();
-
           if (!isLogin) {
             toast.error("로그인이 필요합니다.");
             return;
           }
-
-          methods.handleSubmit(onSubmit, onError);
+          methods.handleSubmit(onSubmit, onError)();
         }}
       >
         <ReplyIcon />
